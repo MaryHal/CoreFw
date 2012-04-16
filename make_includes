@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd src 
+#cp -av --parents */*.h ../include
+cp -a --parents */*.h ../include
+cd ..
+
