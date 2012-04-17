@@ -184,7 +184,6 @@ OBJECTS := \
 	$(OBJDIR)/ResourceCache.o \
 	$(OBJDIR)/ResourceManager.o \
 	$(OBJDIR)/Buffer.o \
-	$(OBJDIR)/stb_image.o \
 	$(OBJDIR)/Section.o \
 	$(OBJDIR)/Text.o \
 	$(OBJDIR)/Drawable.o \
@@ -316,9 +315,6 @@ $(OBJDIR)/ResourceManager.o: src/System/ResourceManager.cpp
 $(OBJDIR)/Buffer.o: src/Memory/Buffer.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/stb_image.o: src/Graphics/stb_image.c
-	@echo $(notdir $<)
-	$(SILENT) $(CC) $(CFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Section.o: src/Graphics/Section.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"

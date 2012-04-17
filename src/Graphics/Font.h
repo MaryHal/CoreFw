@@ -6,9 +6,6 @@
 
 #include "../Graphics/FontLoader.h"
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
-
 class Font
 {
     public:
@@ -16,10 +13,12 @@ class Font
         static const unsigned int NUM_CHARS = 96;
 
     protected:
-        FT_Face fontFace;
-        Texture fontTexture;
+        //Texture fontTexture;
+        unsigned int texture;
         unsigned int height;
+        unsigned char buffer[1<<20];
         Glyph glyphs[NUM_CHARS];
+        FontInfo fontinfo;
 
     public:
         Font();
@@ -30,9 +29,10 @@ class Font
 
         // void __renderTexture();
 
-        FT_Face& getFace();
+        unsigned int getTexture();
         unsigned int getHeight();
         Glyph* getGlyph(int ch);
+        FontInfo* getInfo();
 };
 
 #endif

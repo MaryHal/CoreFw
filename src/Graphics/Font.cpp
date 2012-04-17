@@ -13,12 +13,12 @@ Font::Font(const std::string& filename, unsigned int charSize)
 
 Font::~Font()
 {
-    FT_Done_Face(fontFace);
 }
 
 void Font::loadFont(const std::string& filename, unsigned int charSize)
 {
-    FontLoader::loadFont(filename, charSize, fontFace, fontTexture, height, glyphs);
+    height = charSize;
+    FontLoader::loadFont(filename, texture, height, buffer, glyphs, fontinfo);
 }
 
 #if 0
@@ -28,9 +28,9 @@ void Font::__renderTexture()
 }
 #endif
 
-FT_Face& Font::getFace()
+unsigned int Font::getTexture()
 {
-    return fontFace;
+    return texture;
 }
 
 unsigned int Font::getHeight()
@@ -41,5 +41,10 @@ unsigned int Font::getHeight()
 Glyph* Font::getGlyph(int ch)
 {
     return &glyphs[ch];
+}
+
+FontInfo* Font::getInfo()
+{
+    return &fontinfo;
 }
 

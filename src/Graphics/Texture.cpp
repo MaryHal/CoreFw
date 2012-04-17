@@ -153,3 +153,8 @@ const int Texture::getHeight() const
     return height;
 }
 
+const GLuint Texture::getTexture() const
+{
+    return texture;
+}
+

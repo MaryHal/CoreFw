@@ -6,23 +6,23 @@ ifndef config
 endif
 export config
 
-PROJECTS := CoreFW test
+PROJECTS := test library
 
 .PHONY: all clean help $(PROJECTS)
 
 all: $(PROJECTS)
 
-CoreFW: 
-	@echo "==== Building CoreFW ($(config)) ===="
-	@${MAKE} --no-print-directory -C . -f CoreFW.make
-
-test: CoreFW
+test: 
 	@echo "==== Building test ($(config)) ===="
 	@${MAKE} --no-print-directory -C . -f test.make
 
+library: 
+	@echo "==== Building library ($(config)) ===="
+	@${MAKE} --no-print-directory -C . -f library.make
+
 clean:
-	@${MAKE} --no-print-directory -C . -f CoreFW.make clean
 	@${MAKE} --no-print-directory -C . -f test.make clean
+	@${MAKE} --no-print-directory -C . -f library.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -38,7 +38,7 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
-	@echo "   CoreFW"
 	@echo "   test"
+	@echo "   library"
 	@echo ""
 	@echo "For more information, see http://industriousone.com/premake/quick-start"

@@ -98,7 +98,6 @@ void Core::init(const std::string& filename)
     initOpenGL();
 
     Listener::init();
-    FontLoader::init();
 
     resourceManager = new ResourceManager();
     input = new Input();
