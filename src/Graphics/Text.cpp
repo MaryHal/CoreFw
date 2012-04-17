@@ -1,7 +1,7 @@
 #include "Text.h"
+#include <stdio.h>
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
+#include "../stblib/stb_truetype.h"
 
 Text::Text()
     : font(NULL), text(), length(0.0f)
@@ -31,75 +31,85 @@ void Text::setFont(Font* f)
 void Text::setText(const std::string& t)
 {
     text = t;
-
     length = 0.0f;
-    unsigned char prev(0);
+
+    //unsigned char prev(0);
     for (unsigned int i = 0; i < text.length(); ++i)
     {
-        if (text[i] == '\n')
-        {
-            length = 0.0f;
-        }
-
         unsigned int ch = text[i] - ' ';
 
         if (ch < 0 || ch > font->NUM_CHARS)
             continue;
 
+        /*
+        if (text[i] == '\n')
+        {
+            length = 0.0f;
+        }
+        */
+
         Glyph* glyph = font->getGlyph(ch);
 
-        if (prev && ch)
+        if (i < text.length())
         {
-            FT_Vector delta;
-            FT_Get_Kerning(font->getFace(), prev, text[i], FT_KERNING_DEFAULT, &delta);
-            length += delta.x >> 6;
+            length += stbtt_GetGlyphKernAdvance(font->getInfo(), text[i], text[i+1]);
+            //printf("%d", stbtt_GetGlyphKernAdvance(font->getInfo(), text[i], text[i+1]));
         }
 
-        length += glyph->advance;
+        length += glyph->xadvance;
 
-        prev = text[i];
+        //prev = text[i];
     }
 }
 
 void Text::draw(float x, float y) const
 {
     glPushMatrix();
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, font->getTexture());
     glTranslatef(x, y, 0.0f);
 
-    float nx(0.0f);
-    float ny(0.0f);
+    x = 0.0f;
+    y = 0.0f;
 
-    unsigned char prev(0);
+    // This is horrible.
+    Glyph* H = font->getGlyph('H');
+    float yoffset = H->y1 - H->y0;
 
     for (unsigned int i = 0; i < text.length(); ++i)
     {
+        unsigned int ch = text[i] - ' ';
+
         if (text[i] == '\n')
         {
-            nx = 0.0f;
-            ny += font->getHeight();
+            x = 0.0f;
+            y += font->getHeight();
         }
-
-        unsigned int ch = text[i] - ' ';
 
         if (ch < 0 || ch > font->NUM_CHARS)
             continue;
 
-        Glyph* glyph = font->getGlyph(ch);
-
-        if (prev && ch)
+        if (i < text.length())
         {
-            FT_Vector delta;
-            FT_Get_Kerning(font->getFace(), prev, text[i], FT_KERNING_DEFAULT, &delta);
-            nx += delta.x >> 6;
+            x += stbtt_GetGlyphKernAdvance(font->getInfo(), text[i], text[i+1]);
         }
 
-        glyph->sect.draw(nx, ny);
-        nx += glyph->advance;
+        stbtt_aligned_quad q;
+        stbtt_GetBakedQuad(font->getGlyph(0), 512, 512, ch, &x, &y, &q, 1);//1=opengl,0=old d3d
 
-        prev = text[i];
+        glBegin(GL_QUADS);
+        glTexCoord2f(q.s0,q.t0); glVertex2f(q.x0,q.y0 + yoffset);
+        glTexCoord2f(q.s1,q.t0); glVertex2f(q.x1,q.y0 + yoffset);
+        glTexCoord2f(q.s1,q.t1); glVertex2f(q.x1,q.y1 + yoffset);
+        glTexCoord2f(q.s0,q.t1); glVertex2f(q.x0,q.y1 + yoffset);
+        glEnd();
+
+        //prev = text[i];
+        //printf("(x, y): %f %f\n", x, y);
     }
 
     glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 }
 
 float Text::getLength() const

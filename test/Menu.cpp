@@ -17,7 +17,7 @@ Menu::Menu(const std::string& title)
 */
 
 Menu::Menu(const std::string& title, Font& f)
-    : font(&f), title(font, title), choice("")
+    : font(&f), title(font, title), currentChoice(0), choice("")
 {
     __setLongest(this->title.getLength());
 }
@@ -70,6 +70,8 @@ void Menu::make()
                        metrics.margin, metrics.margin / 2 + metrics.newline,
                        longest, metrics.margin / 2 + metrics.newline, 
                        Color(1.0f, 1.0f, 1.0f, 0.3f));
+
+    currentChoice = 0;
 }
 
 void Menu::handleInput(Input& input, int key, int action)

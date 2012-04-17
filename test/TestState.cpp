@@ -25,24 +25,28 @@ void TestState::init(ResourceManager& resources)
 {
     CoreState::init(resources);
 
-    fonts->add("default", "data/fonts/DroidSans.ttf", 14);
+    fonts->add("default", "data/fonts/DroidSans.ttf", 16);
     font = fonts->get("default");
     textures->add("background", "data/graphics/Frac3.png");
     background = textures->get("background");
 
-    text = fonts->makeText("default", "\"This above all: to thine own self be true\"\n~ Hamlet");
+    text = fonts->makeText("default", "\"This above all: to thine own self be true\" ~ Hamlet Act 1, scene 3, 78 82\nasdf\nasd\nas\na");
+    text2 = fonts->makeText("default", "AVAVAVAVAVAVAVAVAVAWAWAWAWAWAWAWAWAWAW");
 
     menu = new Menu("Main Menu", *font);
-    MenuMetrics m = { 4, 20 };
+    MenuMetrics m = { 6, 20 };
     menu->setMetrics(m);
     menu->addItem("Hello");
     menu->addItem("Hi");
     menu->addItem("Howdy");
     menu->addItem("Hey");
+    menu->addItem("WA");
+    menu->addItem("KO");
+    menu->addItem("AV");
     menu->make();
+    glLineWidth(2.0f);
 
     vb = new VertexBuffer(4, PrimitiveType::Quads, BufferLayout::VC, BufferType::StaticBuffer);
-    glLineWidth(2.0f);
 
     vb->writeVector(0.0f, 0.0f);
     vb->writeColor(1.0f, 1.0f, 1.0f, 0.5f);
@@ -55,6 +59,14 @@ void TestState::init(ResourceManager& resources)
 
     vb->updateBuffers();
     //vb->printDebug();
+    
+    line = new VertexBuffer(2, PrimitiveType::Lines, BufferLayout::VC, BufferType::StaticBuffer);
+    line->writeVector(0.0f, 0.0f);
+    line->writeColor(1.0f, 1.0f, 1.0f, 0.5f);
+    line->writeVector(400.0f, 0.0f);
+    line->writeColor(1.0f, 1.0f, 1.0f, 0.5f);
+
+    line->updateBuffers();
 }
 
 void TestState::deinit()
@@ -88,6 +100,12 @@ void TestState::draw()
     background->draw(0.0f, 0.0f);
     menu->draw(480.0f, 300.0f);
     vb->draw(64.0f, 64.0f);
-    text.draw(8.0f, 8.0f);
+
+    line->draw(13.0f, 13.0f);
+    text.draw(13.0f, 13.0f);
+
+    line->draw(13.0f, 200.0f);
+    text2.draw(13.0f, 200.0f);
 }
+
 

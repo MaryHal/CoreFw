@@ -76,7 +76,6 @@
 //
 // ADVANCED USAGE
 //
-//   Quality:
 //
 //    - Use the functions with Subpixel at the end to allow your characters
 //      to have subpixel positioning. Since the font is anti-aliased, not
@@ -830,12 +829,12 @@ int stbtt_FindGlyphIndex(const stbtt_fontinfo *info, int unicode_codepoint)
       // now decrement to bias correctly to find smallest
       search -= 2;
       while (entrySelector) {
-         stbtt_uint16 start, end;
+         //stbtt_uint16 start, end;
          searchRange >>= 1;
          start = ttUSHORT(data + search + 2 + segcount*2 + 2);
          end = ttUSHORT(data + search + 2);
-         start = ttUSHORT(data + search + searchRange*2 + segcount*2 + 2);
-         end = ttUSHORT(data + search + searchRange*2);
+         //start = ttUSHORT(data + search + searchRange*2 + segcount*2 + 2);
+         //end = ttUSHORT(data + search + searchRange*2);
          if (unicode_codepoint > end)
             search += searchRange*2;
          --entrySelector;
@@ -858,7 +857,7 @@ int stbtt_FindGlyphIndex(const stbtt_fontinfo *info, int unicode_codepoint)
    } else if (format == 12 || format == 13) {
       stbtt_uint32 ngroups = ttULONG(data+index_map+12);
       stbtt_int32 low,high;
-      stbtt_uint16 g = 0;
+      //stbtt_uint16 g = 0;
       low = 0; high = (stbtt_int32)ngroups;
       // Binary search the right group.
       while (low < high) {
@@ -966,7 +965,7 @@ int stbtt_GetGlyphShape(const stbtt_fontinfo *info, int glyph_index, stbtt_verte
 
    if (numberOfContours > 0) {
       stbtt_uint8 flags=0,flagcount;
-      stbtt_int32 ins, i,j=0,m,n, next_move, was_off=0, off, start_off=0, curve_end=0;
+      stbtt_int32 ins, i,j=0,m,n, next_move, was_off=0, off, start_off=0; //curve_end=0;
       stbtt_int32 x,y,cx,cy,sx,sy, scx,scy;
       stbtt_uint8 *points;
       endPtsOfContours = (data + g + 10);

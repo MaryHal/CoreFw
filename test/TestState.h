@@ -14,10 +14,13 @@ class TestState : public CoreState
 {
     private:
         Text text;
+        Text text2;
         FontPtr font;
         TexturePtr background;
 
         VertexBuffer* vb;
+
+        VertexBuffer* line;
 
         Menu* menu;
 
