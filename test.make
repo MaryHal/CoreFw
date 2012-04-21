@@ -29,9 +29,9 @@ ifeq ($(config),debug)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64 -lCoreFW64
+  LIBS      += -lCoreFW64 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
+  LDDEPS    += lib/libCoreFW64.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -51,9 +51,9 @@ ifeq ($(config),release)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64 -lCoreFW64
+  LIBS      += -lCoreFW64 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
+  LDDEPS    += lib/libCoreFW64.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -73,9 +73,9 @@ ifeq ($(config),debug32)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m32
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -m32 -L/usr/lib32 -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex -lCoreFW
+  LIBS      += -lCoreFW32 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex -lCoreFW
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
+  LDDEPS    += lib/libCoreFW32.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -95,9 +95,9 @@ ifeq ($(config),release32)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m32
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -m32 -L/usr/lib32 -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex -lCoreFW
+  LIBS      += -lCoreFW32 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex -lCoreFW
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
+  LDDEPS    += lib/libCoreFW32.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -117,9 +117,9 @@ ifeq ($(config),debug64)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m64
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -m64 -L/usr/lib64 -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64 -lCoreFW64
+  LIBS      += -lCoreFW64 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
+  LDDEPS    += lib/libCoreFW64.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -139,9 +139,9 @@ ifeq ($(config),release64)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m64
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -m64 -L/usr/lib64 -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64 -lCoreFW64
+  LIBS      += -lCoreFW64 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
+  LDDEPS    += lib/libCoreFW64.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
   define PREBUILDCMDS
   endef

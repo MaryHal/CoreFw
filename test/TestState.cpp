@@ -34,7 +34,7 @@ void TestState::init(ResourceManager& resources)
     text = fonts->makeText("default", "\"This above all: to thine own self be true\" ~ Hamlet Act 1, scene 3, 78 82\nasdf\nasd\nas\na\nDefinitely no kerning :(");
     text2 = fonts->makeText("big", "AVAVAV");
 
-    menu = new Menu("Main Menu", *font);
+    menu = new Menu("Main Menu", font);
     MenuMetrics m = { 6, 20 };
     menu->setMetrics(m);
     menu->addItem("Hello");

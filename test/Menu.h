@@ -1,10 +1,12 @@
 #ifndef _Menu_h_
 #define _Menu_h_
 
-#include "../src/Graphics/Drawable.h"
-#include "../src/Graphics/Text.h"
+#include <Graphics/Drawable.h>
+#include <Graphics/Text.h>
 
-#include "../src/Graphics/VertexBuffer.h"
+#include <Graphics/VertexBuffer.h>
+
+#include <System/ResourcePtr.h>
 
 #include <vector>
 
@@ -19,7 +21,7 @@ struct MenuMetrics
 class Menu : public Drawable
 {
     private:
-        Font* font;
+        FontPtr font;
         Text title;
 
         std::vector<Text> items;
@@ -38,7 +40,7 @@ class Menu : public Drawable
     public:
         Menu();
         //Menu(const std::string& title);
-        Menu(const std::string& title, Font& f);
+        Menu(const std::string& title, const FontPtr& f);
         ~Menu();
 
         void setTitle(const std::string& title);

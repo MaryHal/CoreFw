@@ -4,16 +4,16 @@
 #include "../stblib/stb_truetype.h"
 
 Text::Text()
-    : font(NULL), text(), length(0.0f)
+    : font(), text(), length(0.0f)
 {
 }
 
-Text::Text(Font* f)
+Text::Text(const FontPtr& f)
     : font(f), text(""), length(0.0f)
 {
 }
 
-Text::Text(Font* f, const std::string& t)
+Text::Text(const FontPtr& f, const std::string& t)
     : font(f)
 {
     setText(t);
@@ -23,7 +23,7 @@ Text::~Text()
 {
 }
 
-void Text::setFont(Font* f)
+void Text::setFont(const FontPtr& f)
 {
     font = f;
 }
@@ -38,7 +38,7 @@ void Text::setText(const std::string& t)
     {
         unsigned int ch = text[i] - ' ';
 
-        if (ch < 0 || ch > font->NUM_CHARS)
+        if (ch < 0 || ch > Font::NUM_CHARS)
             continue;
 
         Glyph* glyph = font->getGlyph(ch);
@@ -79,9 +79,10 @@ void Text::draw(float x, float y) const
         {
             x = 0.0f;
             y += font->getHeight();
+            continue;
         }
 
-        if (ch < 0 || ch > font->NUM_CHARS)
+        if (ch < 0 || ch > Font::NUM_CHARS)
             continue;
 
         /*
