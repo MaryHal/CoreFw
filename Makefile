@@ -6,23 +6,23 @@ ifndef config
 endif
 export config
 
-PROJECTS := test library
+PROJECTS := Core_Library test
 
 .PHONY: all clean help $(PROJECTS)
 
 all: $(PROJECTS)
 
-test: 
+Core_Library: 
+	@echo "==== Building Core_Library ($(config)) ===="
+	@${MAKE} --no-print-directory -C . -f Core_Library.make
+
+test: Core_Library
 	@echo "==== Building test ($(config)) ===="
 	@${MAKE} --no-print-directory -C . -f test.make
 
-library: 
-	@echo "==== Building library ($(config)) ===="
-	@${MAKE} --no-print-directory -C . -f library.make
-
 clean:
+	@${MAKE} --no-print-directory -C . -f Core_Library.make clean
 	@${MAKE} --no-print-directory -C . -f test.make clean
-	@${MAKE} --no-print-directory -C . -f library.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -38,7 +38,7 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
+	@echo "   Core_Library"
 	@echo "   test"
-	@echo "   library"
 	@echo ""
 	@echo "For more information, see http://industriousone.com/premake/quick-start"

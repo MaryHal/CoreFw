@@ -3,24 +3,25 @@
 
 #include "../Graphics/Drawable.h"
 #include "../Graphics/Font.h"
+#include "../System/ResourcePtr.h"
 
 #include <string>
 
 class Text : public Drawable
 {
     private:
-        Font* font;
+        FontPtr font;
         std::string text;
 
         float length;
 
     public:
         Text();
-        Text(Font* f);
-        Text(Font* f, const std::string& t);
+        Text(const FontPtr& f);
+        Text(const FontPtr& f, const std::string& t);
         ~Text();
 
-        void setFont(Font* f);
+        void setFont(const FontPtr& f);
         void setText(const std::string& t);
         void draw(float x, float y) const;
 

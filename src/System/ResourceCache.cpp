@@ -35,12 +35,12 @@ void FontCache::add(const std::string& identifier,
 
 Text FontCache::makeText(const std::string& identifier, const std::string& str)
 {
-    return Text(&*resmap[identifier], str);
+    return Text(resmap[identifier], str);
 }
 
 Text FontCache::makeText(const std::string& identifier)
 {
-    return Text(&*resmap[identifier], "");
+    return Text(resmap[identifier], "");
 }
 
 // ==================================== SoundCache

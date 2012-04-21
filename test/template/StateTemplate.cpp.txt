@@ -1,0 +1,38 @@
+#include "TestState.h"
+
+#include <Core/Core.h>
+#include <Core/CoreRegistry.h>
+
+REGISTER_GAME("Test", TestState);
+
+TestState::TestState()
+{
+}
+
+TestState::~TestState()
+{
+}
+
+void TestState::init(ResourceManager& resources)
+{
+    CoreState::init(resources);
+}
+
+void TestState::deinit()
+{
+}
+
+void TestState::handleInput(Input& input, int value, int action)
+{
+}
+
+void TestState::logic(float timeStep)
+{
+}
+
+void TestState::draw()
+{
+}
+
+
+

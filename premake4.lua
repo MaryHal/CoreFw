@@ -4,7 +4,7 @@ solution "CoreFW"
 
     ---------------------------------------
     -- Static Library
-    project "library"
+    project "Core_Library"
         language "C++"
 
         includedirs { }
@@ -47,9 +47,6 @@ solution "CoreFW"
             postbuildcommands { "sh make_includes" } 
 
 
-solution "Testbed"
-    configurations { "Debug", "Release" }
-    platforms { "native", "x32", "x64" }
     project "test"
         language "C++"
 
@@ -63,6 +60,8 @@ solution "Testbed"
         --------------------------------------- 
         -- Link static libraries and config
         libdirs ("lib")
+
+        links { "Core_Library" }
         links { "GLEW" }
 
         configuration "linux"
