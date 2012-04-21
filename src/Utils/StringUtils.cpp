@@ -23,52 +23,52 @@ std::string& trim(std::string& s)
 
 std::string formatString(const char* format, ...)
 {
-	char sz[1024];
-	va_list marker;
-	
-	va_start(marker, format);
-	vsprintf(sz, format, marker);
-	va_end(marker);
-	
-	return sz;
+    char sz[1024];
+    va_list marker;
+    
+    va_start(marker, format);
+    vsprintf(sz, format, marker);
+    va_end(marker);
+    
+    return sz;
 }
 
 std::string numberString(int number)
 {
     std::string result;
-	bool negative = false;
-	
-	if (number < 0)
-	{
-		negative = true;
-		number *= -1;
-	}
-	
-	int millions = number / 1000000;
-	number -= millions * 1000000;
-	int thousands = number / 1000;
-	number -= thousands * 1000;
-	int ones = number;
-	
-	if (millions != 0)
-	{
-		result = formatString("%d,%03d,%03d", millions, thousands, ones);
-	}
-	else if (thousands != 0)
-	{
-		result = formatString("%d,%03d", thousands, ones);
-	}
-	else
-	{
-		result = formatString("%d", ones);
-	}
-	
-	if (negative)
-	{
-		result = formatString("-%s",result.c_str());
-	}
-	
-	return result;
+    bool negative = false;
+    
+    if (number < 0)
+    {
+        negative = true;
+        number *= -1;
+    }
+    
+    int millions = number / 1000000;
+    number -= millions * 1000000;
+    int thousands = number / 1000;
+    number -= thousands * 1000;
+    int ones = number;
+    
+    if (millions != 0)
+    {
+        result = formatString("%d,%03d,%03d", millions, thousands, ones);
+    }
+    else if (thousands != 0)
+    {
+        result = formatString("%d,%03d", thousands, ones);
+    }
+    else
+    {
+        result = formatString("%d", ones);
+    }
+    
+    if (negative)
+    {
+        result = formatString("-%s",result.c_str());
+    }
+    
+    return result;
 }
  
 

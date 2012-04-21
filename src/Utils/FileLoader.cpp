@@ -46,7 +46,7 @@ bool FileLoader::atEnd()
 
 bool FileLoader::readLine(std::string* line)
 {
-    char buffer[1024]; // good enough
+    char buffer[1024]; // good enough... I hope
 
     if (!atEnd() && fgets(buffer, 1023, file))
     {
@@ -70,13 +70,12 @@ bool FileLoader::readLine(std::string* line)
 // static
 bool FileLoader::exists(const std::string& filename)
 {
-    bool exists = false;
     FILE* f = fopen(filename.c_str(), "r");
     if (f)
     {
         fclose(f);
-        exists = true;
+        return true;
     }
-    return exists;
+    return false;
 }
 

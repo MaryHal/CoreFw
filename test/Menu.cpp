@@ -4,8 +4,10 @@
 
 #include <System/Log.h>
 
+#include <cstdio>
+
 Menu::Menu()
-    : font(NULL), currentChoice(0), choice("")
+    : font(NULL), currentChoice(0), choice(""), longest(0.0f)
 {
 }
 
@@ -17,7 +19,7 @@ Menu::Menu(const std::string& title)
 */
 
 Menu::Menu(const std::string& title, Font& f)
-    : font(&f), title(font, title), currentChoice(0), choice("")
+    : font(&f), title(font, title), currentChoice(0), choice(""), longest(0.0f)
 {
     __setLongest(this->title.getLength());
 }
