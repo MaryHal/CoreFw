@@ -26,12 +26,13 @@ void TestState::init(ResourceManager& resources)
     CoreState::init(resources);
 
     fonts->add("default", "data/fonts/DroidSans.ttf", 16);
+    fonts->add("big", "data/fonts/DroidSans.ttf", 100);
     font = fonts->get("default");
     textures->add("background", "data/graphics/Frac3.png");
     background = textures->get("background");
 
-    text = fonts->makeText("default", "\"This above all: to thine own self be true\" ~ Hamlet Act 1, scene 3, 78 82\nasdf\nasd\nas\na");
-    text2 = fonts->makeText("default", "AVAVAVAVAVAVAVAVAVAWAWAWAWAWAWAWAWAWAW");
+    text = fonts->makeText("default", "\"This above all: to thine own self be true\" ~ Hamlet Act 1, scene 3, 78 82\nasdf\nasd\nas\na\nDefinitely no kerning :(");
+    text2 = fonts->makeText("big", "AVAVAV");
 
     menu = new Menu("Main Menu", *font);
     MenuMetrics m = { 6, 20 };

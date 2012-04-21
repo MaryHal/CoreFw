@@ -41,20 +41,15 @@ void Text::setText(const std::string& t)
         if (ch < 0 || ch > font->NUM_CHARS)
             continue;
 
-        /*
-        if (text[i] == '\n')
-        {
-            length = 0.0f;
-        }
-        */
-
         Glyph* glyph = font->getGlyph(ch);
 
+        /*
         if (i < text.length())
         {
             length += stbtt_GetGlyphKernAdvance(font->getInfo(), text[i], text[i+1]);
             //printf("%d", stbtt_GetGlyphKernAdvance(font->getInfo(), text[i], text[i+1]));
         }
+        */
 
         length += glyph->xadvance;
 
@@ -89,10 +84,13 @@ void Text::draw(float x, float y) const
         if (ch < 0 || ch > font->NUM_CHARS)
             continue;
 
+        /*
         if (i < text.length())
         {
-            x += stbtt_GetGlyphKernAdvance(font->getInfo(), text[i], text[i+1]);
+            int kern = stbtt_GetGlyphKernAdvance(font->getInfo(), text[i], text[i+1]);
+            x += kern;
         }
+        */
 
         stbtt_aligned_quad q;
         stbtt_GetBakedQuad(font->getGlyph(0), 512, 512, ch, &x, &y, &q, 1);//1=opengl,0=old d3d
