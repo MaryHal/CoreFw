@@ -155,6 +155,10 @@ OBJECTS := \
 	$(OBJDIR)/Menu.o \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/main.o \
+	$(OBJDIR)/Burst.o \
+	$(OBJDIR)/Particle.o \
+	$(OBJDIR)/ParticleMem.o \
+	$(OBJDIR)/ParticleEmitter.o \
 
 RESOURCES := \
 
@@ -222,6 +226,18 @@ $(OBJDIR)/TestState.o: test/TestState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/main.o: test/main.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Burst.o: test/Bullet/Burst.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Particle.o: test/Bullet/Particle.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/ParticleMem.o: test/Bullet/ParticleMem.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/ParticleEmitter.o: test/Bullet/ParticleEmitter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

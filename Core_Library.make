@@ -168,6 +168,7 @@ OBJECTS := \
 	$(OBJDIR)/CoreRegistry.o \
 	$(OBJDIR)/CoreState.o \
 	$(OBJDIR)/Timer.o \
+	$(OBJDIR)/BinaryHeap.o \
 	$(OBJDIR)/FpsCounter.o \
 	$(OBJDIR)/FileLoader.o \
 	$(OBJDIR)/Ini.o \
@@ -265,6 +266,9 @@ $(OBJDIR)/CoreState.o: src/Core/CoreState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Timer.o: src/Utils/Timer.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BinaryHeap.o: src/Utils/BinaryHeap.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/FpsCounter.o: src/Utils/FpsCounter.cpp
