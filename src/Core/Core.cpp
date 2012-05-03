@@ -39,6 +39,8 @@ Renderer* Core::renderer = NULL;
 ResourceManager* Core::resourceManager = NULL;
 Input* Core::input = NULL;
 
+FpsCounter* Core::fps = NULL;
+
 bool Core::initOpenGL()
 {
     glfwInit();
@@ -66,6 +68,8 @@ bool Core::initOpenGL()
     renderer = new Renderer(width, height);
     renderer->init();
 
+    fps = new FpsCounter();
+
     return true;
 }
 
@@ -84,6 +88,8 @@ void Core::init(std::string title, unsigned int width, unsigned int height, bool
 
     resourceManager = new ResourceManager();
     input = new Input();
+
+    delete fps;
 }
 
 void Core::init(const std::string& filename)
@@ -119,6 +125,7 @@ void Core::deinit()
     // Deinit...everything else
     Listener::deinit();
     FontLoader::deinit();
+    CoreRegistry::unregisterAll();
 }
 
 void Core::run()
@@ -131,7 +138,6 @@ void Core::run()
 
     running = true;
 
-    FpsCounter fps;
     while (running)
     {
         if (nextState)
@@ -139,12 +145,12 @@ void Core::run()
             changeState(nextState);
         }
 
-        fps.calculate();
+        fps->calculate();
 
         renderer->pre();
 
-        //logf("%.2f | %.2f", fps.getFps(), fps.getFrameTime());
-        currentState->logic(fps.getFrameTime());
+        logf("%.2f | %.2f", fps->getFps(), fps->getFrameTime());
+        currentState->logic(fps->getFrameTime());
         currentState->draw();
 
         renderer->post();

@@ -1,4 +1,5 @@
 #include "CoreRegistry.h"
+#include "CoreState.h"
 
 std::map<std::string, CoreState*>& CoreRegistry::registry()
 {
@@ -47,3 +48,19 @@ int CoreRegistry::getGameCount()
 {
     return registry().size();
 }
+
+void CoreRegistry::unregisterAll()
+{
+    for (std::map<std::string, CoreState*>::iterator iter = registry().begin();
+         iter != registry().end();
+         ++iter)
+    {
+        if (iter->second != NULL && iter->second->isInitialized())
+        {
+            iter->second->deinit();
+            delete iter->second;
+            registry()[iter->first] = NULL;
+        }
+    }
+}
+

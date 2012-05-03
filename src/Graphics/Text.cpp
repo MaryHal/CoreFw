@@ -67,7 +67,7 @@ void Text::draw(float x, float y) const
     x = 0.0f;
     y = 0.0f;
 
-    // This is horrible.
+    // This is horrible. FIXITPLZ.
     Glyph* H = font->getGlyph('H');
     float yoffset = H->y1 - H->y0;
 
@@ -116,7 +116,7 @@ float Text::getLength() const
     return length;
 }
 
-std::string Text::getText()
+std::string Text::getString()
 {
     return text;
 }
