@@ -39,6 +39,12 @@ void Menu::setMetrics(const MenuMetrics& m)
     metrics = m;
 }
 
+void Menu::setMetrics(int margin, int newline)
+{
+    metrics.margin = margin;
+    metrics.newline = newline;
+}
+
 void Menu::setTitle(const std::string& title)
 {
     this->title.setText(title);
@@ -85,7 +91,7 @@ void Menu::handleInput(Input& input, int key, int action)
         if (input["down"] == key)
             currentChoice++;
         if (input["go"] == key)
-            choice = items.at(currentChoice).getText();
+            choice = items.at(currentChoice).getString();
     }
 
     if (currentChoice < 0)
@@ -117,9 +123,14 @@ void Menu::draw(float x, float y) const
     glPopMatrix();
 }
 
-const std::string Menu::getChoice()
+const std::string Menu::getChoice() const
 {
     return choice;
+}
+
+const bool Menu::checkChoice() const
+{
+    return !(choice == "");
 }
 
 void Menu::resetChoice()

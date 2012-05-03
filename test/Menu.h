@@ -45,13 +45,15 @@ class Menu : public Drawable
 
         void setTitle(const std::string& title);
         void setMetrics(const MenuMetrics& m);
+        void setMetrics(int margin, int newline);
         void addItem(const std::string& item);
         void make();
 
         void handleInput(Input& input, int key, int action);
         void draw(float x = 0.0f, float y = 0.0f) const;
 
-        const std::string getChoice();
+        const std::string getChoice() const;
+        const bool checkChoice() const;
         void resetChoice();
 };
 

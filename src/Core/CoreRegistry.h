@@ -26,8 +26,9 @@ class CoreRegistry
         static CoreState* getGame(const std::string& identifier);
 
         static const std::string& getStateName(CoreState* s);
-
         static int getGameCount();
+
+        static void unregisterAll();
 };
 
 #endif

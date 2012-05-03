@@ -40,6 +40,15 @@ template <typename T> class Rect
 
             return false;
         }
+        
+        bool collide(const Vector2<T>& point)
+        {
+            if (point.x > left && point.x < right)
+                return true;
+            if (point.y > top && point.y < bottom)
+                return true;
+            return false;
+        }
 
         T getWidth() const
         {

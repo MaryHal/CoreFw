@@ -6,6 +6,7 @@ class CoreState;
 struct ResourceManager;
 
 class Input;
+class FpsCounter;
 
 class Core
 {
@@ -25,6 +26,8 @@ class Core
 
         static ResourceManager* resourceManager;
         static Input* input;
+
+        static FpsCounter* fps;
 
         static bool initOpenGL();
 

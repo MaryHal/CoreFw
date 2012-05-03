@@ -19,6 +19,7 @@ struct ParticleProperties
 class Particle
 {
     private:
+        Vector2f position;
         Vector2f velocity;
         Vector2f acceleration;
 

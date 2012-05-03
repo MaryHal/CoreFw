@@ -33,11 +33,11 @@ VectorMem::VectorMem(int size)
     //mem.reserve(size * 2);
     deadIndex = 0;
 
-    vertexBuffer = new float[MAX_PARTICLES * 2];
-    colorBuffer  = new float[MAX_PARTICLES * 4];
+    vertexBuffer = new float[size * 2];
+    colorBuffer  = new float[size * 4];
 
-    vertexBufferSize = sizeof(float) * 2 * MAX_PARTICLES;
-    colorBufferSize  = sizeof(float) * 4 * MAX_PARTICLES;
+    vertexBufferSize = sizeof(float) * 2 * size;
+    colorBufferSize  = sizeof(float) * 4 * size;
 }
 
 VectorMem::~VectorMem()
@@ -94,5 +94,25 @@ Particle& VectorMem::get(int index)
 const int VectorMem::size() const
 {
     return deadIndex;
+}
+
+float* VectorMem::getVertexBuffer() const
+{
+    return vertexBuffer;
+}
+
+float* VectorMem::getColorBuffer() const
+{
+    return colorBuffer;
+}
+
+const int VectorMem::getVertexBufferSize() const
+{
+    return vertexBufferSize;
+}
+
+const int VectorMem::getColorBufferSize() const
+{
+    return colorBufferSize;
 }
 

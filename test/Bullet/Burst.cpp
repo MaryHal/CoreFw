@@ -5,11 +5,11 @@
 
 #include <cmath>
 
-void Burst::set(float x, float y)
+void Burst::set()
 {
     ParticleProperties p = 
     {
-        Vector2f(x, y),           // position
+        Vector2f(0, 0),           // position
         Vector2f(0.0f, 0.0f),     // velocity
         Vector2f(0.0f, 300.0f),   // acceleration
         

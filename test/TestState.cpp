@@ -35,8 +35,7 @@ void TestState::init(ResourceManager& resources)
     text2 = fonts->makeText("big", "AVAVAV");
 
     menu = new Menu("Main Menu", font);
-    MenuMetrics m = { 6, 20 };
-    menu->setMetrics(m);
+    menu->setMetrics(6, 20);
     menu->addItem("Hello");
     menu->addItem("Hi");
     menu->addItem("Howdy");
@@ -44,6 +43,7 @@ void TestState::init(ResourceManager& resources)
     menu->addItem("WA");
     menu->addItem("KO");
     menu->addItem("AV");
+    menu->addItem("OOOOOOOOOO");
     menu->make();
     glLineWidth(2.0f);
 
@@ -72,6 +72,7 @@ void TestState::init(ResourceManager& resources)
 
 void TestState::deinit()
 {
+    CoreState::deinit();
     delete menu;
     delete vb;
 }
@@ -83,14 +84,12 @@ void TestState::handleInput(Input& input, int value, int action)
 
 void TestState::logic(float timeStep)
 {
-    if (menu->getChoice() != "")
+    if (menu->checkChoice())
     {
-        //printf("%s\n", menu->getChoice().c_str());
         std::string choice = menu->getChoice();
         if (choice == "Hello")
         {
-            //Core::changeState(CoreRegistry::getGame("Game"));
-            //vb->dumpBuffer();
+            Core::changeState(CoreRegistry::getGame("Game"));
         }
         menu->resetChoice();
     }
@@ -99,7 +98,7 @@ void TestState::logic(float timeStep)
 void TestState::draw()
 {
     background->draw(0.0f, 0.0f);
-    menu->draw(480.0f, 300.0f);
+    menu->draw(480.0f, 240.0f);
     vb->draw(64.0f, 64.0f);
 
     line->draw(13.0f, 13.0f);

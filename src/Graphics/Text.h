@@ -26,7 +26,7 @@ class Text : public Drawable
         void draw(float x, float y) const;
 
         float getLength() const;
-        std::string getText();
+        std::string getString();
 };
 
 #endif

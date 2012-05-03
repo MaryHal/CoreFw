@@ -9,7 +9,7 @@
 class ParticleMem
 {
     public:
-        static const int MAX_PARTICLES =  128 * 1024;
+        static const int MAX_PARTICLES =  1024* 1024;
 
         ParticleMem() { }
 
@@ -33,7 +33,6 @@ class VectorMem : public ParticleMem
         void swap(int index1, int index2);
         void swapData(int index1, int index2);
 
-    public:
         Particle mem[MAX_PARTICLES];
         float* vertexBuffer;
         float* colorBuffer;
@@ -41,6 +40,7 @@ class VectorMem : public ParticleMem
         int vertexBufferSize;
         int colorBufferSize;
 
+    public:
         VectorMem(int size);
         ~VectorMem();
 
@@ -52,6 +52,11 @@ class VectorMem : public ParticleMem
         Particle& get(int index);
 
         const int size() const;
+
+        float* getVertexBuffer() const;
+        float* getColorBuffer() const;
+        const int getVertexBufferSize() const;
+        const int getColorBufferSize() const;
 };
 
 #endif

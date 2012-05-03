@@ -9,6 +9,17 @@
 
 ParticleEmitter::ParticleEmitter()
 {
+    particles = new VectorMem(ParticleMem::MAX_PARTICLES);
+
+    if (GLEW_ARB_vertex_buffer_object)
+    {
+        glGenBuffers(1, &bufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, bufferID);
+        glBufferData(GL_ARRAY_BUFFER, 
+                        particles->getVertexBufferSize() + particles->getColorBufferSize(),
+                        NULL,
+                        GL_STREAM_DRAW);
+    }
 }
 
 ParticleEmitter::~ParticleEmitter()
@@ -21,28 +32,15 @@ ParticleEmitter::~ParticleEmitter()
     delete particles;
 }
 
-void ParticleEmitter::init()
-{
-    particles = new VectorMem(ParticleMem::MAX_PARTICLES);
-
-    if (GLEW_ARB_vertex_buffer_object)
-    {
-        glGenBuffers(1, &bufferID);
-        glBindBuffer(GL_ARRAY_BUFFER, bufferID);
-        glBufferData(GL_ARRAY_BUFFER, 
-                        particles->vertexBufferSize + particles->colorBufferSize,
-                        NULL,
-                        GL_STREAM_DRAW);
-    }
-}
-
 void ParticleEmitter::logic(float step)
 {
     //printf("%d\n", particles->size());
     for (int i = 0; i < particles->size(); ++i)
     {
         Particle& p = particles->get(i);
-        p.logic(step, particles->vertexBuffer + i * 2, particles->colorBuffer + i * 4);
+        p.logic(step, 
+                particles->getVertexBuffer() + i * 2, 
+                particles->getColorBuffer() + i * 4);
         if (!p.isAlive())
             particles->remove(i);
     }
@@ -52,13 +50,13 @@ void ParticleEmitter::logic(float step)
         glBindBuffer(GL_ARRAY_BUFFER, bufferID);
         glBufferSubData(GL_ARRAY_BUFFER_ARB, 
                         0, 
-                        particles->vertexBufferSize,
-                        particles->vertexBuffer);
+                        particles->getVertexBufferSize(),
+                        particles->getVertexBuffer());
 
         glBufferSubData(GL_ARRAY_BUFFER_ARB,
-                        particles->vertexBufferSize,
-                        particles->colorBufferSize,
-                        particles->colorBuffer);
+                        particles->getVertexBufferSize(),
+                        particles->getColorBufferSize(),
+                        particles->getColorBuffer());
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
@@ -73,7 +71,7 @@ void ParticleEmitter::draw(float x, float y) const
                                                      color[0], color[1], color[2], color[3]);
                                                      */
     glPushMatrix();
-    glTranslatef(320.0f, 240.0f, 0.0f);
+    glTranslatef(x, y, 0.0f);
 
     if (GLEW_ARB_vertex_buffer_object)
     {
@@ -84,7 +82,7 @@ void ParticleEmitter::draw(float x, float y) const
         glEnableClientState(GL_COLOR_ARRAY);
 
         glVertexPointer(2, GL_FLOAT, 0, NULL);
-        glColorPointer(4, GL_FLOAT, 0, (GLvoid*)(size_t)particles->vertexBufferSize);
+        glColorPointer(4, GL_FLOAT, 0, (GLvoid*)(size_t)particles->getVertexBufferSize());
         /*
         int error = glGetError();
         if (error)
@@ -108,38 +106,7 @@ void ParticleEmitter::draw(float x, float y) const
     glPopMatrix();
 }
 
-/*
-void ParticleEmitter::set()
-{
-    ParticleProperties p = 
-    {
-        Vector2f(0.0f, 0.0f),     // position
-        Vector2f(0.0f, 0.0f),     // velocity
-        Vector2f(0.0f, 300.0f),   // acceleration
-        
-        Color(1.0, 1.0, 1.0, 1.0), // currentColor
-        Color(1.0, 1.0, 1.0, 0),   // fadeColor
-        2.0f                       // lifespan
-    };
-
-    int magnitude = random.genRand(350.0, 400.0);
-
-    for (int i = 0; i < SINGLE; ++i)
-    {
-        float u = random.genRand(0.0, 6.28);
-        float w = random.genRand(-1.0, 1.0);
-        float r = magnitude * sqrt(1 - w * w);
-
-        p.life = 2.0f + random.genRand(-0.3, 0.3);
-
-        p.velocity.x = r * sin(u);
-        p.velocity.y = r * cos(u);
-        particles->add(p);
-    }
-}
-*/
-
-const int ParticleEmitter::particleCount() const
+const int ParticleEmitter::getParticleCount() const
 {
     return particles->size();    
 }

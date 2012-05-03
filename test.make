@@ -154,6 +154,7 @@ endif
 OBJECTS := \
 	$(OBJDIR)/Menu.o \
 	$(OBJDIR)/TestState.o \
+	$(OBJDIR)/GameState.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/Burst.o \
 	$(OBJDIR)/Particle.o \
@@ -223,6 +224,9 @@ $(OBJDIR)/Menu.o: test/Menu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/TestState.o: test/TestState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/GameState.o: test/GameState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/main.o: test/main.cpp

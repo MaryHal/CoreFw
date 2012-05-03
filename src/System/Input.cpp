@@ -2,19 +2,12 @@
 
 void Input::__setDefaultKeys()
 {
-    addKey("1", 'A');
-    addKey("2", 'S');
-    addKey("3", 'D');
-    addKey("4", ' ');
-    addKey("5", 'J');
-    addKey("6", 'K');
-    addKey("7", 'L');
-
     addKey("up", 'W');
     addKey("down", 'S');
     addKey("left", 'A');
     addKey("right", 'D');
     addKey("go", 'J');
+    addKey("go2", 'K');
 
     /*
     addKey("up", GLFW_KEY_UP);

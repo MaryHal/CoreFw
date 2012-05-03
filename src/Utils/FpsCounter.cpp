@@ -22,7 +22,7 @@ void FpsCounter::calculate()
         frameCount = 0;
     }
     frameCount++;
-}   
+}
 
 float FpsCounter::getFrameTime() const
 {

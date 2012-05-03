@@ -12,16 +12,20 @@ class CoreState
         FontCache* fonts;
         SoundCache* sounds;
 
+        bool initialized;
+
     public:
         CoreState();
         virtual ~CoreState();
 
         virtual void init(ResourceManager& resources);
-        virtual void deinit() = 0;
+        virtual void deinit();
 
         virtual void handleInput(Input& i, int value, int action) = 0;
         virtual void logic(float timeStep) = 0;
         virtual void draw() = 0;
+
+        bool isInitialized() const;
 };
 
 #endif
