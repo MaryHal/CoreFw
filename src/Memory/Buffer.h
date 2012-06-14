@@ -41,6 +41,8 @@ class Buffer
 
         char* getBuffer();
 
+        void setWriteLoc(int count, size_t bytesPerCount);
+        void setReadLoc(int count, size_t bytesPerCount);
         template<class T> void setWriteLoc(int count)
         {
             writeLoc = buffer + sizeof(T) * count;

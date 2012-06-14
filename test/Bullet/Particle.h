@@ -30,11 +30,19 @@ class Particle
 
     public:
         Particle();
-        Particle(const Vector2f& velocity, const Vector2f acceleration, const Color& color, float life=2.0f);
+        Particle(const Vector2f& positive, 
+                 const Vector2f& velocity, 
+                 const Vector2f acceleration, 
+                 const Color& color, 
+                 float life=2.0f);
         Particle(const ParticleProperties& p);
         ~Particle();
 
-        void set(const Vector2f& velocity, const Vector2f acceleration, const Color& color, float life=2.0f);
+        void set(const Vector2f& position, 
+                 const Vector2f& velocity, 
+                 const Vector2f acceleration, 
+                 const Color& color, 
+                 float life=2.0f);
         void set(const ParticleProperties& p);
 
         Vector2f& getVelocity();

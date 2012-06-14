@@ -40,7 +40,7 @@ void ParticleEmitter::logic(float step)
         Particle& p = particles->get(i);
         p.logic(step, 
                 particles->getVertexBuffer() + i * 2, 
-                particles->getColorBuffer() + i * 4);
+                particles->getColorBuffer()  + i * 4);
         if (!p.isAlive())
             particles->remove(i);
     }
@@ -95,7 +95,6 @@ void ParticleEmitter::draw(float x, float y) const
         if (error)
             printf("0x%x\n", error);
             */
-        
 
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_COLOR_ARRAY);
@@ -108,6 +107,6 @@ void ParticleEmitter::draw(float x, float y) const
 
 const int ParticleEmitter::getParticleCount() const
 {
-    return particles->size();    
+    return particles->size();
 }
 
