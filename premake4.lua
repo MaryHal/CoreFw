@@ -17,7 +17,7 @@ solution "CoreFW"
         --------------------------------------- 
         -- Link static libraries and config
         libdirs ("lib")
-        links { "GLEW", }
+        links { "GLEW" }
 
         configuration "linux"
             links { "GL", "X11", "Xrandr", "pthread", "m", "glfw" }
