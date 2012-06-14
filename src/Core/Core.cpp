@@ -149,7 +149,7 @@ void Core::run()
 
         renderer->pre();
 
-        logf("%.2f | %.2f", fps->getFps(), fps->getFrameTime());
+        //logf("%.2f | %.2f", fps->getFps(), fps->getFrameTime());
         currentState->logic(fps->getFrameTime());
         currentState->draw();
 
@@ -168,7 +168,7 @@ void Core::changeState(CoreState* s)
     if (currentState)
     {
         currentState->deinit();
-        logf(" -- Deinitialized State: \"%s\".", getStateName().c_str());
+        logf(" -- Deinitialized State: \"%s\"", getStateName().c_str());
     }
 
     currentState = s;
@@ -194,7 +194,7 @@ void Core::deleteState()
     if (currentState)
     {
         currentState->deinit();
-        logf(" -- Deinitialized State: \"%s\".", getStateName().c_str());
+        logf(" -- Deinitialized State: \"%s\"", getStateName().c_str());
     }
 }
 
