@@ -23,9 +23,27 @@ class Vector2
         {
         }
 
-        void dotProduct(Vector2<T>& v);
-        //void crossProduct(Vector2<T>& v);     // Hah, this makes no sense.
-        void magnitude();
+        float dotProduct(Vector2<T>& v)
+        {
+            return x*v.x + y+v.y;
+        }
+
+        float magnitude()
+        {
+            return sqrt(x * x + y * y);
+        }
+
+        Vector2<T> normalize()
+        {
+            return *this / magnitude();
+        }
+
+        void extend(float newMagnitude)
+        {
+            Vector2<T> v = normalize() * newMagnitude;
+            x = v.x;
+            y = v.y;
+        }
 
         void set(T X, T Y)
         {

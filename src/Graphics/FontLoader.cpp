@@ -39,7 +39,7 @@ bool FontLoader::loadFont(const std::string& Filename, unsigned int& texture,
     stbtt_BakeFontBitmap(buffer, 0, height, bitmap, 512, 512, 32, 96, glyphs); // no guarantee this fits!
     //int error = stbtt_InitFont(fontinfo, buffer, stbtt_GetFontOffsetForIndex(buffer, 0));
     int error = stbtt_InitFont(&fontinfo, buffer, 0);
-    printf("%d\n", error);
+    //printf("%d\n", error);
     if (error == 0)
         printf("what???\n");
 

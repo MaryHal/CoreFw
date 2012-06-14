@@ -5,7 +5,7 @@
 
 int main(int argc, const char *argv[])
 {
-    Core::init("Particle Demo", 640, 480, false);
+    Core::init("CoreFW Test", 640, 480, false);
     Core::changeState(CoreRegistry::getGame("Test"));
     Core::run();
     Core::deinit();

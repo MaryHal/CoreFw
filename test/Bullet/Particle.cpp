@@ -12,9 +12,13 @@ Particle::Particle()
     */
 }
 
-Particle::Particle(const Vector2f& velocity, const Vector2f acceleration, const Color& color, float life)
+Particle::Particle(const Vector2f& positive, 
+                   const Vector2f& velocity, 
+                   const Vector2f acceleration, 
+                   const Color& color, 
+                   float life)
 {
-    set(velocity, acceleration, color, life);
+    set(position, velocity, acceleration, color, life);
 }
 
 Particle::Particle(const ParticleProperties& p)
@@ -26,8 +30,13 @@ Particle::~Particle()
 {
 }
 
-void Particle::set(const Vector2f& velocity, const Vector2f acceleration, const Color& color, float life)
+void Particle::set(const Vector2f& position, 
+                   const Vector2f& velocity, 
+                   const Vector2f acceleration, 
+                   const Color& color, 
+                   float life)
 {
+    this->position = position;
     this->velocity = velocity;
     this->acceleration = acceleration;
 
@@ -38,6 +47,7 @@ void Particle::set(const Vector2f& velocity, const Vector2f acceleration, const 
 
 void Particle::set(const ParticleProperties& p)
 {
+    this->position = p.position;
     this->velocity = p.velocity;
     this->acceleration = p.acceleration;
     
@@ -84,6 +94,9 @@ void Particle::processTranslation(float step, float* vertices)
 
     vertices[0] += velocity.x * step;
     vertices[1] += velocity.y * step;
+
+    position.x = vertices[0];
+    position.y = vertices[1];
 
     //printf("%.2f, %.2f\n", vertices[0], vertices[1]);
 }
