@@ -155,8 +155,10 @@ OBJECTS := \
 	$(OBJDIR)/Menu.o \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/GameState.o \
+	$(OBJDIR)/PatternState.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/Burst.o \
+	$(OBJDIR)/Bullet.o \
 	$(OBJDIR)/Particle.o \
 	$(OBJDIR)/ParticleMem.o \
 	$(OBJDIR)/ParticleEmitter.o \
@@ -229,10 +231,16 @@ $(OBJDIR)/TestState.o: test/TestState.cpp
 $(OBJDIR)/GameState.o: test/GameState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/PatternState.o: test/PatternState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/main.o: test/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Burst.o: test/Bullet/Burst.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Bullet.o: test/Bullet/Bullet.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Particle.o: test/Bullet/Particle.cpp
