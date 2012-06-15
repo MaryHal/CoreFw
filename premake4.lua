@@ -39,18 +39,18 @@ solution "CoreFW"
             kind "StaticLib" 
             defines "DEBUG"
             flags { "Symbols", "ExtraWarnings" }
-            postbuildcommands { "sh make_includes" } 
+            --postbuildcommands { "sh make_includes" } 
 
         configuration "Release"
             kind "StaticLib"
             flags { "Optimize", "ExtraWarnings" }
-            postbuildcommands { "sh make_includes" } 
+            --postbuildcommands { "sh make_includes" } 
 
 
     project "test"
         language "C++"
 
-        includedirs { "./include/" }
+        includedirs { "./src/" }
 
         files { "test/**" }
 

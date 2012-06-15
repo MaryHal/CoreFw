@@ -40,7 +40,7 @@ void ParticleEmitter::logic(float step)
         Particle& p = particles->get(i);
         p.logic(step, 
                 particles->getVertexBuffer() + i * 2, 
-                particles->getColorBuffer()  + i * 4);
+                particles->getColorBuffer() + i * 4);
         if (!p.isAlive())
             particles->remove(i);
     }
