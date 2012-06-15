@@ -1,7 +1,6 @@
 #include "Ini.h"
 
-#include <fstream>
-
+#include "FileLoader.h"
 #include "StringUtils.h"
 
 Ini::Ini()
@@ -15,9 +14,9 @@ Ini::Ini(const std::string& Filename)
 
 bool Ini::loadFile(const std::string& Filename)
 {
-    std::ifstream file(Filename.c_str(), std::ios::in);
+    FileLoader file(Filename, FileLoader::Read);
 
-    if (file.fail())
+    if (!file.isOpen())
     {
         return false;
     }
@@ -28,7 +27,7 @@ bool Ini::loadFile(const std::string& Filename)
 
     std::string line;
 
-    while (getline(file, line, '\n'))
+    while (file.readLine(&line))
     {
         trim(line);
 
@@ -73,7 +72,6 @@ bool Ini::loadFile(const std::string& Filename)
 
         entries[section + '/' + key] = value;
     }
-    file.close();
 
     return true;
 }
@@ -88,6 +86,7 @@ std::string Ini::operator[](const std::string& identifier)
     return alreadyExists(identifier) ? entries[identifier] : "";
 }
 
+/*
 void Ini::__dump(FILE* f)
 {
     // Messy dump. Does not retain ini file format
@@ -98,6 +97,7 @@ void Ini::__dump(FILE* f)
         fprintf(f, "%s=%s\n", iter->first.c_str(), iter->second.c_str());
     }
 }
+*/
 
 void Ini::exportFile(const std::string& Filename)
 {

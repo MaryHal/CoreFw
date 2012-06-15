@@ -3,7 +3,24 @@
 
 #include <cstdio>
 
+FileLoader::FileLoader()
+    : file(NULL)
+{
+};
+
 FileLoader::FileLoader(const std::string& filename, Mode m)
+    : file(NULL)
+{
+    loadFile(filename, m);
+}
+
+FileLoader::~FileLoader()
+{
+    if (file)
+        fclose(file);
+}
+
+void FileLoader::loadFile(const std::string& filename, Mode m)
 {
     mode = m;
 
@@ -21,12 +38,6 @@ FileLoader::FileLoader(const std::string& filename, Mode m)
         length = ftell(file);
         rewind(file);
     }
-}
-
-FileLoader::~FileLoader()
-{
-    if (file)
-        fclose(file);
 }
 
 void FileLoader::gotoBeginning()
@@ -65,6 +76,11 @@ bool FileLoader::readLine(std::string* line)
     }
 
     return false;
+}
+
+bool FileLoader::isOpen()
+{
+    return !file;
 }
 
 // static

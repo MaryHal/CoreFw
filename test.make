@@ -24,7 +24,7 @@ ifeq ($(config),debug)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += -DDEBUG
-  INCLUDES  += -Iinclude
+  INCLUDES  += -Isrc
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall
   CXXFLAGS  += $(CFLAGS) 
@@ -46,7 +46,7 @@ ifeq ($(config),release)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += 
-  INCLUDES  += -Iinclude
+  INCLUDES  += -Isrc
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall
   CXXFLAGS  += $(CFLAGS) 
@@ -68,7 +68,7 @@ ifeq ($(config),debug32)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test32
   DEFINES   += -DDEBUG
-  INCLUDES  += -Iinclude
+  INCLUDES  += -Isrc
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m32
   CXXFLAGS  += $(CFLAGS) 
@@ -90,7 +90,7 @@ ifeq ($(config),release32)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test32
   DEFINES   += 
-  INCLUDES  += -Iinclude
+  INCLUDES  += -Isrc
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m32
   CXXFLAGS  += $(CFLAGS) 
@@ -112,7 +112,7 @@ ifeq ($(config),debug64)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += -DDEBUG
-  INCLUDES  += -Iinclude
+  INCLUDES  += -Isrc
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m64
   CXXFLAGS  += $(CFLAGS) 
@@ -134,7 +134,7 @@ ifeq ($(config),release64)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += 
-  INCLUDES  += -Iinclude
+  INCLUDES  += -Isrc
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m64
   CXXFLAGS  += $(CFLAGS) 
