@@ -11,17 +11,17 @@
 class Section : public Drawable
 {
     private:
-        Texture* texture;
+        const Texture* texture;
         VertexBuffer vb;
 
     public:
         Section();
-        Section(Texture* t, Rect<float>* r);
+        Section(const Texture& t, Rect<float>* r);
         ~Section();
 
         void setTexture(Texture* tex);
 
-        void createSection(Texture* t, Rect<float>* r);
+        void createSection(const Texture& t, Rect<float>* r);
         void draw(float x, float y) const;
 };
 

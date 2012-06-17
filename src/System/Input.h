@@ -19,9 +19,6 @@ class Input
     private:
         std::map<std::string, int> keys;
 
-        int key;
-        int action;
-
         void __setDefaultKeys();
 
     public:

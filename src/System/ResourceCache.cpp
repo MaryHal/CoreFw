@@ -22,8 +22,8 @@ void TextureCache::add(const std::string& identifier, const std::string& filenam
 
 // ==================================== FontCache
 void FontCache::add(const std::string& identifier, 
-                                       const std::string& filename, 
-                                       unsigned int charSize)
+                    const std::string& filename, 
+                    unsigned int charSize)
 {
     if (alreadyExists(identifier))
         return;
