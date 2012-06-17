@@ -23,7 +23,7 @@
 #include "../System/Input.h"
 #include "../System/Log.h"
 
-const std::string Core::version = "0.01a";
+const std::string Core::version = "0.02a";
 
 std::string Core::title = "";
 unsigned int Core::width = 0;
@@ -68,8 +68,6 @@ bool Core::initOpenGL()
     renderer = new Renderer(width, height);
     renderer->init();
 
-    fps = new FpsCounter();
-
     return true;
 }
 
@@ -89,7 +87,7 @@ void Core::init(std::string title, unsigned int width, unsigned int height, bool
     resourceManager = new ResourceManager();
     input = new Input();
 
-    delete fps;
+    fps = new FpsCounter();
 }
 
 void Core::init(const std::string& filename)

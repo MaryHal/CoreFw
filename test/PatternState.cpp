@@ -1,5 +1,7 @@
 #include "PatternState.h"
 
+#include <System/Input.h>
+
 #include <Core/Core.h>
 #include <Core/CoreRegistry.h>
 
@@ -24,6 +26,8 @@ void PatternState::deinit()
 
 void PatternState::handleInput(Input& input, int value, int action)
 {
+    if (input["up"] == value && action == KeyPress)
+        Core::changeState(CoreRegistry::getGame("Test"));
 }
 
 void PatternState::logic(float timeStep)
@@ -33,6 +37,4 @@ void PatternState::logic(float timeStep)
 void PatternState::draw()
 {
 }
-
-
 

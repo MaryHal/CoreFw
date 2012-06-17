@@ -5,37 +5,9 @@ Section::Section()
 {
 }
 
-Section::Section(Texture* t, Rect<float>* r)
-    : texture(t)
+Section::Section(const Texture& t, Rect<float>* r)
 {
-    float sectWidth(r->getWidth());
-    float sectHeight(r->getHeight());
-
-    float texCoordx(r->left / t->getWidth());
-    float texCoordy(r->top / t->getHeight());
-    float texCoordx2(r->right / t->getWidth());
-    float texCoordy2(r->bottom / t->getHeight());
-
-    vb.set(4, PrimitiveType::Quads, BufferLayout::TV, BufferType::StaticBuffer);
-    vb.init();
-
-    // Top Left
-    vb.writeVector(texCoordx, texCoordy);
-    vb.writeVector(0.0f, 0.0f);
-
-    // Top Right
-    vb.writeVector(texCoordx2, texCoordy);
-    vb.writeVector(sectWidth, 0.0f);
-
-    // Bottom Right
-    vb.writeVector(texCoordx2, texCoordy2);
-    vb.writeVector(sectWidth, sectHeight);
-
-    // Bottom Left
-    vb.writeVector(texCoordx, texCoordy2);
-    vb.writeVector(0.0f, sectHeight);
-
-    vb.updateBuffers();
+    createSection(t, r);
 }
 
 Section::~Section()
@@ -48,16 +20,16 @@ void Section::setTexture(Texture* tex)
     texture = tex;
 }
 
-void Section::createSection(Texture* t, Rect<float>* r)
+void Section::createSection(const Texture& t, Rect<float>* r)
 {
-    texture = t;
+    texture = &t;
     float sectWidth(r->getWidth());
     float sectHeight(r->getHeight());
 
-    float texCoordx(r->left / t->getWidth());
-    float texCoordy(r->top / t->getHeight());
-    float texCoordx2(r->right / t->getWidth());
-    float texCoordy2(r->bottom / t->getHeight());
+    float texCoordx(r->left / t.getWidth());
+    float texCoordy(r->top / t.getHeight());
+    float texCoordx2(r->right / t.getWidth());
+    float texCoordy2(r->bottom / t.getHeight());
 
     vb.set(4, PrimitiveType::Quads, BufferLayout::TV, BufferType::StaticBuffer);
     vb.init();

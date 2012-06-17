@@ -91,6 +91,10 @@ void TestState::logic(float timeStep)
         {
             Core::changeState(CoreRegistry::getGame("Game"));
         }
+        else if (choice == "Hi")
+        {
+            Core::changeState(CoreRegistry::getGame("Pattern"));
+        }
         menu->resetChoice();
     }
 }
