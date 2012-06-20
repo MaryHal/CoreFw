@@ -1,46 +1,48 @@
 #include "Listener.h"
 
-#include <fmodex/fmod.hpp>
-#include <fmodex/fmod_errors.h>
-#include <cstdio>
-
 #include "../System/Log.h"
 
-FMOD::System* Listener::system = NULL;
+#include <AL/al.h>
+#include <AL/alc.h>
+
+ALCdevice* Listener::device = NULL;
+ALCcontext* Listener::context = NULL;
 
 void Listener::init()
 {
-    FMOD_RESULT result;
-
-    result = FMOD::System_Create(&system);      // Create the main system object.
-    if (result != FMOD_OK)
+    device = alcOpenDevice(NULL);
+    if (device)
     {
-        logf("FMOD error! (%d) %s.", result, FMOD_ErrorString(result));
-        return;
+        context = alcCreateContext(device, NULL);
+        alcMakeContextCurrent(context);
     }
 
-    result = system->init(100, FMOD_INIT_NORMAL, 0);	// Initialize FMOD.
-    if (result != FMOD_OK)
-    {
-        logf("FMOD error! (%d) %s.", result, FMOD_ErrorString(result));
-        return;
-    }
+    // Let's keep 2d sound for now.
+    alListener3f(AL_POSITION, 0, 0, 0);
+    alListener3f(AL_VELOCITY, 0, 0, 0);
+    alListener3f(AL_ORIENTATION, 0, 0, -1);
 
     log("Listener Initialized.");
 }
 
 void Listener::deinit()
 {
-    system->release();
+    alcDestroyContext(context);
+    alcCloseDevice(device);
 }
 
-void Listener::update()
+void Listener::setVolume(float volume)
 {
-    system->update();
+    alListenerf(AL_GAIN, volume);
 }
 
-FMOD::System* Listener::getSystem()
+float Listener::getVolume()
 {
-    return system;
+    float volume = 0.f;
+    alGetListenerf(AL_GAIN, &volume);
+
+    return volume;
 }
+
+
 

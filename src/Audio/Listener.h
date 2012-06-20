@@ -1,22 +1,21 @@
 #ifndef _Listener_h_
 #define _Listener_h_
 
-namespace FMOD
-{
-    class System;
-}
+typedef struct ALCdevice_struct ALCdevice;
+typedef struct ALCcontext_struct ALCcontext;
 
 class Listener
 {
-    public:
-        static FMOD::System* system;
+    private:
+        static ALCdevice* device;
+        static ALCcontext* context;
 
+    public:
         static void init();
         static void deinit();
 
-        static void update();
-
-        static FMOD::System* getSystem();
+        static void setVolume(float volume);
+        static float getVolume();
 };
 
 #endif

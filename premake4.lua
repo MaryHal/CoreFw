@@ -17,7 +17,7 @@ solution "CoreFW"
         --------------------------------------- 
         -- Link static libraries and config
         libdirs ("lib")
-        links { "GLEW" }
+        links { "openal", "sndfile", "GLEW" }
 
         configuration "linux"
             links { "GL", "X11", "Xrandr", "pthread", "m", "glfw" }
@@ -26,11 +26,9 @@ solution "CoreFW"
             links { "glfw", "opengl32" }
 
         configuration { "native or x64" }
-            links { "fmodex64" }
             targetsuffix "64"
 
         configuration "x32"
-            links { "fmodex" }
             targetsuffix "32"
 
         --------------------------------------- 
@@ -62,7 +60,7 @@ solution "CoreFW"
         libdirs ("lib")
 
         links { "Core_Library" }
-        links { "GLEW" }
+        links { "openal", "sndfile", "GLEW" }
 
         configuration "linux"
             targetprefix "linux_"
@@ -73,11 +71,11 @@ solution "CoreFW"
             links { "glfw", "opengl32" }
 
         configuration { "native or x64" }
-            links { "fmodex64", "CoreFW64" }
+            links { "CoreFW64" }
             targetsuffix "64"
 
         configuration "x32"
-            links { "fmodex", "CoreFW" }
+            links { "CoreFW" }
             targetsuffix "32"
 
         --------------------------------------- 

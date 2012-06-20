@@ -29,7 +29,7 @@ ifeq ($(config),debug)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
+  LIBS      += -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
@@ -51,7 +51,7 @@ ifeq ($(config),release)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
+  LIBS      += -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
@@ -73,7 +73,7 @@ ifeq ($(config),debug32)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m32
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -m32 -L/usr/lib32 -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex
+  LIBS      += -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
@@ -95,7 +95,7 @@ ifeq ($(config),release32)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m32
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -m32 -L/usr/lib32 -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex
+  LIBS      += -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
@@ -117,7 +117,7 @@ ifeq ($(config),debug64)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m64
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -m64 -L/usr/lib64 -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
+  LIBS      += -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
@@ -139,7 +139,7 @@ ifeq ($(config),release64)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m64
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -m64 -L/usr/lib64 -Llib
-  LIBS      += -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
+  LIBS      += -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
@@ -161,9 +161,9 @@ OBJECTS := \
 	$(OBJDIR)/FileLoader.o \
 	$(OBJDIR)/Ini.o \
 	$(OBJDIR)/StringUtils.o \
+	$(OBJDIR)/SoundLoader.o \
 	$(OBJDIR)/Sound.o \
 	$(OBJDIR)/Listener.o \
-	$(OBJDIR)/ComplexSound.o \
 	$(OBJDIR)/Random.o \
 	$(OBJDIR)/Vector2.o \
 	$(OBJDIR)/Math.o \
@@ -271,13 +271,13 @@ $(OBJDIR)/Ini.o: src/Utils/Ini.cpp
 $(OBJDIR)/StringUtils.o: src/Utils/StringUtils.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/SoundLoader.o: src/Audio/SoundLoader.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Sound.o: src/Audio/Sound.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Listener.o: src/Audio/Listener.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/ComplexSound.o: src/Audio/ComplexSound.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Random.o: src/Math/Random.cpp
