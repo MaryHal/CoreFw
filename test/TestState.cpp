@@ -31,6 +31,8 @@ void TestState::init(ResourceManager& resources)
     textures->add("background", "data/graphics/Frac3.png");
     background = textures->get("background");
 
+    sound = sounds->add("noise", "data/sound/sfx.wav");
+
     text = fonts->makeText("default", "\"This above all: to thine own self be true\" ~ Hamlet Act 1, scene 3, 78 82\nasdf\nasd\nas\na\nDefinitely no kerning :(");
     text2 = fonts->makeText("big", "AVAVAV");
 
@@ -80,6 +82,11 @@ void TestState::deinit()
 void TestState::handleInput(Input& input, int value, int action)
 {
     menu->handleInput(input, value, action);
+
+    if (value == 'Q' && action == KeyRelease)
+    {
+        sound->play();
+    }
 }
 
 void TestState::logic(float timeStep)

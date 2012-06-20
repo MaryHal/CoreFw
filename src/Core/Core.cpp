@@ -82,7 +82,6 @@ void Core::init(std::string title, unsigned int width, unsigned int height, bool
     initOpenGL();
 
     Listener::init();
-    FontLoader::init();
 
     resourceManager = new ResourceManager();
     input = new Input();
@@ -152,7 +151,7 @@ void Core::run()
         currentState->draw();
 
         renderer->post();
-        Listener::update();
+        //Listener::update();
 
         running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
         //glfwSleep(1.0 / 60.0 - fps.getFrameTime());

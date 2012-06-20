@@ -17,6 +17,7 @@ class TestState : public CoreState
         Text text2;
         FontPtr font;
         TexturePtr background;
+        SoundPtr sound;
 
         VertexBuffer* vb;
         VertexBuffer* line;

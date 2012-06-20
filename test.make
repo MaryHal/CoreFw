@@ -29,7 +29,7 @@ ifeq ($(config),debug)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -Llib
-  LIBS      += -lCoreFW64 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
+  LIBS      += -lCoreFW64 -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libCoreFW64.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -51,7 +51,7 @@ ifeq ($(config),release)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -Llib
-  LIBS      += -lCoreFW64 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
+  LIBS      += -lCoreFW64 -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libCoreFW64.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -73,7 +73,7 @@ ifeq ($(config),debug32)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m32
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -m32 -L/usr/lib32 -Llib
-  LIBS      += -lCoreFW32 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex -lCoreFW
+  LIBS      += -lCoreFW32 -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lCoreFW
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libCoreFW32.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -95,7 +95,7 @@ ifeq ($(config),release32)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m32
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -m32 -L/usr/lib32 -Llib
-  LIBS      += -lCoreFW32 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex -lCoreFW
+  LIBS      += -lCoreFW32 -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lCoreFW
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libCoreFW32.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -117,7 +117,7 @@ ifeq ($(config),debug64)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m64
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -m64 -L/usr/lib64 -Llib
-  LIBS      += -lCoreFW64 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
+  LIBS      += -lCoreFW64 -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libCoreFW64.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -139,7 +139,7 @@ ifeq ($(config),release64)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m64
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -m64 -L/usr/lib64 -Llib
-  LIBS      += -lCoreFW64 -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw -lfmodex64
+  LIBS      += -lCoreFW64 -lopenal -lsndfile -lGLEW -lGL -lX11 -lXrandr -lpthread -lm -lglfw
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libCoreFW64.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)

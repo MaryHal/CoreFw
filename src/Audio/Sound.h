@@ -3,32 +3,25 @@
 
 #include <string>
 
-namespace FMOD
-{
-    class Sound;
-    class Channel;
-};
+#include <AL/al.h>
+#include <AL/alc.h>
 
-namespace SoundType
-{
-    const int Default = 0;
-    const int Stream = 1;
-};
+#include <sndfile.h>
 
 class Sound
 {
     protected:
-        FMOD::Sound* sound;
-        FMOD::Channel* channel;
+        ALuint source;
+        ALuint buffer;
 
     public:
         Sound();
-        Sound(const std::string& filename, int type=SoundType::Default);
+        Sound(const std::string& filename);
         ~Sound();
 
-        void loadSound(const std::string& filename, int type=SoundType::Default);
+        void loadSound(const std::string& filename);
 
-        virtual void play();
+        void play();
         void stop();
         void pause();
 
@@ -42,19 +35,6 @@ class Sound
         float getTime();
 
         float getLength();
-
-        // Tracker module stuff
-        int getPattern();
-        int getPatternCount();
-        int getRow();
-        int getRowCount();
-        int getOrder();
-
-        float getFrequency();
-        virtual void setFrequency(float frequency);
-
-        float getSpeed();
-        void setSpeed(float speed);
 };
 
 #endif

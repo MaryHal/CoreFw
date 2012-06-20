@@ -36,7 +36,7 @@ class ResourceCache
             return resmap.find(identifier) != resmap.end();
         }
 
-        void add(const std::string& identifier, const ResourcePointer& ptr)
+        ResourcePointer add(const std::string& identifier, const ResourcePointer& ptr)
         {
             if (alreadyExists(identifier))
                 return;
@@ -94,13 +94,13 @@ class ResourceCache
 class TextureCache : public ResourceCache<Texture>
 {
     public:
-        void add(const std::string& identifier, const std::string& filename);
+        boost::shared_ptr<Texture> add(const std::string& identifier, const std::string& filename);
 };
 
 class FontCache : public ResourceCache<Font>
 {
     public:
-        void add(const std::string& identifier, const std::string& filename, unsigned int charSize);
+        boost::shared_ptr<Font> add(const std::string& identifier, const std::string& filename, unsigned int charSize);
 
         Text makeText(const std::string& identifier, const std::string& str);
         Text makeText(const std::string& identifier);
@@ -109,8 +109,7 @@ class FontCache : public ResourceCache<Font>
 class SoundCache : public ResourceCache<Sound>
 {
     public:
-        void add(const std::string& identifier, const std::string& filename, const int type=SoundType::Default);
-        //void addComplex(const std::string& identifier, const std::string& filename, const int type=SoundType::Default);
+        boost::shared_ptr<Sound> add(const std::string& identifier, const std::string& filename);
 };
 
 #endif
