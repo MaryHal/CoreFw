@@ -5,6 +5,7 @@
 #include "../Graphics/Text.h"
 
 #include "../Audio/Sound.h"
+#include "../Audio/Sample.h"
 
 // ==================================== ResourceCache
 
@@ -54,7 +55,7 @@ boost::shared_ptr<Sound> SoundCache::add(const std::string& identifier,
     if (alreadyExists(identifier))
         return resmap[identifier];
 
-    boost::shared_ptr<Sound> resource = boost::shared_ptr<Sound>(new Sound(filename));
+    boost::shared_ptr<Sound> resource = boost::shared_ptr<Sound>(new Sample(filename));
 
     resmap[identifier] = resource;
 

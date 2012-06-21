@@ -11,7 +11,7 @@ class Color;
 class Buffer
 {
     protected:
-        char* buffer;
+        char* data;
         size_t length;
         char* bufferEnd;
 
@@ -39,17 +39,17 @@ class Buffer
 
         void append(Buffer* b);
 
-        char* getBuffer();
+        char* getData();
 
         void setWriteLoc(int count, size_t bytesPerCount);
         void setReadLoc(int count, size_t bytesPerCount);
         template<class T> void setWriteLoc(int count)
         {
-            writeLoc = buffer + sizeof(T) * count;
+            writeLoc = data + sizeof(T) * count;
         }
         template<class T> void setReadLoc(int count)
         {
-            readLoc = buffer + sizeof(T) * count;
+            readLoc = data + sizeof(T) * count;
         }
 
         // used for making display lists that will pass these buffers directly to OpenGL;  no converting into global endianness!

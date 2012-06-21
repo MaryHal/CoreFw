@@ -108,7 +108,7 @@ void VertexBuffer::updateBuffers()
 
     glBufferData(GL_ARRAY_BUFFER,
                  length,
-                 buffer,
+                 data,
                  gl_BufferType[bufferType]);
 
     /*

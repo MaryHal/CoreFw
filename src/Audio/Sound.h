@@ -6,20 +6,23 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 
-#include <sndfile.h>
+#include "SoundBuffer.h"
 
 class Sound
 {
     protected:
         ALuint source;
-        ALuint buffer;
+        SoundBuffer buffer;
+
+        void __generateSource();
+        void __setSource();
 
     public:
         Sound();
         Sound(const std::string& filename);
         ~Sound();
 
-        void loadSound(const std::string& filename);
+        virtual void loadSound(const std::string& filename) = 0;
 
         void play();
         void stop();

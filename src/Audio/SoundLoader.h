@@ -3,15 +3,13 @@
 
 #include <string>
 #include <AL/al.h>
+#include "SoundBuffer.h"
 
 class SoundLoader
 {
-    private:
-        static ALenum getFormat(unsigned int channels);
-
     public:
-        static bool loadSound(const std::string& filename, unsigned int& buffer);
-        static bool update(short* data, unsigned int& buffer, unsigned int channels, unsigned int sampleRate, std::size_t sampleCount);
+        static ALenum getFormat(unsigned int channels);
+        static bool loadSound(const std::string& filename, SoundBuffer& buffer);
 };
 
 #endif

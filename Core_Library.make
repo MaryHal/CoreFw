@@ -162,7 +162,10 @@ OBJECTS := \
 	$(OBJDIR)/Ini.o \
 	$(OBJDIR)/StringUtils.o \
 	$(OBJDIR)/SoundLoader.o \
+	$(OBJDIR)/Music.o \
 	$(OBJDIR)/Sound.o \
+	$(OBJDIR)/Sample.o \
+	$(OBJDIR)/SoundBuffer.o \
 	$(OBJDIR)/Listener.o \
 	$(OBJDIR)/Random.o \
 	$(OBJDIR)/Vector2.o \
@@ -274,7 +277,16 @@ $(OBJDIR)/StringUtils.o: src/Utils/StringUtils.cpp
 $(OBJDIR)/SoundLoader.o: src/Audio/SoundLoader.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Music.o: src/Audio/Music.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Sound.o: src/Audio/Sound.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Sample.o: src/Audio/Sample.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/SoundBuffer.o: src/Audio/SoundBuffer.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Listener.o: src/Audio/Listener.cpp
