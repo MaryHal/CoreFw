@@ -8,7 +8,7 @@
 #include "../System/Log.h"
 
 Buffer::Buffer()
-    : buffer(NULL),
+    : data(NULL),
       length(0),
       bufferEnd(NULL),
       readLoc(NULL),
@@ -30,33 +30,33 @@ Buffer::Buffer(char* buf, int bufferLength)
 Buffer::~Buffer()
 {
     if (!external)
-        delete [] buffer;
-    buffer = NULL;
+        delete [] data;
+    data = NULL;
 }
 
 void Buffer::allocateData(size_t maxSize)
 {
-    buffer = new char[maxSize];
+    data = new char[maxSize];
     length = maxSize;
-    bufferEnd = &buffer[length];
+    bufferEnd = &data[length];
 
-    readLoc = writeLoc = buffer;
+    readLoc = writeLoc = data;
 
     external = false;
 }
 
 void Buffer::setBuffer(char* buf, int bufferLength)
 {
-    buffer = buf;
+    data = buf;
     length = bufferLength;
-    bufferEnd = &buffer[length];
+    bufferEnd = &data[length];
 
-    readLoc = buffer;
+    readLoc = data;
     writeLoc = bufferEnd;
 
     external = true;
 
-    logf("%p, %d", buffer, length);
+    logf("%p, %d", data, length);
 }
 
 bool Buffer::atEnd()
@@ -66,28 +66,28 @@ bool Buffer::atEnd()
 
 size_t Buffer::size()
 {
-    return (size_t)(bufferEnd - buffer);
+    return (size_t)(bufferEnd - data);
 }
 
 void Buffer::rewind()
 {
-    readLoc = buffer;
+    readLoc = data;
 }
 
 void Buffer::clear()
 {
-    writeLoc = readLoc = buffer;
+    writeLoc = readLoc = data;
 }
 
 void Buffer::append(Buffer* b)
 {
-    memcpy(bufferEnd, b->getBuffer(), b->size());
+    memcpy(bufferEnd, b->getData(), b->size());
     writeLoc += b->size();
 }
 
-char* Buffer::getBuffer()
+char* Buffer::getData()
 {
-    return buffer;
+    return data;
 }
 
 float Buffer::readFloat()

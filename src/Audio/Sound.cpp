@@ -4,22 +4,7 @@
 
 #include "../System/Log.h"
 
-Sound::Sound()
-{
-}
-
-Sound::Sound(const std::string& filename)
-{
-    loadSound(filename);
-}
-
-Sound::~Sound()
-{
-    alDeleteSources(1, &source);
-    alDeleteBuffers(1, &buffer);
-}
-
-void Sound::loadSound(const std::string& filename)
+void Sound::__generateSource()
 {
     // Setup our source
     alGenSources(1, &source);
@@ -28,30 +13,41 @@ void Sound::loadSound(const std::string& filename)
     alSource3f(source, AL_POSITION, 0, 0, 0);
     alSource3f(source, AL_VELOCITY, 0, 0, 0);
     alSourcei(source, AL_LOOPING, AL_FALSE);
+}
 
-    // We now need to generate a buffer, fill it with data, then set our
-    // source to play the buffer.
-    alGenBuffers(1, &buffer);
+void Sound::__setSource()
+{
+    alSourcei(source, AL_BUFFER, buffer.getBufferID());
+}
 
-    SoundLoader::loadSound(filename, buffer);
+Sound::Sound()
+{
+}
 
-    alSourcei(source, AL_BUFFER, buffer);
+Sound::Sound(const std::string& filename)
+{
+    // logf("Sound @ \"%s\" loaded.", filename.c_str());
+}
 
-    logf("Sound @ \"%s\" loaded.", filename.c_str());
+Sound::~Sound()
+{
+    alDeleteSources(1, &source);
 }
 
 void Sound::play()
 {
-    log("Playing Sound");
+    // log("Playing Sound");
     alSourcePlay(source);
 }
 
 void Sound::stop()
 {
+    alSourceStop(source);
 }
 
 void Sound::pause()
 {
+    alSourcePause(source);
 }
 
 void Sound::setVolume(float volume)
