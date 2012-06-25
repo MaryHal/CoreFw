@@ -20,8 +20,8 @@ Sample::~Sample()
 void Sample::loadSound(const std::string& filename)
 {
     __generateSource();
-    SoundLoader::loadSound(filename, buffer);
+    buffer.loadFromFile(filename);
     buffer.update();
-    __setSource();
+    __setSource(buffer.getBufferID());
 }
 

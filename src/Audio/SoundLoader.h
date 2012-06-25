@@ -9,7 +9,6 @@ class SoundLoader
 {
     public:
         static ALenum getFormat(unsigned int channels);
-        static bool loadSound(const std::string& filename, SoundBuffer& buffer);
 };
 
 #endif

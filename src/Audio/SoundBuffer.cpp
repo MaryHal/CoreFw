@@ -1,18 +1,17 @@
 #include "SoundBuffer.h"
 
 #include <AL/al.h>
+
 #include "SoundLoader.h"
+#include <sndfile.h>
 
 SoundBuffer::SoundBuffer()
 {
 }
 
-SoundBuffer::SoundBuffer(std::size_t sampleCount,
-                         unsigned int channelCount,
-                         unsigned int sampleRate)
-    : buffer(0)
+SoundBuffer::SoundBuffer(const std::string& filename)
 {
-    setSoundBuffer(sampleCount, channelCount, sampleRate);
+    loadFromFile(filename);
 }
 
 SoundBuffer::~SoundBuffer()
@@ -20,19 +19,30 @@ SoundBuffer::~SoundBuffer()
     alDeleteBuffers(1, &buffer);
 }
 
-void SoundBuffer::setSoundBuffer(std::size_t sampleCount,
-                                 unsigned int channelCount,
-                                 unsigned int sampleRate)
+void SoundBuffer::loadFromFile(const std::string& filename)
 {
-    this->sampleCount = sampleCount;
-    this->channelCount = channelCount;
-    this->sampleRate = sampleRate;
+    SF_INFO FileInfos;
+    SNDFILE* myFile = sf_open(filename.c_str(), SFM_READ, &FileInfos);
+    if (!myFile)
+    {
+        //std::cerr << "Failed to read sound file \"" << Filename << "\"" << std::endl;
+        return;
+    }
+
+    // Set the sound parameters
+    sampleCount = static_cast<std::size_t>(FileInfos.frames) * FileInfos.channels;
+    channelCount = FileInfos.channels;
+    sampleRate = FileInfos.samplerate;
+
+    // Read Data
+    allocateData(sampleCount * sizeof(short));
+    static_cast<std::size_t>(sf_read_short(myFile, (short*)data, sampleCount));
+
+    sf_close(myFile);
 
     // We now need to generate a buffer, fill it with data, then set our
     // source to play the buffer.
     alGenBuffers(1, &buffer);
-
-    allocateData(sampleCount * sizeof(short));
 }
 
 void SoundBuffer::update()

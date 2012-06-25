@@ -5,6 +5,9 @@
 
 class Sample : public Sound
 {
+    private:
+        SoundBuffer buffer;
+
     public:
         Sample();
         Sample(const std::string& filename);

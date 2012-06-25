@@ -12,10 +12,9 @@ class Sound
 {
     protected:
         ALuint source;
-        SoundBuffer buffer;
 
         void __generateSource();
-        void __setSource();
+        void __setSource(const unsigned int& bufferID);
 
     public:
         Sound();
