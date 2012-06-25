@@ -15,9 +15,9 @@ void Sound::__generateSource()
     alSourcei(source, AL_LOOPING, AL_FALSE);
 }
 
-void Sound::__setSource()
+void Sound::__setSource(const unsigned int& bufferID)
 {
-    alSourcei(source, AL_BUFFER, buffer.getBufferID());
+    alSourcei(source, AL_BUFFER, bufferID);
 }
 
 Sound::Sound()

@@ -27,6 +27,7 @@ void Listener::init()
 
 void Listener::deinit()
 {
+    alcMakeContextCurrent(NULL);
     alcDestroyContext(context);
     alcCloseDevice(device);
 }
