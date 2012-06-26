@@ -5,8 +5,6 @@
 
 //#include <sstream>
 #include <boost/lexical_cast.hpp>
-#define toString boost::lexical_cast<std::string>
-#define fromString boost::lexical_cast
 
 std::string& ltrim(std::string& s);
 std::string& rtrim(std::string& s);
@@ -14,6 +12,16 @@ std::string& trim(std::string& s);
 
 std::string formatString(const char* format, ...);
 std::string numberString(int number);
+
+template<typename T> inline std::string toString(T var)
+{
+    return boost::lexical_cast<std::string>(var);
+}
+
+template<typename T> inline T fromString(std::string str)
+{
+    return boost::lexical_cast<T>(str);
+}
 
 /*
 template <typename T>
