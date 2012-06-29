@@ -10,7 +10,7 @@ Music::Music()
 
 Music::Music(const std::string& filename)
     : file(NULL), 
-    streaming(true),
+    streaming(false),
     sampleCount(0),
     channelCount(0),
     sampleRate(0),
@@ -27,9 +27,31 @@ Music::Music(const std::string& filename)
 
 Music::~Music()
 {
+    stop();
     alDeleteBuffers(BUFFER_COUNT, buffers);
     if (file)
         sf_close(file);
+}
+
+void Music::play()
+{
+    if (!streaming)
+    {
+        streaming = true;
+        thread = glfwCreateThread(&SoundStream::streamData, this);
+    }
+}
+
+void Music::startMusic()
+{
+    Sound::play();
+}
+
+void Music::stop()
+{
+    streaming = false;
+    glfwWaitThread(thread, GLFW_WAIT);
+    Sound::stop();
 }
 
 void Music::loadSound(const std::string& filename)
@@ -57,8 +79,6 @@ void Music::loadSound(const std::string& filename)
 
         logf("Unsupported number of channels (%d)", channelCount);
     }
-
-    thread = glfwCreateThread(&SoundStream::streamData, this);
 }
 
 bool Music::loadChunk(SoundChunk& c, std::size_t size)

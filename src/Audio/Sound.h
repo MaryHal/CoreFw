@@ -23,8 +23,8 @@ class Sound
 
         virtual void loadSound(const std::string& filename) = 0;
 
-        void play();
-        void stop();
+        virtual void play();
+        virtual void stop();
         void pause();
 
         void setVolume(float volume);
