@@ -36,7 +36,7 @@ Sound::~Sound()
 
 void Sound::play()
 {
-    // log("Playing Sound");
+    log("Playing Sound");
     alSourcePlay(source);
 }
 
@@ -81,5 +81,10 @@ float Sound::getTime()
 float Sound::getLength()
 {
     return 0;
+}
+
+ALuint Sound::getSource()
+{
+    return source;
 }
 
