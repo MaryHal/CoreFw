@@ -2,14 +2,13 @@
 
 #include <cstdio>
 
-#include "Menu.h"
-
 #include <Utils/StringUtils.h>
-
 #include <System/Input.h>
 
 #include <Core/Core.h>
 #include <Core/CoreRegistry.h>
+
+#include "Menu.h"
 
 REGISTER_GAME("Test", TestState);
 
@@ -31,7 +30,8 @@ void TestState::init(ResourceManager& resources)
     textures->add("background", "data/graphics/Frac3.png");
     background = textures->get("background");
 
-    sound = sounds->add("noise", "data/sound/sfx.wav");
+    sound = sounds->addSample("noise", "data/sound/sfx.wav");
+    music = sounds->addMusic("asdf", "data/music/song.ogg");
 
     text = fonts->makeText("default", "\"This above all: to thine own self be true\" ~ Hamlet Act 1, scene 3, 78 82\nasdf\nasd\nas\na\nDefinitely no kerning :(");
     text2 = fonts->makeText("big", "AVAVAV");
@@ -86,6 +86,10 @@ void TestState::handleInput(Input& input, int value, int action)
     if (value == 'Q' && action == KeyRelease)
     {
         sound->play();
+    }
+    if (value == 'E' && action == KeyRelease)
+    {
+        music->play();
     }
 }
 

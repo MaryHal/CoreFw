@@ -37,6 +37,8 @@ class Sound
         float getTime();
 
         float getLength();
+
+        ALuint getSource();
 };
 
 #endif

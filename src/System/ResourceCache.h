@@ -109,7 +109,8 @@ class FontCache : public ResourceCache<Font>
 class SoundCache : public ResourceCache<Sound>
 {
     public:
-        boost::shared_ptr<Sound> add(const std::string& identifier, const std::string& filename);
+        boost::shared_ptr<Sound> addSample(const std::string& identifier, const std::string& filename);
+        boost::shared_ptr<Sound> addMusic(const std::string& identifier, const std::string& filename);
 };
 
 #endif

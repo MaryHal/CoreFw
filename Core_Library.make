@@ -162,6 +162,7 @@ OBJECTS := \
 	$(OBJDIR)/Ini.o \
 	$(OBJDIR)/StringUtils.o \
 	$(OBJDIR)/SoundLoader.o \
+	$(OBJDIR)/SoundStream.o \
 	$(OBJDIR)/Music.o \
 	$(OBJDIR)/Sound.o \
 	$(OBJDIR)/Sample.o \
@@ -275,6 +276,9 @@ $(OBJDIR)/StringUtils.o: src/Utils/StringUtils.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/SoundLoader.o: src/Audio/SoundLoader.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/SoundStream.o: src/Audio/SoundStream.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Music.o: src/Audio/Music.cpp
