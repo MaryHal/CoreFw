@@ -8,6 +8,9 @@ struct ResourceManager
     TextureCache textureCache;
     FontCache fontCache;
     SoundCache soundCache;
+
+    ResourceManager();
+    ~ResourceManager();
 };
 
 #endif

@@ -91,6 +91,10 @@ void TestState::handleInput(Input& input, int value, int action)
     {
         music->play();
     }
+    if (value == 'F' && action == KeyRelease)
+    {
+        music->stop();
+    }
 }
 
 void TestState::logic(float timeStep)

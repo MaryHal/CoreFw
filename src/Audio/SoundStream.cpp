@@ -10,7 +10,7 @@ void GLFWCALL SoundStream::streamData(void* arg)
     Music* m = (Music*)arg;
 
     bool requestStop = m->fillQueue();
-    m->play();
+    m->startMusic();
 
     while (m->isStreaming())
     {
@@ -46,7 +46,7 @@ void GLFWCALL SoundStream::streamData(void* arg)
         }
 
         // Leave some time for the other threads if the stream is still playing
-        glfwSleep(0.02);
+        glfwSleep(0.1);
     }
 
     // Stop the playback

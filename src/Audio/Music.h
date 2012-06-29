@@ -39,6 +39,10 @@ class Music : public Sound
         Music(const std::string& filename);
         ~Music();
 
+        void play();
+        void startMusic();
+        void stop();
+
         void loadSound(const std::string& filename);
         bool loadChunk(SoundChunk& c, std::size_t size);
 
