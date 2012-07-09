@@ -3,7 +3,8 @@
 CoreState::CoreState()
     : textures(NULL),
       fonts(NULL),
-      sounds(NULL)
+      sounds(NULL),
+      initialized(false)
 {
 }
 

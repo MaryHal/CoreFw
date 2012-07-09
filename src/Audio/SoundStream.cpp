@@ -4,13 +4,14 @@
 #include <AL/al.h>
 
 #include "../System/Log.h"
+#include <GL/glfw.h>
 
 void GLFWCALL SoundStream::streamData(void* arg)
 {
     Music* m = (Music*)arg;
 
     bool requestStop = m->fillQueue();
-    m->startMusic();
+    m->play();
 
     while (m->isStreaming())
     {
@@ -46,13 +47,15 @@ void GLFWCALL SoundStream::streamData(void* arg)
         }
 
         // Leave some time for the other threads if the stream is still playing
-        glfwSleep(0.1);
+        glfwSleep(0.2);
     }
 
     // Stop the playback
-    m->stop();
+    // m->stop();
 
     // Unqueue any buffer left in the queue
     m->clearQueue();
+
+    log("Music Stream Thread Killed");
 }
 

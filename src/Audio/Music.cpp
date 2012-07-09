@@ -11,6 +11,7 @@ Music::Music()
 Music::Music(const std::string& filename)
     : file(NULL), 
     streaming(false),
+    loop(false),
     sampleCount(0),
     channelCount(0),
     sampleRate(0),
@@ -28,6 +29,7 @@ Music::Music(const std::string& filename)
 Music::~Music()
 {
     stop();
+
     alDeleteBuffers(BUFFER_COUNT, buffers);
     if (file)
         sf_close(file);
@@ -37,21 +39,66 @@ void Music::play()
 {
     if (!streaming)
     {
+        for (unsigned int i = 0; i < BUFFER_COUNT; ++i)
+            endBuffers[i] = false;
+
         streaming = true;
+        samplesProcessed = 0;
+        seek(0);
         thread = glfwCreateThread(&SoundStream::streamData, this);
     }
-}
-
-void Music::startMusic()
-{
-    Sound::play();
+    else
+    {
+        Sound::play();
+    }
 }
 
 void Music::stop()
 {
-    streaming = false;
-    glfwWaitThread(thread, GLFW_WAIT);
-    Sound::stop();
+    if (status != Stopped)
+    {
+        Sound::stop();
+        streaming = false;
+        glfwWaitThread(thread, GLFW_WAIT);
+
+        samplesProcessed = 0;
+    }
+}
+
+void Music::seek(float time)
+{
+    GLFWmutex mutex = glfwCreateMutex();
+
+    if (file)
+    {
+        sf_count_t frameOffset = static_cast<sf_count_t>(time * 1000 * sampleRate);
+        sf_seek(file, frameOffset, SEEK_SET);
+    }
+
+    glfwDestroyMutex(mutex);
+}
+
+float Music::getDuration()
+{
+    return duration;
+}
+
+float Music::getTime()
+{
+    ALfloat secs = 0.f;
+    alGetSourcef(source, AL_SEC_OFFSET, &secs);
+
+    return secs + static_cast<float>(samplesProcessed) / sampleRate / channelCount;
+}
+
+void Music::setLoop(bool value)
+{
+    loop = value;
+}
+
+bool Music::getLoop()
+{
+    return loop;
 }
 
 void Music::loadSound(const std::string& filename)
@@ -79,15 +126,26 @@ void Music::loadSound(const std::string& filename)
 
         logf("Unsupported number of channels (%d)", channelCount);
     }
+
+    duration = static_cast<float>(sampleCount) / sampleRate / channelCount;
+
+    buffer.resize(sampleRate * channelCount);
 }
 
-bool Music::loadChunk(SoundChunk& c, std::size_t size)
+bool Music::loadChunk(SoundChunk& c)
 {
     GLFWmutex mutex = glfwCreateMutex();
-    c.sampleCount = static_cast<std::size_t>(sf_read_short(file, c.samples, size));
+
+    c.samples = &buffer[0];
+
+    if (file && c.samples && sampleCount)
+        c.sampleCount = static_cast<std::size_t>(sf_read_short(file, &buffer[0], buffer.size()));
+    else
+        c.sampleCount = 0;
+
     glfwDestroyMutex(mutex);
 
-    return c.sampleCount == size;
+    return c.sampleCount == buffer.size();
 }
 
 bool Music::fillQueue()
@@ -108,14 +166,25 @@ bool Music::fillAndPushBuffer(unsigned int bufferNum)
     bool requestStop = false;
 
     // Acquire audio data
-    std::size_t size = sampleRate * channelCount * sizeof(short);
     SoundChunk chunk = {NULL, 0};
-    chunk.samples = new short[sampleRate * channelCount * 2];
-
-    if (!loadChunk(chunk, size))
+    if (!loadChunk(chunk))
     {
         endBuffers[bufferNum] = true;
-        requestStop = true;
+
+        if (loop)
+        {
+            logf("looping");
+            seek(0);
+
+            if (!chunk.samples || chunk.sampleCount == 0)
+            {
+                fillAndPushBuffer(bufferNum);
+            }
+        }
+        else
+        {
+            requestStop = true;
+        }
     }
 
     // Buffer the data
@@ -131,8 +200,6 @@ bool Music::fillAndPushBuffer(unsigned int bufferNum)
         alSourceQueueBuffers(source, 1, &buffer);
     }
 
-    delete chunk.samples;
-
     return requestStop;
 }
 
@@ -146,6 +213,11 @@ void Music::clearQueue()
     ALuint buffer;
     for (ALint i = 0; i < nbQueued; ++i)
         alSourceUnqueueBuffers(source, 1, &buffer);
+}
+
+void Music::setStream(bool value)
+{
+    streaming = value;
 }
 
 bool Music::isStreaming()
@@ -204,6 +276,5 @@ bool Music::getEndBuffer(unsigned int bufferNum)
 {
     return endBuffers[bufferNum];
 }
-
 
 

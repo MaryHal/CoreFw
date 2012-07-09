@@ -9,6 +9,8 @@
 
 #include <sndfile.h>
 
+#include <vector>
+
 class Music : public Sound
 {
     private:
@@ -27,6 +29,8 @@ class Music : public Sound
         unsigned int buffers[BUFFER_COUNT];
         bool endBuffers[BUFFER_COUNT];
 
+        bool loop;
+
         std::size_t  sampleCount;
         unsigned int channelCount;
         unsigned int sampleRate;
@@ -34,22 +38,33 @@ class Music : public Sound
         ALenum format;
         unsigned long samplesProcessed;
 
+        float duration;
+
+        std::vector<short> buffer;
+
     public:
         Music();
         Music(const std::string& filename);
         ~Music();
 
         void play();
-        void startMusic();
         void stop();
 
+        void seek(float time);
+        float getDuration();
+        float getTime();
+
+        void setLoop(bool value);
+        bool getLoop();
+
         void loadSound(const std::string& filename);
-        bool loadChunk(SoundChunk& c, std::size_t size);
+        bool loadChunk(SoundChunk& c);
 
         bool fillQueue();
         bool fillAndPushBuffer(unsigned int bufferNum);
         void clearQueue();
         
+        void setStream(bool value);
         bool isStreaming();
         ALint buffersProcessed();
 

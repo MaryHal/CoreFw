@@ -35,6 +35,7 @@ void TestState::init(ResourceManager& resources)
 
     text = fonts->makeText("default", "\"This above all: to thine own self be true\" ~ Hamlet Act 1, scene 3, 78 82\nasdf\nasd\nas\na\nDefinitely no kerning :(");
     text2 = fonts->makeText("big", "AVAVAV");
+    text3 = fonts->makeText("default", "asdf");
 
     menu = new Menu("Main Menu", font);
     menu->setMetrics(6, 20);
@@ -70,6 +71,7 @@ void TestState::init(ResourceManager& resources)
     line->writeColor(1.0f, 1.0f, 1.0f, 0.5f);
 
     line->updateBuffers();
+    music->setLoop(true);
 }
 
 void TestState::deinit()
@@ -95,6 +97,10 @@ void TestState::handleInput(Input& input, int value, int action)
     {
         music->stop();
     }
+    if (value == 'R' && action == KeyRelease)
+    {
+        music->pause();
+    }
 }
 
 void TestState::logic(float timeStep)
@@ -104,14 +110,15 @@ void TestState::logic(float timeStep)
         std::string choice = menu->getChoice();
         if (choice == "Hello")
         {
-            Core::changeState(CoreRegistry::getGame("Game"));
+            Core::changeState(CoreRegistry::getState("Game"));
         }
         else if (choice == "Hi")
         {
-            Core::changeState(CoreRegistry::getGame("Pattern"));
+            Core::changeState(CoreRegistry::getState("Pattern"));
         }
         menu->resetChoice();
     }
+    text3.setText(toString<float>(music->getTime()) + '/' + toString<float>(music->getDuration()));
 }
 
 void TestState::draw()
@@ -121,10 +128,11 @@ void TestState::draw()
     vb->draw(64.0f, 64.0f);
 
     line->draw(13.0f, 13.0f);
-    text.draw(13.0f, 13.0f);
-
     line->draw(13.0f, 200.0f);
+
+    text.draw(13.0f, 13.0f);
     text2.draw(13.0f, 200.0f);
+    text3.draw(13.0f, 400.0f);
 }
 
 

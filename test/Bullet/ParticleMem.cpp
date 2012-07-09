@@ -39,7 +39,7 @@ const int ParticleMem::getColorBufferSize() const
 void VectorMem::swap(int index1, int index2)
 {
     // Swap Particles:
-    //      Uh, Yeah, so we don't really need to swap anything...
+    // Uh, Yeah, so we don't really need to swap anything...
     //Particle temp = mem[index1];
     mem[index1] = mem[index2];
     //mem[index2] = temp;

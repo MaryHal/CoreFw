@@ -29,10 +29,9 @@ class Core
 
         static FpsCounter* fps;
 
-        static bool initOpenGL();
+        static bool initGLFW();
 
     public:
-        static void init(const std::string& filename);
         static void init(std::string title, unsigned int width, unsigned int height, bool fullscreen);
         static void deinit();
 

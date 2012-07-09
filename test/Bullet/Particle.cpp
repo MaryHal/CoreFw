@@ -3,6 +3,12 @@
 #include <cstdio>
 
 Particle::Particle()
+    : position(0.0f, 0.0f),
+    velocity(0.0f, 0.0f),
+    acceleration(0.0f, 0.0f),
+    colorDelta(0.0f, 0.0f, 0.0f),
+    life(0.0f),
+    alive(false)
 {
     /*
     velocity = Vector2f(0.0f, 0.0f);

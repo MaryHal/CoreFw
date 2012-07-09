@@ -3,14 +3,15 @@ if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
 inoremap <silent> <S-Tab> =BackwardsSnippet()
+inoremap <expr> <BS> neocomplcache#smart_close_popup()."\"
 nmap <silent>  :wincmd h
-snoremap <silent> 	 i<Right>=TriggerSnippet()
-xnoremap 	 % 
+vnoremap 	 % 
 nnoremap 	 %
 nmap <silent> <NL> :wincmd j
 nmap <silent>  :wincmd k
+smap  <Plug>(neocomplcache_snippets_expand)
 nmap <silent>  :wincmd l
-nnoremap <silent>  :Bufferlist
+nnoremap <silent>  :CtrlPBuffer
 nnoremap <silent>  :CtrlP
 snoremap  b<BS>
 snoremap % b<BS>%
@@ -43,19 +44,26 @@ snoremap ` b<BS>`
 nmap gx <Plug>NetrwBrowseX
 noremap j gj
 noremap k gk
-snoremap <Left> bi
-snoremap <Right> a
-snoremap <BS> b<BS>
+nnoremap <silent> <F4> :Bufferlist
 snoremap <silent> <S-Tab> i<Right>=BackwardsSnippet()
+snoremap <BS> b<BS>
+snoremap <Right> a
+snoremap <Left> bi
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)
 map <F6> :call CompileAndRun(1)
 map <F5> :call CompileAndRun(0)
 nmap <C-Tab> :tabn
 nmap <C-S-Tab> :tabp
-nnoremap <silent> <F4> :Bufferlist
 nnoremap <silent> <F1> :NERDTreeToggle
-inoremap <silent> 	 =TriggerSnippet()
+inoremap <expr>  neocomplcache#cancel_popup()
+inoremap <expr>  neocomplcache#undo_completion()
+inoremap <expr>  neocomplcache#smart_close_popup()."\"
+inoremap <expr> 	 pumvisible() ? "\" : "\	"
+imap  <Plug>(neocomplcache_snippets_expand)
+inoremap <expr>  neocomplcache#complete_common_string()
+inoremap <expr>  neocomplcache#smart_close_popup() . "\"
 inoremap <silent> 	 =ShowAvailableSnips()
+inoremap <expr>  neocomplcache#close_popup()
 imap ,ihn :IHN
 imap ,is :IHS:A
 imap ,ih :IHS
@@ -76,7 +84,7 @@ set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
 set fileformats=unix,dos,mac
 set grepprg=ack
-set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175,a:blinkon0
+set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175,a:blinkon0,a:blinkon0
 set guifont=Inconsolata\ 10
 set guioptions=
 set helplang=en
@@ -90,7 +98,7 @@ set listchars=extends:»,precedes:«,tab:»¯,trail:°
 set modelines=0
 set mouse=a
 set ruler
-set runtimepath=~/.vim/bundle/vundle,~/.vim/bundle/vim-fuzzee,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/bufkill.vim,~/.vim/bundle/Buffet.vim,~/.vim/bundle/a.vim,~/.vim/bundle/The-NERD-tree,~/.vim/bundle/snipMate,~/.vim/bundle/ack.vim,~/.vim/bundle/Zenburn,~/.vim/bundle/fu,~/.vim/bundle/vim-powerline,~/.vim,/usr/share/vim/vimfiles,/usr/share/vim/vim73,/usr/share/vim/vimfiles/after,~/.vim/after,~/.vim/bundle/vundle/after,~/.vim/bundle/vim-fuzzee/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/bufkill.vim/after,~/.vim/bundle/Buffet.vim/after,~/.vim/bundle/a.vim/after,~/.vim/bundle/The-NERD-tree/after,~/.vim/bundle/snipMate/after,~/.vim/bundle/ack.vim/after,~/.vim/bundle/Zenburn/after,~/.vim/bundle/fu/after,~/.vim/bundle/vim-powerline/after
+set runtimepath=~/.vim/bundle/vundle,~/.vim/bundle/vim-fuzzee,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/neocomplcache,~/.vim/bundle/bufkill.vim,~/.vim/bundle/a.vim,~/.vim/bundle/The-NERD-tree,~/.vim/bundle/ack.vim,~/.vim/bundle/Zenburn,~/.vim/bundle/fu,~/.vim/bundle/vim-powerline,~/.vim/bundle/vim-fuzzee,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/bufkill.vim,~/.vim/bundle/Buffet.vim,~/.vim/bundle/a.vim,~/.vim/bundle/The-NERD-tree,~/.vim/bundle/snipMate,~/.vim/bundle/ack.vim,~/.vim/bundle/Zenburn,~/.vim/bundle/fu,~/.vim/bundle/vim-powerline,~/.vim,/usr/share/vim/vimfiles,/usr/share/vim/vim73,/usr/share/vim/vimfiles/after,~/.vim/after,~/.vim/bundle/vim-fuzzee/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/bufkill.vim/after,~/.vim/bundle/Buffet.vim/after,~/.vim/bundle/a.vim/after,~/.vim/bundle/The-NERD-tree/after,~/.vim/bundle/snipMate/after,~/.vim/bundle/ack.vim/after,~/.vim/bundle/Zenburn/after,~/.vim/bundle/fu/after,~/.vim/bundle/vim-powerline/after,~/.vim/bundle/vundle/after,~/.vim/bundle/vim-fuzzee/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/neocomplcache/after,~/.vim/bundle/bufkill.vim/after,~/.vim/bundle/a.vim/after,~/.vim/bundle/The-NERD-tree/after,~/.vim/bundle/ack.vim/after,~/.vim/bundle/Zenburn/after,~/.vim/bundle/fu/after,~/.vim/bundle/vim-powerline/after
 set scrolloff=3
 set shellpipe=2>&1\ |\ tee\ %s;exit\ ${PIPESTATUS[0]}
 set shiftwidth=4
@@ -125,19 +133,20 @@ badd +1 ~/tmp/SFML/include/SFML/Audio/Music.hpp
 badd +1 ~/tmp/SFML/src/SFML/Audio/Music.cpp
 badd +1 ~/tmp/SFML/include/SFML/Audio/SoundStream.hpp
 badd +1 ~/tmp/SFML/src/SFML/Audio/SoundStream.cpp
-badd +0 ~/tmp/SFML/src/SFML/Audio/SoundFile.hpp
-badd +0 ~/tmp/SFML/src/SFML/Audio/SoundFile.cpp
-badd +0 src/System/ResourceCache.h
-badd +0 src/System/ResourceCache.cpp
-badd +0 test/TestState.h
-badd +0 test/TestState.cpp
-badd +0 src/Audio/Sound.h
-badd +0 src/Audio/Sound.cpp
-badd +0 src/Audio/Sample.h
-badd +0 src/Audio/Sample.cpp
-badd +0 src/Audio/SoundBuffer.h
-badd +0 src/Audio/SoundBuffer.cpp
+badd +1 ~/tmp/SFML/src/SFML/Audio/SoundFile.hpp
+badd +1 ~/tmp/SFML/src/SFML/Audio/SoundFile.cpp
+badd +1 src/System/ResourceCache.h
+badd +1 src/System/ResourceCache.cpp
+badd +1 test/TestState.h
+badd +1 test/TestState.cpp
+badd +1 src/Audio/Sound.h
+badd +1 src/Audio/Sound.cpp
+badd +1 src/Audio/Sample.h
+badd +1 src/Audio/Sample.cpp
+badd +1 src/Audio/SoundBuffer.h
+badd +1 src/Audio/SoundBuffer.cpp
 badd +612 /usr/include/sndfile.h
+badd +14 \[Vundle]\ Installer
 silent! argdel *
 edit src/Audio/Music.h
 set splitbelow splitright
@@ -155,13 +164,13 @@ split
 wincmd w
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 25 + 26) / 53)
+exe '1resize ' . ((&lines * 26 + 26) / 53)
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
-exe '2resize ' . ((&lines * 24 + 26) / 53)
+exe '2resize ' . ((&lines * 23 + 26) / 53)
 exe 'vert 2resize ' . ((&columns * 96 + 97) / 194)
-exe '3resize ' . ((&lines * 24 + 26) / 53)
+exe '3resize ' . ((&lines * 25 + 26) / 53)
 exe 'vert 3resize ' . ((&columns * 97 + 97) / 194)
-exe '4resize ' . ((&lines * 25 + 26) / 53)
+exe '4resize ' . ((&lines * 24 + 26) / 53)
 exe 'vert 4resize ' . ((&columns * 97 + 97) / 194)
 argglobal
 setlocal keymap=
@@ -267,7 +276,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 23 - ((14 * winheight(0) + 12) / 25)
+let s:l = 23 - ((0 * winheight(0) + 13) / 26)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -379,11 +388,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 8 - ((7 * winheight(0) + 12) / 24)
+let s:l = 1 - ((0 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-8
+1
 normal! 0
 wincmd w
 argglobal
@@ -474,7 +483,7 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(0,1)
+setlocal statusline=%!Pl#Statusline(0,0)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
@@ -491,12 +500,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 25 - ((18 * winheight(0) + 12) / 24)
+let s:l = 43 - ((15 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-25
-normal! 04l
+43
+normal! 07l
 wincmd w
 argglobal
 edit src/Audio/SoundStream.cpp
@@ -603,21 +612,20 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 25 - ((6 * winheight(0) + 12) / 25)
+let s:l = 18 - ((6 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-25
+18
 normal! 0
 wincmd w
-3wincmd w
-exe '1resize ' . ((&lines * 25 + 26) / 53)
+exe '1resize ' . ((&lines * 26 + 26) / 53)
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
-exe '2resize ' . ((&lines * 24 + 26) / 53)
+exe '2resize ' . ((&lines * 23 + 26) / 53)
 exe 'vert 2resize ' . ((&columns * 96 + 97) / 194)
-exe '3resize ' . ((&lines * 24 + 26) / 53)
+exe '3resize ' . ((&lines * 25 + 26) / 53)
 exe 'vert 3resize ' . ((&columns * 97 + 97) / 194)
-exe '4resize ' . ((&lines * 25 + 26) / 53)
+exe '4resize ' . ((&lines * 24 + 26) / 53)
 exe 'vert 4resize ' . ((&columns * 97 + 97) / 194)
 tabedit ~/tmp/SFML/include/SFML/Audio/Music.hpp
 set splitbelow splitright
@@ -973,11 +981,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 150 - ((21 * winheight(0) + 12) / 24)
+let s:l = 151 - ((22 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-150
+151
 normal! 0
 lcd ~/code/current/CoreFW
 wincmd w
@@ -1069,7 +1077,7 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(0,0)
+setlocal statusline=%!Pl#Statusline(0,1)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
@@ -1086,15 +1094,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 95 - ((12 * winheight(0) + 12) / 25)
+let s:l = 88 - ((5 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-95
+88
 normal! 024l
 lcd ~/code/current/CoreFW
 wincmd w
-3wincmd w
+4wincmd w
 exe '1resize ' . ((&lines * 24 + 26) / 53)
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
 exe '2resize ' . ((&lines * 25 + 26) / 53)
@@ -1338,7 +1346,7 @@ normal! zt
 normal! 0
 lcd ~/code/current/CoreFW
 wincmd w
-3wincmd w
+4wincmd w
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
 exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
 tabedit ~/code/current/CoreFW/src/System/ResourceCache.h
@@ -1671,7 +1679,7 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(9,1)
+setlocal statusline=%!Pl#Statusline(9,0)
 setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
@@ -1689,7 +1697,7 @@ setlocal wrap
 setlocal wrapmargin=0
 lcd ~/code/current/CoreFW
 wincmd w
-3wincmd w
+4wincmd w
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
 exe '2resize ' . ((&lines * 39 + 26) / 53)
 exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
@@ -1930,7 +1938,7 @@ normal! zt
 normal! 0
 lcd ~/code/current/CoreFW
 wincmd w
-3wincmd w
+4wincmd w
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
 exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
 tabedit ~/code/current/CoreFW/src/Audio/SoundBuffer.h
@@ -2168,7 +2176,7 @@ normal! zt
 normal! 0
 lcd ~/code/current/CoreFW
 wincmd w
-3wincmd w
+4wincmd w
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
 exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
 tabedit ~/code/current/CoreFW/src/Audio/Sample.h
@@ -2406,7 +2414,7 @@ normal! zt
 normal! 0
 lcd ~/code/current/CoreFW
 wincmd w
-3wincmd w
+4wincmd w
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
 exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
 tabedit ~/code/current/CoreFW/src/Audio/Sound.h
@@ -2644,10 +2652,10 @@ normal! zt
 normal! 0
 lcd ~/code/current/CoreFW
 wincmd w
-3wincmd w
+4wincmd w
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
 exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
-tabnext 1
+tabnext 2
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
 endif

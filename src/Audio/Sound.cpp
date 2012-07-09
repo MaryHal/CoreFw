@@ -9,7 +9,7 @@ void Sound::__generateSource()
     // Setup our source
     alGenSources(1, &source);
     alSourcef(source, AL_PITCH, 1);
-    alSourcef(source, AL_GAIN, 1);
+    alSourcef(source, AL_GAIN, 0.8);
     alSource3f(source, AL_POSITION, 0, 0, 0);
     alSource3f(source, AL_VELOCITY, 0, 0, 0);
     alSourcei(source, AL_LOOPING, AL_FALSE);
@@ -21,10 +21,14 @@ void Sound::__setSource(const unsigned int& bufferID)
 }
 
 Sound::Sound()
+    : status(Stopped),
+    source(0)
 {
 }
 
 Sound::Sound(const std::string& filename)
+    : status(Stopped),
+    source(0)
 {
     // logf("Sound @ \"%s\" loaded.", filename.c_str());
 }
@@ -36,37 +40,63 @@ Sound::~Sound()
 
 void Sound::play()
 {
-    log("Playing Sound");
+    status = Playing;
     alSourcePlay(source);
 }
 
 void Sound::stop()
 {
+    status = Stopped;
     alSourceStop(source);
 }
 
 void Sound::pause()
 {
-    alSourcePause(source);
+    if (status == Paused)
+    {
+        play();
+    }
+    else if (status == Playing)
+    {
+        status = Paused;
+        alSourcePause(source);
+    }
 }
 
 void Sound::setVolume(float volume)
 {
+    alSourcef(source, AL_GAIN, volume);
 }
 
 float Sound::getVolume()
 {
-    return 0.0f;
+    ALfloat volume;
+    alGetSourcef(source, AL_GAIN, &volume);
+
+    return volume;
+}
+
+void Sound::setLoop(bool loop)
+{
+    alSourcei(source, AL_LOOPING, loop);
+}
+
+bool Sound::getLoop() const
+{
+    ALint loop;
+    alGetSourcei(source, AL_LOOPING, &loop);
+
+    return loop != 0;
 }
 
 bool Sound::isPlaying()
 {
-    return false;
+    return status == Playing;
 }
 
 bool Sound::isPaused()
 {
-    return false;
+    return status == Paused;
 }
 
 void Sound::setTime(float time)
@@ -78,7 +108,7 @@ float Sound::getTime()
     return 0;
 }
 
-float Sound::getLength()
+float Sound::getDuration()
 {
     return 0;
 }
@@ -86,5 +116,10 @@ float Sound::getLength()
 ALuint Sound::getSource()
 {
     return source;
+}
+
+Status Sound::getStatus()
+{
+    return status;
 }
 

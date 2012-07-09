@@ -27,7 +27,7 @@ void PatternState::deinit()
 void PatternState::handleInput(Input& input, int value, int action)
 {
     if (input["up"] == value && action == KeyPress)
-        Core::changeState(CoreRegistry::getGame("Test"));
+        Core::changeState(CoreRegistry::getState("Test"));
 }
 
 void PatternState::logic(float timeStep)

@@ -11,6 +11,13 @@ class Bullet : public Particle
 
     public:
         Bullet();
+        Bullet(const Vector2f& positive, 
+                 const Vector2f& velocity, 
+                 const Vector2f acceleration, 
+                 const Color& color, 
+                 float life=2.0f);
+        Bullet(const ParticleProperties& p);
+        ~Bullet();
 };
 
 #endif

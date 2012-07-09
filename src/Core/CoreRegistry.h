@@ -6,7 +6,7 @@
 
 class CoreState;
 
-#define REGISTER_GAME(name,game)  static RegisterState thisEntry(std::string(name),new game);
+#define REGISTER_GAME(name,game)  static RegisterState thisEntry(std::string(name), new game);
 
 struct RegisterState
 {
@@ -22,11 +22,11 @@ class CoreRegistry
     public:
         static bool alreadyExists(const std::string& identifier);
 
-        static void registerGame(const std::string& identifier, CoreState* entry);
-        static CoreState* getGame(const std::string& identifier);
+        static void registerState(const std::string& identifier, CoreState* entry);
+        static CoreState* getState(const std::string& identifier);
 
         static const std::string& getStateName(CoreState* s);
-        static int getGameCount();
+        static int getStateCount();
 
         static void unregisterAll();
 };
