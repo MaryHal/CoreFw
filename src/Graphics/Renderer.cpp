@@ -10,14 +10,6 @@
 Renderer::Renderer(int w, int h)
     : dispWidth(w), dispHeight(h)
 {
-}
-
-Renderer::~Renderer()
-{
-}
-
-void Renderer::init() const
-{
     // Set Default ClearColor
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -42,6 +34,14 @@ void Renderer::init() const
     if (glGetError() != GL_NO_ERROR)
         log("Could not initialize OpenGL.");
     log("Renderer Initialized.");
+}
+
+Renderer::~Renderer()
+{
+}
+
+void Renderer::init() const
+{
 }
 
 void Renderer::deinit() const

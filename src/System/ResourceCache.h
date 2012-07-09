@@ -55,11 +55,11 @@ class ResourceCache
 
         void remove(const std::string& identifier)
         {
-            //delete resmap[identifier];
+            delete resmap[identifier];
             resmap.erase(identifier);
         }
 
-        void removeAll()
+        virtual void removeAll()
         {
             if (resmap.empty()) 
                 return;

@@ -17,7 +17,7 @@ class ParticleMem
         int colorBufferSize;
 
     public:
-        static const int MAX_PARTICLES =  1024* 1024;
+        static const int MAX_PARTICLES =  1024 * 1024;
 
         ParticleMem();
 

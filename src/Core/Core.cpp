@@ -41,7 +41,7 @@ Input* Core::input = NULL;
 
 FpsCounter* Core::fps = NULL;
 
-bool Core::initOpenGL()
+bool Core::initGLFW()
 {
     glfwInit();
 
@@ -65,9 +65,6 @@ bool Core::initOpenGL()
 
     glewInit();
 
-    renderer = new Renderer(width, height);
-    renderer->init();
-
     return true;
 }
 
@@ -79,50 +76,32 @@ void Core::init(std::string title, unsigned int width, unsigned int height, bool
     Core::fullscreen = fullscreen;
     running = false;
 
-    initOpenGL();
+    initGLFW();
 
     Listener::init();
 
+    renderer = new Renderer(width, height);
     resourceManager = new ResourceManager();
     input = new Input();
 
     fps = new FpsCounter();
 }
 
-void Core::init(const std::string& filename)
-{
-    Ini ini(filename);
-    Core::title = ini["Title"];
-    Core::width = fromString<unsigned int>(ini["Width"]);
-    Core::height = fromString<unsigned int>(ini["Height"]);
-    Core::fullscreen = fromString<bool>(ini["Fullscreen"]);
-    running = false;
-
-    initOpenGL();
-
-    Listener::init();
-
-    resourceManager = new ResourceManager();
-    input = new Input();
-}
-
 void Core::deinit()
 {
-    // Deinit OpenGL stuff
-    glfwTerminate();
-    renderer->deinit();
-    delete renderer;
-
-    // deleting fonts/resources must happen before deinitializing the
-    // FontLoader
     delete resourceManager;
-
     delete input;
 
+    delete fps;
+
     // Deinit...everything else
+    CoreRegistry::unregisterAll();
     Listener::deinit();
     FontLoader::deinit();
-    CoreRegistry::unregisterAll();
+
+    // Deinit OpenGL stuff
+    glfwTerminate();
+    delete renderer;
 }
 
 void Core::run()

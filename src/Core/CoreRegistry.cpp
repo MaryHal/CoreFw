@@ -1,6 +1,8 @@
 #include "CoreRegistry.h"
 #include "CoreState.h"
 
+#include "../System/Log.h"
+
 std::map<std::string, CoreState*>& CoreRegistry::registry()
 {
     static std::map<std::string, CoreState*>* r = new std::map<std::string, CoreState*>();
@@ -9,7 +11,7 @@ std::map<std::string, CoreState*>& CoreRegistry::registry()
 
 RegisterState::RegisterState(const std::string& identifier, CoreState* state)
 {
-	CoreRegistry::registerGame(identifier, state);
+    CoreRegistry::registerState(identifier, state);
 }
 
 bool CoreRegistry::alreadyExists(const std::string& identifier)
@@ -17,7 +19,7 @@ bool CoreRegistry::alreadyExists(const std::string& identifier)
     return registry().find(identifier) != registry().end();
 }
 
-void CoreRegistry::registerGame(const std::string& identifier, CoreState* entry)
+void CoreRegistry::registerState(const std::string& identifier, CoreState* entry)
 {
     if (alreadyExists(identifier))
         return;
@@ -25,7 +27,7 @@ void CoreRegistry::registerGame(const std::string& identifier, CoreState* entry)
     registry()[identifier] = entry;
 }
 
-CoreState* CoreRegistry::getGame(const std::string& identifier)
+CoreState* CoreRegistry::getState(const std::string& identifier)
 {
     return alreadyExists(identifier) ? registry()[identifier] : NULL;
 }
@@ -44,7 +46,7 @@ const std::string& CoreRegistry::getStateName(CoreState* s)
     return str;
 }
 
-int CoreRegistry::getGameCount()
+int CoreRegistry::getStateCount()
 {
     return registry().size();
 }
@@ -55,9 +57,8 @@ void CoreRegistry::unregisterAll()
          iter != registry().end();
          ++iter)
     {
-        if (iter->second != NULL && iter->second->isInitialized())
+        if (iter->second)
         {
-            iter->second->deinit();
             delete iter->second;
             registry()[iter->first] = NULL;
         }

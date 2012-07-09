@@ -19,7 +19,7 @@ void logf(const char *format, ...)
 
 void log(const std::string& str)
 {
-    printf("%s\n", str.c_str() );
+    fprintf(stdout, "%s\n", str.c_str() );
 }
 
 

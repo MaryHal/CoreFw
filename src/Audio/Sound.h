@@ -8,9 +8,17 @@
 
 #include "SoundBuffer.h"
 
+enum Status
+{
+    Stopped,
+    Playing,
+    Paused
+};
+
 class Sound
 {
     protected:
+        Status status;
         ALuint source;
 
         void __generateSource();
@@ -33,12 +41,16 @@ class Sound
         bool isPlaying();
         bool isPaused();
 
-        void setTime(float time);
-        float getTime();
+        virtual void setLoop(bool loop);
+        virtual bool getLoop() const;
 
-        float getLength();
+        void setTime(float time);
+        virtual float getTime();
+
+        virtual float getDuration();
 
         ALuint getSource();
+        Status getStatus();
 };
 
 #endif

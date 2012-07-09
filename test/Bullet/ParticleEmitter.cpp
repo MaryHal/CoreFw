@@ -64,12 +64,6 @@ void ParticleEmitter::logic(float step)
 
 void ParticleEmitter::draw(float x, float y) const
 {
-    /*
-    float* vertex = particles->vertexBuffer;
-    float* color = particles->colorBuffer;
-    printf("%.2f, %.2f |  %.2f, %.2f, %.2f, %.2f\n", vertex[0], vertex[1],
-                                                     color[0], color[1], color[2], color[3]);
-                                                     */
     glPushMatrix();
     glTranslatef(x, y, 0.0f);
 
@@ -83,18 +77,8 @@ void ParticleEmitter::draw(float x, float y) const
 
         glVertexPointer(2, GL_FLOAT, 0, NULL);
         glColorPointer(4, GL_FLOAT, 0, (GLvoid*)(size_t)particles->getVertexBufferSize());
-        /*
-        int error = glGetError();
-        if (error)
-            printf("0x%x ", error);
-            */
 
         glDrawArrays(GL_POINTS, 0, particles->size());
-        /*
-        error = glGetError();
-        if (error)
-            printf("0x%x\n", error);
-            */
 
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_COLOR_ARRAY);
