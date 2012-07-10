@@ -1,15 +1,10 @@
 #include "Core.h"
+#include "CoreRegistry.h"
+#include "CoreState.h"
+
 #include "../Utils/FpsCounter.h"
 
 #include "../Graphics/Renderer.h"
-
-#include <GL/glew.h>
-#include <GL/glfw.h>
-
-#include <cstdio>
-
-#include "CoreRegistry.h"
-#include "CoreState.h"
 
 //#include "../Graphics/ImageLoader.h"
 #include "../Graphics/FontLoader.h"
@@ -17,11 +12,14 @@
 
 #include "../System/ResourceManager.h"
 
-#include "../Utils/Ini.h"
-#include "../Utils/StringUtils.h"
-
 #include "../System/Input.h"
 #include "../System/Log.h"
+
+#include <GL/glew.h>
+#include <GL/glfw.h>
+
+#include <cstdio>
+
 
 const std::string Core::version = "0.02a";
 
@@ -30,9 +28,7 @@ unsigned int Core::width = 0;
 unsigned int Core::height = 0;
 bool Core::fullscreen = false;
 bool Core::running = false;
-
-CoreState* Core::currentState = NULL;
-CoreState* Core::nextState    = NULL;
+std::stack<CoreState*> Core::states;
 
 Renderer* Core::renderer = NULL;
 
@@ -100,13 +96,13 @@ void Core::deinit()
     FontLoader::deinit();
 
     // Deinit OpenGL stuff
-    glfwTerminate();
     delete renderer;
+    glfwTerminate();
 }
 
 void Core::run()
 {
-    if (currentState == NULL)
+    if (states.empty())
     {
         log(" ## No Initial State");
         return;
@@ -116,61 +112,80 @@ void Core::run()
 
     while (running)
     {
-        if (nextState)
-        {
-            changeState(nextState);
-        }
-
         fps->calculate();
 
         renderer->pre();
 
         //logf("%.2f | %.2f", fps->getFps(), fps->getFrameTime());
-        currentState->logic(fps->getFrameTime());
-        currentState->draw();
+        states.top()->logic(fps->getFrameTime());
+        states.top()->draw();
 
         renderer->post();
         //Listener::update();
 
         running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
+
+        if (glfwGetKey(GLFW_KEY_F12))
+        {
+            popState();
+            glfwSleep(1.0f);
+        }
+
         //glfwSleep(1.0 / 60.0 - fps.getFrameTime());
     }
 
-    deleteState();
+    popAllStates();
 }
 
-void Core::changeState(CoreState* s)
+void Core::pushState(CoreState* s)
 {
-    if (currentState)
+    if (s == NULL)
     {
-        currentState->deinit();
-        logf(" -- Deinitialized State: \"%s\"", getStateName().c_str());
-    }
-
-    currentState = s;
-
-    if (currentState == NULL)
-    {
+        logf(" ## Trying to push NULL state: \"%s\"", 
+             CoreRegistry::getStateName(s).c_str());
         return;
     }
 
-    currentState->init(*resourceManager);
-    logf(" -- Initialized State: \"%s\"", getStateName().c_str());
-
-    nextState = NULL;
-}
-
-void Core::setNextState(CoreState* s)
-{
-    nextState = s;
-}
-
-void Core::deleteState()
-{
-    if (currentState)
+    if (s->isInitialized())
     {
-        currentState->deinit();
-        logf(" -- Deinitialized State: \"%s\"", getStateName().c_str());
+        logf(" ## Trying to push already initialized state: \"%s\"", 
+             CoreRegistry::getStateName(s).c_str());
+        return;
+    }
+
+    states.push(s);
+    s->init(*resourceManager);
+    logf(" -- Initialized State: \"%s\"", CoreRegistry::getStateName(s).c_str());
+}
+
+void Core::popState()
+{
+    if (!states.empty())
+    {
+        // Get top member and remove it.
+        CoreState* current = states.top();
+        logf(" -- Denitialized State: \"%s\"", CoreRegistry::getStateName(current).c_str());
+        current->deinit();
+
+        states.pop();
+        
+        if (states.empty())
+            running  = false;
+    }
+}
+
+void Core::popAllStates()
+{
+    while (!states.empty())
+    {
+        CoreState* current = states.top();
+        if (current->isInitialized())
+        {
+            current->deinit();
+            logf(" -- Denitialized State: \"%s\"", CoreRegistry::getStateName(current).c_str());
+        }
+
+        states.pop();
     }
 }
 
@@ -179,9 +194,9 @@ void Core::exit()
     running = false;
 }
 
-const std::string& Core::getStateName()
+void Core::printStateStack()
 {
-    return CoreRegistry::getStateName(currentState);
+    std::stack<CoreState*> tempStack;
 }
 
 const std::string& Core::getVersion()
@@ -191,7 +206,7 @@ const std::string& Core::getVersion()
 
 void GLFWCALL Core::keyInput(int key, int action)
 {
-    currentState->handleInput(*input, key, action);
+    states.top()->handleInput(*input, key, action);
 }
 
 void GLFWCALL Core::mouseMoveInput(int x, int y)
@@ -201,6 +216,6 @@ void GLFWCALL Core::mouseMoveInput(int x, int y)
 
 void GLFWCALL Core::mouseInput(int button, int action)
 {
-    currentState->handleInput(*input, button, action);
+    states.top()->handleInput(*input, button, action);
 }
 

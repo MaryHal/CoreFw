@@ -50,6 +50,9 @@ void GameState::handleInput(Input& input, int value, int action)
     {
         emitter->set();
     }
+
+    if (input["up"] == value && action == KeyPress)
+        Core::popState();
 }
 
 void GameState::logic(float timeStep)

@@ -1,4 +1,8 @@
+#ifndef _Core_h_
+#define _Core_h_
+
 #include <string>
+#include <stack>
 
 class Renderer;
 class CoreState;
@@ -18,9 +22,7 @@ class Core
         static bool fullscreen;
 
         static bool running;
-
-        static CoreState* currentState;
-        static CoreState* nextState;
+        static std::stack<CoreState*> states;
 
         static Renderer* renderer;
 
@@ -37,17 +39,20 @@ class Core
 
         static void run();
 
-        static void changeState(CoreState* s);
-        static void setNextState(CoreState* s);
-        static void deleteState();
+        static void pushState(CoreState* s);
+        static void popState();
+        static void popAllStates();
 
         static void exit();
-        static const std::string& getStateName();
 
         static const std::string& getVersion();
+
+        static void printStateStack();
 
         static void keyInput(int key, int action); 
         static void mouseMoveInput(int x, int y);
         static void mouseInput(int button, int action); 
 };
+
+#endif
 

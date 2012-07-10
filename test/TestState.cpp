@@ -110,12 +110,13 @@ void TestState::logic(float timeStep)
         std::string choice = menu->getChoice();
         if (choice == "Hello")
         {
-            Core::changeState(CoreRegistry::getState("Game"));
+            Core::pushState(CoreRegistry::getState("Game"));
         }
         else if (choice == "Hi")
         {
-            Core::changeState(CoreRegistry::getState("Pattern"));
+            Core::pushState(CoreRegistry::getState("Pattern"));
         }
+
         menu->resetChoice();
     }
     text3.setText(toString<float>(music->getTime()) + '/' + toString<float>(music->getDuration()));
