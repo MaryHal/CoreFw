@@ -133,9 +133,11 @@ Desktop.ini
 ############
 *.d
 *.o
+obj/*
 bin/Linux_Test32
 bin/Linux_Test64
 bin/data/*
+lib/*
 
 #############
 ## Python
