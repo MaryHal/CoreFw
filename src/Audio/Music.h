@@ -20,7 +20,7 @@ class Music : public Sound
             std::size_t sampleCount;
         };
 
-        static const unsigned int BUFFER_COUNT = 4;
+        static const unsigned int BUFFER_COUNT = 3;
 
         SNDFILE* file;
 

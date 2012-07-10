@@ -22,6 +22,7 @@ void PatternState::init(ResourceManager& resources)
 
 void PatternState::deinit()
 {
+    CoreState::deinit();
 }
 
 void PatternState::handleInput(Input& input, int value, int action)

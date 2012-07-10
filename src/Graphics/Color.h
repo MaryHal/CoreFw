@@ -64,15 +64,16 @@ class Color
         {
             return !(*this == c);
         }
+
+        static Color BLACK;
+        static Color WHITE;
+
+        static Color RED;
+        static Color GREEN;
+        static Color BLUE;
 };
 
 Color linearInterpolate(const Color& color1, const Color& color2, float stepSize);
-
-static Color BLACK = Color(0.0f, 0.0f, 0.0f, 1.0f);
-static Color WHITE = Color(1.0f, 1.0f, 1.0f, 1.0f);
-static Color RED   = Color(1.0f, 0.0f, 0.0f, 1.0f);
-static Color GREEN = Color(0.0f, 1.0f, 0.0f, 1.0f);
-static Color BLUE  = Color(0.0f, 0.0f, 1.0f, 1.0f);
 
 #endif
 

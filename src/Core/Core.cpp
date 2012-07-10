@@ -155,7 +155,7 @@ void Core::pushState(CoreState* s)
 
     states.push(s);
     s->init(*resourceManager);
-    logf(" -- Initialized State: \"%s\"", CoreRegistry::getStateName(s).c_str());
+    logf(" -- Initialized State(%d): \"%s\"", states.size(), CoreRegistry::getStateName(s).c_str());
 }
 
 void Core::popState()
@@ -164,7 +164,7 @@ void Core::popState()
     {
         // Get top member and remove it.
         CoreState* current = states.top();
-        logf(" -- Denitialized State: \"%s\"", CoreRegistry::getStateName(current).c_str());
+        logf(" -- Denitialized State(%d): \"%s\"", states.size(), CoreRegistry::getStateName(current).c_str());
         current->deinit();
 
         states.pop();
@@ -182,7 +182,7 @@ void Core::popAllStates()
         if (current->isInitialized())
         {
             current->deinit();
-            logf(" -- Denitialized State: \"%s\"", CoreRegistry::getStateName(current).c_str());
+            logf(" -- Denitialized State(%d): \"%s\"", states.size(), CoreRegistry::getStateName(current).c_str());
         }
 
         states.pop();

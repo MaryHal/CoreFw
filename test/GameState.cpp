@@ -53,6 +53,11 @@ void GameState::handleInput(Input& input, int value, int action)
 
     if (input["up"] == value && action == KeyPress)
         Core::popState();
+
+    if ('Q' == value && action == KeyPress)
+    {
+        ((Burst*)emitter)->setSkittles(!((Burst*)emitter)->getSkittles());
+    }
 }
 
 void GameState::logic(float timeStep)
@@ -64,7 +69,10 @@ void GameState::logic(float timeStep)
     emitter->logic(timeStep);
     text.setText(toString(emitter->getParticleCount()) + 
                  '\n' +
-                 toString(1.0f / timeStep));
+                 toString(1.0f / timeStep) +
+                 '\n' +
+                 "Skittles: " +
+                 toString(((Burst*)emitter)->getSkittles()));
 }
 
 void GameState::draw()
