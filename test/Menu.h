@@ -47,7 +47,11 @@ class Menu : public Drawable
         void setMetrics(const MenuMetrics& m);
         void setMetrics(int margin, int newline);
         void addItem(const std::string& item);
+        void addItems(const std::string items[], int numItems);
         void make();
+
+        static const bool stringCmp(const Text& a, const Text& b);
+        void sortItems();
 
         void handleInput(Input& input, int key, int action);
         void draw(float x = 0.0f, float y = 0.0f) const;

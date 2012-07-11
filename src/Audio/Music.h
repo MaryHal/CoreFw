@@ -20,7 +20,7 @@ class Music : public Sound
             std::size_t sampleCount;
         };
 
-        static const unsigned int BUFFER_COUNT = 3;
+        static const unsigned int BUFFER_COUNT = 5;
 
         SNDFILE* file;
 
@@ -73,6 +73,8 @@ class Music : public Sound
 
         void setSamplesProcessed(unsigned long i);
         void addSamplesProcessed(unsigned long i);
+        unsigned long getSamplesProcessed();
+
         void setEndBuffer(unsigned int bufferNum, bool value);
         bool getEndBuffer(unsigned int bufferNum);
 };

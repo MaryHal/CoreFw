@@ -9,7 +9,7 @@ void Sound::__generateSource()
     // Setup our source
     alGenSources(1, &source);
     alSourcef(source, AL_PITCH, 1);
-    alSourcef(source, AL_GAIN, 0.8);
+    alSourcef(source, AL_GAIN, 0.5);
     alSource3f(source, AL_POSITION, 0, 0, 0);
     alSource3f(source, AL_VELOCITY, 0, 0, 0);
     alSourcei(source, AL_LOOPING, AL_FALSE);

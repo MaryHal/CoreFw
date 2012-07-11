@@ -23,10 +23,10 @@ class Text : public Drawable
 
         void setFont(const FontPtr& f);
         void setText(const std::string& t);
-        void draw(float x, float y) const;
+        void draw(float x = 0.0f, float y = 0.0f) const;
 
         float getLength() const;
-        std::string getString();
+        const std::string& getString() const;
 };
 
 #endif

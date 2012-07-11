@@ -1,17 +1,22 @@
-#ifndef _PatternState_h_
-#define _PatternState_h_
+#ifndef _MusicState_h_
+#define _MusicState_h_
 
 #include <Core/CoreState.h>
 #include <System/ResourcePtr.h>
 
-class PatternState : public CoreState
+class Menu;
+
+class MusicState : public CoreState
 {
     private:
         TexturePtr background;
+        SoundPtr music;
+        Menu* menu;
+        Text text;
 
     public:
-        PatternState();
-        ~PatternState();
+        MusicState();
+        ~MusicState();
 
         void init(ResourceManager& resources);
         void deinit();

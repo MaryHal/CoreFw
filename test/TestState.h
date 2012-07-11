@@ -15,12 +15,10 @@ class TestState : public CoreState
     private:
         Text text;
         Text text2;
-        Text text3;
         FontPtr font;
         TexturePtr background;
 
         SoundPtr sound;
-        SoundPtr music;
 
         VertexBuffer* vb;
         VertexBuffer* line;

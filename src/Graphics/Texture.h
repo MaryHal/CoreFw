@@ -40,7 +40,7 @@ class Texture : public Drawable
         void bindTexture() const;
 
         // Texture Rendering
-        void draw(float x, float y) const;
+        void draw(float x = 0.0f, float y = 0.0f) const;
 
         // Accessors
         const int getWidth() const;

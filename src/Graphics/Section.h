@@ -22,7 +22,7 @@ class Section : public Drawable
         void setTexture(Texture* tex);
 
         void createSection(const Texture& t, Rect<float>* r);
-        void draw(float x, float y) const;
+        void draw(float x = 0.0f, float y = 0.0f) const;
 };
 
 #endif

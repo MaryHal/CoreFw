@@ -27,15 +27,12 @@ void TestState::init(ResourceManager& resources)
     fonts->add("default", "data/fonts/DroidSans.ttf", 16);
     fonts->add("big", "data/fonts/DroidSans.ttf", 100);
     font = fonts->get("default");
-    textures->add("background", "data/graphics/Frac3.png");
-    background = textures->get("background");
+    background = textures->add("background", "data/graphics/Frac1.png");
 
     sound = sounds->addSample("noise", "data/sound/sfx.wav");
-    music = sounds->addMusic("asdf", "data/music/song.ogg");
 
     text = fonts->makeText("default", "\"This above all: to thine own self be true\" ~ Hamlet Act 1, scene 3, 78 82\nasdf\nasd\nas\na\nDefinitely no kerning :(");
     text2 = fonts->makeText("big", "AVAVAV");
-    text3 = fonts->makeText("default", "asdf");
 
     menu = new Menu("Main Menu", font);
     menu->setMetrics(6, 20);
@@ -71,7 +68,6 @@ void TestState::init(ResourceManager& resources)
     line->writeColor(1.0f, 1.0f, 1.0f, 0.5f);
 
     line->updateBuffers();
-    music->setLoop(true);
 }
 
 void TestState::deinit()
@@ -89,18 +85,6 @@ void TestState::handleInput(Input& input, int value, int action)
     {
         sound->play();
     }
-    if (value == 'E' && action == KeyRelease)
-    {
-        music->play();
-    }
-    if (value == 'F' && action == KeyRelease)
-    {
-        music->stop();
-    }
-    if (value == 'R' && action == KeyRelease)
-    {
-        music->pause();
-    }
 }
 
 void TestState::logic(float timeStep)
@@ -116,16 +100,19 @@ void TestState::logic(float timeStep)
         {
             Core::pushState(CoreRegistry::getState("Pattern"));
         }
+        else if (choice == "Howdy")
+        {
+            Core::pushState(CoreRegistry::getState("Music"));
+        }
 
         menu->resetChoice();
     }
-    text3.setText(toString<float>(music->getTime()) + '/' + toString<float>(music->getDuration()));
 }
 
 void TestState::draw()
 {
     background->draw(0.0f, 0.0f);
-    menu->draw(480.0f, 240.0f);
+    menu->draw(440.0f, 240.0f);
     vb->draw(64.0f, 64.0f);
 
     line->draw(13.0f, 13.0f);
@@ -133,7 +120,6 @@ void TestState::draw()
 
     text.draw(13.0f, 13.0f);
     text2.draw(13.0f, 200.0f);
-    text3.draw(13.0f, 400.0f);
 }
 
 

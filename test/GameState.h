@@ -8,6 +8,7 @@ class ParticleEmitter;
 class GameState : public CoreState
 {
     private:
+        TexturePtr background;
         Text text;
         ParticleEmitter* emitter;
         bool held;

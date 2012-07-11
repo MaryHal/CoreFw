@@ -18,6 +18,7 @@ PatternState::~PatternState()
 void PatternState::init(ResourceManager& resources)
 {
     CoreState::init(resources);
+    background = textures->add("patternBackground", "data/graphics/Frac4.png");
 }
 
 void PatternState::deinit()
@@ -37,5 +38,6 @@ void PatternState::logic(float timeStep)
 
 void PatternState::draw()
 {
+    background->draw(0.0f, 0.0f);
 }
 

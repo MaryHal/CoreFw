@@ -116,7 +116,7 @@ float Text::getLength() const
     return length;
 }
 
-std::string Text::getString()
+const std::string& Text::getString() const
 {
     return text;
 }

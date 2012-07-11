@@ -24,6 +24,7 @@ void GameState::init(ResourceManager& resources)
 {
     CoreState::init(resources);
 
+    background = textures->add("burstBackground", "data/graphics/Frac3.png");
     text = fonts->makeText("default");
 
     emitter = new Burst();
@@ -77,6 +78,7 @@ void GameState::logic(float timeStep)
 
 void GameState::draw()
 {
+    background->draw(0.0f, 0.0f);
     emitter->draw(320.0f, 240.0f);
     text.draw(4.0f, 4.0f);
 }

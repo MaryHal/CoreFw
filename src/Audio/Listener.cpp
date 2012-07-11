@@ -28,8 +28,10 @@ void Listener::init()
 void Listener::deinit()
 {
     alcMakeContextCurrent(NULL);
-    alcDestroyContext(context);
-    alcCloseDevice(device);
+    if (context)
+        alcDestroyContext(context);
+    if (device)
+        alcCloseDevice(device);
 }
 
 void Listener::setVolume(float volume)

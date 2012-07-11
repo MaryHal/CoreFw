@@ -267,6 +267,11 @@ void Music::addSamplesProcessed(unsigned long i)
     samplesProcessed += i;
 }
 
+unsigned long Music::getSamplesProcessed()
+{
+    return samplesProcessed;
+}
+
 void Music::setEndBuffer(unsigned int bufferNum, bool value)
 {
     endBuffers[bufferNum] = value;

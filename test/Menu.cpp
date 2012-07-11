@@ -1,10 +1,9 @@
 #include "Menu.h"
 
 #include <System/Input.h>
-
 #include <System/Log.h>
 
-#include <cstdio>
+#include <algorithm>
 
 Menu::Menu()
     : font(), currentChoice(0), choice(""), longest(0.0f)
@@ -59,6 +58,12 @@ void Menu::addItem(const std::string& item)
     items.push_back(t);
 }
 
+void Menu::addItems(const std::string items[], int numItems)
+{
+    for (int i = 0; i < numItems; ++i)
+        addItem(items[i]);
+}
+
 void Menu::make()
 {
     VertexBuffer::Rectangle(rect,
@@ -80,6 +85,31 @@ void Menu::make()
                        Color(1.0f, 1.0f, 1.0f, 0.3f));
 
     currentChoice = 0;
+}
+
+const bool Menu::stringCmp(const Text& a, const Text& b)
+{
+    for (std::string::const_iterator 
+         a_iter = a.getString().begin(),
+         b_iter = b.getString().begin();
+         a_iter != a.getString().end() &&
+         b_iter != b.getString().end();
+         ++a_iter,
+         ++b_iter)
+    {
+        if (tolower(*a_iter) < tolower(*b_iter))
+            return true;
+        else if (tolower(*a_iter) > tolower(*b_iter))
+            return false;
+    }
+    if (a.getString().size() < b.getString().size())
+        return true;
+    return false;
+}
+
+void Menu::sortItems()
+{
+    std::sort(items.begin(), items.end(), stringCmp);
 }
 
 void Menu::handleInput(Input& input, int key, int action)
