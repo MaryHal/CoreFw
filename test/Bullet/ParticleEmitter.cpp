@@ -9,7 +9,7 @@
 
 ParticleEmitter::ParticleEmitter()
 {
-    particles = new VectorMem(ParticleMem::MAX_PARTICLES);
+    allocateMem();
 
     if (GLEW_ARB_vertex_buffer_object)
     {
@@ -30,6 +30,11 @@ ParticleEmitter::~ParticleEmitter()
     }
 
     delete particles;
+}
+
+void ParticleEmitter::allocateMem()
+{
+    particles = new VectorMem(ParticleMem::MAX_PARTICLES);
 }
 
 void ParticleEmitter::logic(float step)

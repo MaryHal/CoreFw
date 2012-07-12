@@ -17,7 +17,7 @@ class ParticleMem
         int colorBufferSize;
 
     public:
-        static const int MAX_PARTICLES =  1024 * 1024;
+        static const int MAX_PARTICLES =  512 * 128;
 
         ParticleMem();
 
@@ -29,6 +29,7 @@ class ParticleMem
                          const Vector2f acceleration, 
                          const Color& color, 
                          float life=2.0f) = 0;
+        virtual void add(const ParticleProperties& p) = 0;
 
         virtual void remove(int index) = 0;
 

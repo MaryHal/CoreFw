@@ -4,22 +4,24 @@
 #include <Math/Random.h>
 #include <Graphics/Drawable.h>
 
-class VectorMem;
+class ParticleMem;
 
 class ParticleEmitter : public Drawable
 {
     protected:
         Random random;
-        VectorMem* particles;
+        ParticleMem* particles;
 
         unsigned int bufferID;
 
     public:
         ParticleEmitter();
-        ~ParticleEmitter();
+        virtual ~ParticleEmitter();
+
+        virtual void allocateMem();
 
         void logic(float step);
-        virtual void draw(float x = 0.0f, float y = 0.0f) const;
+        void draw(float x = 0.0f, float y = 0.0f) const;
 
         virtual void set() = 0;
 

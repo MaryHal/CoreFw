@@ -159,6 +159,7 @@ OBJECTS := \
 	$(OBJDIR)/PatternState.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/Burst.o \
+	$(OBJDIR)/BulletEmitter.o \
 	$(OBJDIR)/Bullet.o \
 	$(OBJDIR)/Particle.o \
 	$(OBJDIR)/ParticleMem.o \
@@ -242,6 +243,9 @@ $(OBJDIR)/main.o: test/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Burst.o: test/Bullet/Burst.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BulletEmitter.o: test/Bullet/BulletEmitter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Bullet.o: test/Bullet/Bullet.cpp
