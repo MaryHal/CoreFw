@@ -28,8 +28,10 @@ void PatternState::deinit()
 
 void PatternState::handleInput(Input& input, int value, int action)
 {
-    if (input["up"] == value && action == KeyPress)
+    if (value == GLFW_KEY_BACKSPACE && action == GLFW_PRESS)
+    {
         Core::popState();
+    }
 }
 
 void PatternState::logic(float timeStep)

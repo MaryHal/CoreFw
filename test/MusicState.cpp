@@ -54,6 +54,11 @@ void MusicState::deinit()
 void MusicState::handleInput(Input& input, int value, int action)
 {
     menu->handleInput(input, value, action);
+
+    if (value == GLFW_KEY_BACKSPACE && action == GLFW_PRESS)
+    {
+        Core::popState();
+    }
 }
 
 void MusicState::logic(float timeStep)

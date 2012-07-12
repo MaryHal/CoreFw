@@ -52,12 +52,14 @@ void GameState::handleInput(Input& input, int value, int action)
         emitter->set();
     }
 
-    if (input["up"] == value && action == KeyPress)
-        Core::popState();
-
     if ('Q' == value && action == KeyPress)
     {
         ((Burst*)emitter)->setSkittles(!((Burst*)emitter)->getSkittles());
+    }
+
+    if (value == GLFW_KEY_BACKSPACE && action == GLFW_PRESS)
+    {
+        Core::popState();
     }
 }
 

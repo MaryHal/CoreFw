@@ -33,6 +33,7 @@ class ResourceCache
 
         bool alreadyExists(const std::string& identifier)
         {
+            //coreAssert(resmap.find(identifier) != resmap.end()," ## Trying to load resource with already existing identifier");
             return resmap.find(identifier) != resmap.end();
         }
 

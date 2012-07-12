@@ -173,7 +173,6 @@ OBJECTS := \
 	$(OBJDIR)/Math.o \
 	$(OBJDIR)/Log.o \
 	$(OBJDIR)/Input.o \
-	$(OBJDIR)/Debug.o \
 	$(OBJDIR)/ResourceCache.o \
 	$(OBJDIR)/ResourceManager.o \
 	$(OBJDIR)/Buffer.o \
@@ -309,9 +308,6 @@ $(OBJDIR)/Log.o: src/System/Log.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Input.o: src/System/Input.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Debug.o: src/System/Debug.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/ResourceCache.o: src/System/ResourceCache.cpp

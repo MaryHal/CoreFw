@@ -1,8 +1,6 @@
 #include <Core/Core.h>
 #include <Core/CoreRegistry.h>
 
-#include <System/Debug.h>
-
 int main(int argc, const char *argv[])
 {
     Core::init("CoreFW Test", 640, 480, false);
