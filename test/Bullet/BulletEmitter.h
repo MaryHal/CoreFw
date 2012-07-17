@@ -13,6 +13,8 @@ class BulletEmitter : public ParticleEmitter
 
         void allocateMem();
         void set();
+
+        void fire();
 };
 
 #endif

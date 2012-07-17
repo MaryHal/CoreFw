@@ -134,6 +134,7 @@ Desktop.ini
 *.d
 *.o
 obj/*
+tags
 bin/Linux_Test32
 bin/Linux_Test64
 bin/data/*

@@ -53,7 +53,7 @@ class VectorMem : public ParticleMem
         void swap(int index1, int index2);
         void swapData(int index1, int index2);
 
-        void allocateParticles();
+        virtual void allocateParticles();
         void allocateData(int size);
 
     public:
@@ -77,10 +77,11 @@ class VectorMem : public ParticleMem
 class BulletMem : public VectorMem 
 {
     private:
-        void allocateParticles()
-        {
-            mem = new Bullet[MAX_PARTICLES];
-        }
+        void allocateParticles();
+
+    public:
+        BulletMem(int size);
+        ~BulletMem();
 };
 
 #endif

@@ -2,6 +2,7 @@
 #define _Bullet_h_
 
 #include "Particle.h"
+#include <queue>
 
 class ParticleMem;
 
@@ -18,6 +19,9 @@ class Bullet : public Particle
                  float life=2.0f);
         Bullet(const ParticleProperties& p);
         ~Bullet();
+
+        void changeDirection(float value, float wait);
+        void changeDirectionRel(float value, float wait);
 };
 
 #endif
