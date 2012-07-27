@@ -1,7 +1,7 @@
 #ifndef _Drawable_h_
 #define _Drawable_h_
 
-#include "../Graphics/Color.h"
+#include "Color.h"
 #include "../Math/Vector2.h"
 
 namespace Blend

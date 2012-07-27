@@ -2,13 +2,13 @@
 #define _Music_h_
 
 #include "Sound.h"
-#include <string>
 
 #include <GL/glfw.h>
 #include <AL/al.h>
 
 #include <sndfile.h>
 
+#include <string>
 #include <vector>
 
 class Music : public Sound

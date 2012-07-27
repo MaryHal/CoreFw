@@ -11,8 +11,8 @@
 #include "../Graphics/Text.h"
 
 #include "../Audio/Sound.h"
-#include "../System/Log.h"
 
+#include "Log.h"
 #include <boost/shared_ptr.hpp>
 
 template <class T>

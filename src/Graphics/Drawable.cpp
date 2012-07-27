@@ -1,6 +1,5 @@
 #include "Drawable.h"
-
-#include "../Graphics/Renderer.h"
+#include "Renderer.h"
 
 Drawable::Drawable()
 {

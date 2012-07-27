@@ -1,10 +1,7 @@
 #include "Texture.h"
+#include "ImageLoader.h"
 
 #include <cstdlib>
-
-#include "../Math/Math.h"
-
-#include "../Graphics/ImageLoader.h"
 
 Texture::Texture()
     : texture(0), mode(0), loaded(false)

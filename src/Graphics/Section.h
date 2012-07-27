@@ -2,11 +2,10 @@
 #define _Section_h_
 
 #include "Drawable.h"
-#include "Texture.h"
-
+#include "VertexBuffer.h"
 #include "../Math/Rect.h"
 
-#include "VertexBuffer.h"
+class Texture;
 
 class Section : public Drawable
 {

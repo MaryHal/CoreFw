@@ -1,8 +1,7 @@
 #ifndef _Text_h_
 #define _Text_h_
 
-#include "../Graphics/Drawable.h"
-#include "../Graphics/Font.h"
+#include "Drawable.h"
 #include "../System/ResourcePtr.h"
 
 #include <string>

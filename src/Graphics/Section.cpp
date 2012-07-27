@@ -1,5 +1,7 @@
 #include "Section.h"
 
+#include "Texture.h"
+
 Section::Section()
     : texture(NULL)
 {

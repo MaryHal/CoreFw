@@ -1,13 +1,12 @@
 #include "FontLoader.h"
-#include "../Graphics/Font.h"
-
-#include "../Math/Math.h"
+#include "Font.h"
 
 #include "../System/Log.h"
 
 #define STB_TRUETYPE_IMPLEMENTATION
 #include "../stblib/stb_truetype.h"
 
+#include <GL/glfw.h>
 #include <cstdio>
 
 void FontLoader::init()

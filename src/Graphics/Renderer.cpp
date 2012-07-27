@@ -1,11 +1,11 @@
 #include "Renderer.h"
 
-#include "../Graphics/Drawable.h"
+#include "Drawable.h"
+#include "../System/Log.h"
 
 #include <GL/glfw.h>
 #include <cstdio>
 
-#include "../System/Log.h"
 
 Renderer::Renderer(int w, int h)
     : dispWidth(w), dispHeight(h)

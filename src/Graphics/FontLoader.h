@@ -1,9 +1,6 @@
 #ifndef _FontLoader_h_
 #define _FontLoader_h_
 
-#include "../Graphics/Texture.h"
-#include "../Graphics/Section.h"
-
 #include <string>
 #include "../stblib/stb_truetype.h"
 

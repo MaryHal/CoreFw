@@ -1,14 +1,14 @@
 #include "VertexBuffer.h"
 
-#include <GL/glew.h>
-#include <GL/glfw.h>
-
 #include "../Math/Vector2.h"
 #include "../Math/Trig.h"
 
-#include <cstdio>
-
 #include "../System/Log.h"
+
+#include <GL/glew.h>
+#include <GL/glfw.h>
+
+#include <cstdio>
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 

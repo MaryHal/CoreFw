@@ -1,8 +1,7 @@
 #include "SoundBuffer.h"
+#include "SoundLoader.h"
 
 #include <AL/al.h>
-
-#include "SoundLoader.h"
 #include <sndfile.h>
 
 SoundBuffer::SoundBuffer()

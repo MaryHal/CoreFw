@@ -1,5 +1,4 @@
 #include "Sound.h"
-
 #include "SoundLoader.h"
 
 #include "../System/Log.h"

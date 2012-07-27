@@ -1,9 +1,9 @@
 #include "SoundStream.h"
-
 #include "Music.h"
-#include <AL/al.h>
 
 #include "../System/Log.h"
+
+#include <AL/al.h>
 #include <GL/glfw.h>
 
 void GLFWCALL SoundStream::streamData(void* arg)

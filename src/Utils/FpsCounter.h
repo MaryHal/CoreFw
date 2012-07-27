@@ -1,3 +1,6 @@
+#ifndef _FpsCounter_h_
+#define _FpsCounter_h_
+
 class FpsCounter
 {
     private:
@@ -16,3 +19,6 @@ class FpsCounter
         float getFrameTime() const;
         float getFps() const;
 };
+
+#endif
+

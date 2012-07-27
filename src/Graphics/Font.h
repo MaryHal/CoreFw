@@ -1,10 +1,7 @@
 #ifndef _Font_h_
 #define _Font_h_
 
-#include "../Graphics/Texture.h"
-#include "../Graphics/Section.h"
-
-#include "../Graphics/FontLoader.h"
+#include "FontLoader.h"
 
 class Font
 {

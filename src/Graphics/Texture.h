@@ -1,7 +1,7 @@
 #ifndef _Texture_h_
 #define _Texture_h_
 
-#include "../Graphics/Drawable.h"
+#include "Drawable.h"
 
 #include <GL/glew.h>
 #include <GL/glfw.h>

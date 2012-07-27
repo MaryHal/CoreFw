@@ -1,7 +1,5 @@
 #include "Font.h"
 
-#include "../Graphics/FontLoader.h"
-
 Font::Font()
 {
 }

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <AL/al.h>
+
 #include "SoundBuffer.h"
 
 class SoundLoader

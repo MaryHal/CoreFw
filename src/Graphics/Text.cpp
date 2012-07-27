@@ -1,7 +1,7 @@
 #include "Text.h"
-#include <stdio.h>
-
 #include "../stblib/stb_truetype.h"
+
+#include <cstdio>
 
 Text::Text()
     : font(), text(), length(0.0f)

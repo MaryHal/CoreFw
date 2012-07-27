@@ -1,11 +1,10 @@
 #include "ImageLoader.h"
 
-#include <GL/glfw.h>
 #include "../stblib/stb_image.h"
-
-#include <cstdio>
-
 #include "../System/Log.h"
+
+#include <GL/glfw.h>
+#include <cstdio>
 
 unsigned char* ImageLoader::loadImage(const std::string& Filename, 
         int& width, int& height, int& mode)

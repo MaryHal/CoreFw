@@ -1,5 +1,4 @@
 #include "Color.h"
-
 #include <GL/glfw.h>
 
 /*
