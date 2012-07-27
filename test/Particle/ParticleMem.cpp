@@ -147,23 +147,3 @@ const int VectorMem::size() const
     return deadIndex;
 }
 
-//=======================================================================
-// BULLET MEM
-//=======================================================================
-
-void BulletMem::allocateParticles()
-{
-    mem = new Bullet[MAX_PARTICLES];
-}
-
-BulletMem::BulletMem(int size)
-    : VectorMem(size)
-{
-}
-
-BulletMem::~BulletMem()
-{
-
-}
-
-

@@ -159,11 +159,12 @@ OBJECTS := \
 	$(OBJDIR)/PatternState.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/Burst.o \
-	$(OBJDIR)/BulletEmitter.o \
-	$(OBJDIR)/Bullet.o \
 	$(OBJDIR)/Particle.o \
 	$(OBJDIR)/ParticleMem.o \
 	$(OBJDIR)/ParticleEmitter.o \
+	$(OBJDIR)/BulletEmitter.o \
+	$(OBJDIR)/Bullet.o \
+	$(OBJDIR)/BulletMem.o \
 
 RESOURCES := \
 
@@ -242,7 +243,16 @@ $(OBJDIR)/PatternState.o: test/PatternState.cpp
 $(OBJDIR)/main.o: test/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Burst.o: test/Bullet/Burst.cpp
+$(OBJDIR)/Burst.o: test/Particle/Burst.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Particle.o: test/Particle/Particle.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/ParticleMem.o: test/Particle/ParticleMem.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/ParticleEmitter.o: test/Particle/ParticleEmitter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BulletEmitter.o: test/Bullet/BulletEmitter.cpp
@@ -251,13 +261,7 @@ $(OBJDIR)/BulletEmitter.o: test/Bullet/BulletEmitter.cpp
 $(OBJDIR)/Bullet.o: test/Bullet/Bullet.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Particle.o: test/Bullet/Particle.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/ParticleMem.o: test/Bullet/ParticleMem.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/ParticleEmitter.o: test/Bullet/ParticleEmitter.cpp
+$(OBJDIR)/BulletMem.o: test/Bullet/BulletMem.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

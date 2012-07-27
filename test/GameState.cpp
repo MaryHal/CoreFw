@@ -7,8 +7,8 @@
 
 #include <Utils/StringUtils.h>
 
-#include "Bullet/ParticleEmitter.h"
-#include "Bullet/Burst.h"
+#include "Particle/ParticleEmitter.h"
+#include "Particle/Burst.h"
 
 REGISTER_GAME("Game", GameState);
 

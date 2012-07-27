@@ -4,6 +4,8 @@
 #include <Core/CoreState.h>
 #include <System/ResourcePtr.h>
 
+#include "Bullet/BulletEmitter.h"
+
 class PatternState : public CoreState
 {
     private:

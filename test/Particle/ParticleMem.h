@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "Particle.h"
-#include "Bullet.h"
 
 // Interface dealie for particles. How are we going to store the particles and manage them?
 class ParticleMem
@@ -72,16 +71,6 @@ class VectorMem : public ParticleMem
         Particle& get(int index);
 
         const int size() const;
-};
-
-class BulletMem : public VectorMem 
-{
-    private:
-        void allocateParticles();
-
-    public:
-        BulletMem(int size);
-        ~BulletMem();
 };
 
 #endif

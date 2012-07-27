@@ -125,6 +125,8 @@ Bullet::Bullet	test/Bullet/Bullet.cpp	/^Bullet::Bullet(const Vector2f& positive,
 Bullet::Bullet	test/Bullet/Bullet.h	/^        Bullet();$/;"	p	class:Bullet	access:public	signature:()
 Bullet::Bullet	test/Bullet/Bullet.h	/^        Bullet(const ParticleProperties& p);$/;"	p	class:Bullet	access:public	signature:(const ParticleProperties& p)
 Bullet::Bullet	test/Bullet/Bullet.h	/^        Bullet(const Vector2f& positive, $/;"	p	class:Bullet	access:public	signature:(const Vector2f& positive, const Vector2f& velocity, const Vector2f acceleration, const Color& color, float life=2.0f)
+Bullet::changeDirection	test/Bullet/Bullet.h	/^        void changeDirection(float value, float wait);$/;"	p	class:Bullet	access:public	signature:(float value, float wait)
+Bullet::changeDirectionRel	test/Bullet/Bullet.h	/^        void changeDirectionRel(float value, float wait);$/;"	p	class:Bullet	access:public	signature:(float value, float wait)
 Bullet::~Bullet	test/Bullet/Bullet.cpp	/^Bullet::~Bullet()$/;"	f	class:Bullet	signature:()
 Bullet::~Bullet	test/Bullet/Bullet.h	/^        ~Bullet();$/;"	p	class:Bullet	access:public	signature:()
 BulletEmitter	test/Bullet/BulletEmitter.cpp	/^BulletEmitter::BulletEmitter()$/;"	f	class:BulletEmitter	signature:()
@@ -134,12 +136,20 @@ BulletEmitter::BulletEmitter	test/Bullet/BulletEmitter.cpp	/^BulletEmitter::Bull
 BulletEmitter::BulletEmitter	test/Bullet/BulletEmitter.h	/^        BulletEmitter();$/;"	p	class:BulletEmitter	access:public	signature:()
 BulletEmitter::allocateMem	test/Bullet/BulletEmitter.cpp	/^void BulletEmitter::allocateMem()$/;"	f	class:BulletEmitter	signature:()
 BulletEmitter::allocateMem	test/Bullet/BulletEmitter.h	/^        void allocateMem();$/;"	p	class:BulletEmitter	access:public	signature:()
+BulletEmitter::fire	test/Bullet/BulletEmitter.h	/^        void fire();$/;"	p	class:BulletEmitter	access:public	signature:()
 BulletEmitter::set	test/Bullet/BulletEmitter.cpp	/^void BulletEmitter::set()$/;"	f	class:BulletEmitter	signature:()
 BulletEmitter::set	test/Bullet/BulletEmitter.h	/^        void set();$/;"	p	class:BulletEmitter	access:public	signature:()
 BulletEmitter::~BulletEmitter	test/Bullet/BulletEmitter.cpp	/^BulletEmitter::~BulletEmitter()$/;"	f	class:BulletEmitter	signature:()
 BulletEmitter::~BulletEmitter	test/Bullet/BulletEmitter.h	/^        ~BulletEmitter();$/;"	p	class:BulletEmitter	access:public	signature:()
+BulletMem	test/Bullet/ParticleMem.cpp	/^BulletMem::BulletMem(int size)$/;"	f	class:BulletMem	signature:(int size)
+BulletMem	test/Bullet/ParticleMem.h	/^        BulletMem(int size);$/;"	p	class:BulletMem	access:public	signature:(int size)
 BulletMem	test/Bullet/ParticleMem.h	/^class BulletMem : public VectorMem $/;"	c	inherits:VectorMem
-BulletMem::allocateParticles	test/Bullet/ParticleMem.h	/^        void allocateParticles()$/;"	f	class:BulletMem	access:private	signature:()
+BulletMem::BulletMem	test/Bullet/ParticleMem.cpp	/^BulletMem::BulletMem(int size)$/;"	f	class:BulletMem	signature:(int size)
+BulletMem::BulletMem	test/Bullet/ParticleMem.h	/^        BulletMem(int size);$/;"	p	class:BulletMem	access:public	signature:(int size)
+BulletMem::allocateParticles	test/Bullet/ParticleMem.cpp	/^void BulletMem::allocateParticles()$/;"	f	class:BulletMem	signature:()
+BulletMem::allocateParticles	test/Bullet/ParticleMem.h	/^        void allocateParticles();$/;"	p	class:BulletMem	access:private	signature:()
+BulletMem::~BulletMem	test/Bullet/ParticleMem.cpp	/^BulletMem::~BulletMem()$/;"	f	class:BulletMem	signature:()
+BulletMem::~BulletMem	test/Bullet/ParticleMem.h	/^        ~BulletMem();$/;"	p	class:BulletMem	access:public	signature:()
 Burst	test/Bullet/Burst.cpp	/^Burst::Burst()$/;"	f	class:Burst	signature:()
 Burst	test/Bullet/Burst.h	/^        Burst();$/;"	p	class:Burst	access:public	signature:()
 Burst	test/Bullet/Burst.h	/^class Burst : public ParticleEmitter$/;"	c	inherits:ParticleEmitter
@@ -733,7 +743,7 @@ ParticleEmitter::particles	test/Bullet/ParticleEmitter.h	/^        ParticleMem* 
 ParticleEmitter::random	test/Bullet/ParticleEmitter.h	/^        Random random;$/;"	m	class:ParticleEmitter	access:protected
 ParticleEmitter::set	test/Bullet/ParticleEmitter.h	/^        virtual void set() = 0;$/;"	p	class:ParticleEmitter	access:public	signature:()
 ParticleEmitter::~ParticleEmitter	test/Bullet/ParticleEmitter.cpp	/^ParticleEmitter::~ParticleEmitter()$/;"	f	class:ParticleEmitter	signature:()
-ParticleEmitter::~ParticleEmitter	test/Bullet/ParticleEmitter.h	/^        ~ParticleEmitter();$/;"	p	class:ParticleEmitter	access:public	signature:()
+ParticleEmitter::~ParticleEmitter	test/Bullet/ParticleEmitter.h	/^        virtual ~ParticleEmitter();$/;"	p	class:ParticleEmitter	access:public	signature:()
 ParticleMem	test/Bullet/ParticleMem.cpp	/^ParticleMem::ParticleMem() $/;"	f	class:ParticleMem	signature:()
 ParticleMem	test/Bullet/ParticleMem.h	/^        ParticleMem();$/;"	p	class:ParticleMem	access:public	signature:()
 ParticleMem	test/Bullet/ParticleMem.h	/^class ParticleMem$/;"	c
@@ -1303,7 +1313,7 @@ VectorMem::add	test/Bullet/ParticleMem.h	/^        void add(const Vector2f& posi
 VectorMem::allocateData	test/Bullet/ParticleMem.cpp	/^void VectorMem::allocateData(int size)$/;"	f	class:VectorMem	signature:(int size)
 VectorMem::allocateData	test/Bullet/ParticleMem.h	/^        void allocateData(int size);$/;"	p	class:VectorMem	access:protected	signature:(int size)
 VectorMem::allocateParticles	test/Bullet/ParticleMem.cpp	/^void VectorMem::allocateParticles()$/;"	f	class:VectorMem	signature:()
-VectorMem::allocateParticles	test/Bullet/ParticleMem.h	/^        void allocateParticles();$/;"	p	class:VectorMem	access:protected	signature:()
+VectorMem::allocateParticles	test/Bullet/ParticleMem.h	/^        virtual void allocateParticles();$/;"	p	class:VectorMem	access:protected	signature:()
 VectorMem::deadIndex	test/Bullet/ParticleMem.h	/^        int deadIndex;$/;"	m	class:VectorMem	access:protected
 VectorMem::get	test/Bullet/ParticleMem.cpp	/^Particle& VectorMem::get(int index)$/;"	f	class:VectorMem	signature:(int index)
 VectorMem::get	test/Bullet/ParticleMem.h	/^        Particle& get(int index);$/;"	p	class:VectorMem	access:public	signature:(int index)
@@ -1596,9 +1606,10 @@ allocateMem	test/Bullet/BulletEmitter.cpp	/^void BulletEmitter::allocateMem()$/;
 allocateMem	test/Bullet/BulletEmitter.h	/^        void allocateMem();$/;"	p	class:BulletEmitter	access:public	signature:()
 allocateMem	test/Bullet/ParticleEmitter.cpp	/^void ParticleEmitter::allocateMem()$/;"	f	class:ParticleEmitter	signature:()
 allocateMem	test/Bullet/ParticleEmitter.h	/^        virtual void allocateMem();$/;"	p	class:ParticleEmitter	access:public	signature:()
+allocateParticles	test/Bullet/ParticleMem.cpp	/^void BulletMem::allocateParticles()$/;"	f	class:BulletMem	signature:()
 allocateParticles	test/Bullet/ParticleMem.cpp	/^void VectorMem::allocateParticles()$/;"	f	class:VectorMem	signature:()
-allocateParticles	test/Bullet/ParticleMem.h	/^        void allocateParticles()$/;"	f	class:BulletMem	access:private	signature:()
-allocateParticles	test/Bullet/ParticleMem.h	/^        void allocateParticles();$/;"	p	class:VectorMem	access:protected	signature:()
+allocateParticles	test/Bullet/ParticleMem.h	/^        virtual void allocateParticles();$/;"	p	class:VectorMem	access:protected	signature:()
+allocateParticles	test/Bullet/ParticleMem.h	/^        void allocateParticles();$/;"	p	class:BulletMem	access:private	signature:()
 alreadyExists	src/Core/CoreRegistry.cpp	/^bool CoreRegistry::alreadyExists(const std::string& identifier)$/;"	f	class:CoreRegistry	signature:(const std::string& identifier)
 alreadyExists	src/Core/CoreRegistry.h	/^        static bool alreadyExists(const std::string& identifier);$/;"	p	class:CoreRegistry	access:public	signature:(const std::string& identifier)
 alreadyExists	src/System/ResourceCache.h	/^        bool alreadyExists(const std::string& identifier)$/;"	f	class:ResourceCache	access:public	signature:(const std::string& identifier)
@@ -1646,6 +1657,8 @@ calculate	src/Utils/FpsCounter.cpp	/^void FpsCounter::calculate()$/;"	f	class:Fp
 calculate	src/Utils/FpsCounter.h	/^        void calculate();$/;"	p	class:FpsCounter	access:public	signature:()
 capacity	src/Utils/BinaryHeap.h	/^        size_t capacity;$/;"	m	class:BinaryHeap	access:private
 cdata	src/stblib/stb_truetype.h	/^stbtt_bakedchar cdata[96]; \/\/ ASCII 32..126 is 95 glyphs$/;"	v
+changeDirection	test/Bullet/Bullet.h	/^        void changeDirection(float value, float wait);$/;"	p	class:Bullet	access:public	signature:(float value, float wait)
+changeDirectionRel	test/Bullet/Bullet.h	/^        void changeDirectionRel(float value, float wait);$/;"	p	class:Bullet	access:public	signature:(float value, float wait)
 channel	src/stblib/stb_image.c	/^   stbi_uc size,type,channel;$/;"	m	struct:__anon17	file:	access:public
 channelCount	src/Audio/Music.h	/^        unsigned int channelCount;$/;"	m	class:Music	access:private
 channelCount	src/Audio/SoundBuffer.h	/^        unsigned int channelCount;$/;"	m	class:SoundBuffer	access:private
@@ -1816,6 +1829,7 @@ fillQueue	src/Audio/Music.cpp	/^bool Music::fillQueue()$/;"	f	class:Music	signat
 fillQueue	src/Audio/Music.h	/^        bool fillQueue();$/;"	p	class:Music	access:public	signature:()
 fill_bits	src/stblib/stb_image.c	/^static void fill_bits(zbuf *z)$/;"	f	file:	signature:(zbuf *z)
 findIndex	src/Utils/BinaryHeap.h	/^        int findIndex(const T* data) const$/;"	f	class:BinaryHeap	access:public	signature:(const T* data) const
+fire	test/Bullet/BulletEmitter.h	/^        void fire();$/;"	p	class:BulletEmitter	access:public	signature:()
 first	src/stblib/stb_image.c	/^   uint8 first;$/;"	m	struct:stbi_gif_lzw_struct	file:	access:public
 first_row_filter	src/stblib/stb_image.c	/^static uint8 first_row_filter[5] =$/;"	v	file:
 firstcode	src/stblib/stb_image.c	/^   uint16 firstcode[16];$/;"	m	struct:__anon12	file:	access:public
@@ -2907,6 +2921,8 @@ zreceive	src/stblib/stb_image.c	/^stbi_inline static unsigned int zreceive(zbuf 
 ~Bullet	test/Bullet/Bullet.h	/^        ~Bullet();$/;"	p	class:Bullet	access:public	signature:()
 ~BulletEmitter	test/Bullet/BulletEmitter.cpp	/^BulletEmitter::~BulletEmitter()$/;"	f	class:BulletEmitter	signature:()
 ~BulletEmitter	test/Bullet/BulletEmitter.h	/^        ~BulletEmitter();$/;"	p	class:BulletEmitter	access:public	signature:()
+~BulletMem	test/Bullet/ParticleMem.cpp	/^BulletMem::~BulletMem()$/;"	f	class:BulletMem	signature:()
+~BulletMem	test/Bullet/ParticleMem.h	/^        ~BulletMem();$/;"	p	class:BulletMem	access:public	signature:()
 ~CoreState	src/Core/CoreState.cpp	/^CoreState::~CoreState()$/;"	f	class:CoreState	signature:()
 ~CoreState	src/Core/CoreState.h	/^        virtual ~CoreState();$/;"	p	class:CoreState	access:public	signature:()
 ~Drawable	src/Graphics/Drawable.h	/^        virtual ~Drawable() {} $/;"	f	class:Drawable	access:public	signature:()
@@ -2929,7 +2945,7 @@ zreceive	src/stblib/stb_image.c	/^stbi_inline static unsigned int zreceive(zbuf 
 ~Particle	test/Bullet/Particle.cpp	/^Particle::~Particle()$/;"	f	class:Particle	signature:()
 ~Particle	test/Bullet/Particle.h	/^        ~Particle();$/;"	p	class:Particle	access:public	signature:()
 ~ParticleEmitter	test/Bullet/ParticleEmitter.cpp	/^ParticleEmitter::~ParticleEmitter()$/;"	f	class:ParticleEmitter	signature:()
-~ParticleEmitter	test/Bullet/ParticleEmitter.h	/^        ~ParticleEmitter();$/;"	p	class:ParticleEmitter	access:public	signature:()
+~ParticleEmitter	test/Bullet/ParticleEmitter.h	/^        virtual ~ParticleEmitter();$/;"	p	class:ParticleEmitter	access:public	signature:()
 ~ParticleMem	test/Bullet/ParticleMem.cpp	/^ParticleMem::~ParticleMem()$/;"	f	class:ParticleMem	signature:()
 ~ParticleMem	test/Bullet/ParticleMem.h	/^        virtual ~ParticleMem();$/;"	p	class:ParticleMem	access:public	signature:()
 ~PatternState	test/PatternState.cpp	/^PatternState::~PatternState()$/;"	f	class:PatternState	signature:()

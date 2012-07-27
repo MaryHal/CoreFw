@@ -1,23 +1,22 @@
 #include "BulletEmitter.h"
 
-#include "ParticleMem.h"
-
 BulletEmitter::BulletEmitter()
-    : ParticleEmitter()
 {
-
 }
 
 BulletEmitter::~BulletEmitter()
 {
 }
 
-void BulletEmitter::allocateMem()
+void BulletEmitter::fire()
 {
-    particles = new BulletMem(ParticleMem::MAX_PARTICLES);
 }
 
-void BulletEmitter::set()
+void BulletEmitter::draw(float x, float y) const
 {
+    for (int i = 0; i < bulletMem.size(); ++i)
+    {
+        bulletMem.get(i).draw();
+    }
 }
 
