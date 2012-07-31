@@ -6,6 +6,8 @@
 
 #include <Graphics/Drawable.h>
 
+#include <iostream>
+
 enum Action
 {
     DIRECTION,
@@ -36,6 +38,7 @@ class Bullet : public Drawable
         Bullet();
         ~Bullet();
 
+	void logic(float time);
         void draw(float x = 0.0f, float y = 0.0f) const;
 };
 

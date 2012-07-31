@@ -9,6 +9,10 @@ Bullet::~Bullet()
 {
 }
 
+void Bullet::logic(float time)
+{
+}
+
 void Bullet::draw(float x, float y) const
 {
     glBegin(GL_POINTS);

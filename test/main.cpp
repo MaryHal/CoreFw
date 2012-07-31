@@ -7,6 +7,7 @@ int main(int argc, const char *argv[])
     Core::pushState(CoreRegistry::getState("Test"));
     Core::run();
     Core::deinit();
+
     return 0;
 }
 

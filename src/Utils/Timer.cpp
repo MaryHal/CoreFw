@@ -1,5 +1,4 @@
 #include "Timer.h"
-:A
 
 #include <GL/glfw.h>
 

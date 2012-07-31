@@ -52,6 +52,7 @@ solution "CoreFW"
 
         files { "test/**" }
 
+
         targetdir "bin"
         targetname "Test"
 

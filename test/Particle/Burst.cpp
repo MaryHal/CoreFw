@@ -53,6 +53,7 @@ void Burst::set()
 
     int magnitude = random.genRand(350.0, 400.0);
 
+    Vector2f pos(random.genRand(-200.0, 200.0), random.genRand(-200.0, 200.0));
     for (int i = 0; i < SINGLE; ++i)
     {
         float u = random.genRand(0.0, 6.28);
@@ -61,6 +62,7 @@ void Burst::set()
 
         p.life = 1.0f + random.genRand(-0.3, 0.3);
 
+        p.position = pos;
         p.velocity.x = r * sin(u);
         p.velocity.y = r * cos(u);
 
