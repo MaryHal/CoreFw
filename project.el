@@ -8,9 +8,16 @@
   (shell-command (concat "(cd " rootDir " && ./run && cd -)" ))
   )
 
+(defun premake ()
+  (interactive)
+  (shell-command (concat "(cd " rootDir " && premake4 gmake && cd -)" ))
+  )
+
+(global-set-key (kbd "<f4>") 'premake)
 (global-set-key (kbd "<f5>") 'compile)
 (global-set-key (kbd "<f6>") 'runProgram)
 
 (setq ac-clang-flags
-      (append ac-clang-flags (split-string (concat "-I" rootDir "src"))))
+      (append ac-clang-flags (split-string (concat "-I" rootDir "src")
+                                           "/usr/include/GL")))
 

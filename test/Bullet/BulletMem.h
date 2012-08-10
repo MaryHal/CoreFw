@@ -6,22 +6,24 @@
 class BulletMem
 {
     private:
-        static const int MAX_BULLETS = 1024 * 2;
-        void swap(int index1, int index2);
+    static const int MAX_BULLETS = 1024 * 2;
+    void swap(int index1, int index2);
 
-        Bullet mem[MAX_BULLETS];
-        int deadIndex;
+    Bullet mem[MAX_BULLETS];
+    int deadIndex;
 
     public:
-        BulletMem();
-        ~BulletMem();
+    BulletMem();
+    ~BulletMem();
 
-        const Bullet& get(int index) const;
+    Bullet& get(int index);
 
-        void add();
-        void remove(int index);
+    void add(Vector2f& pos, Vector2f& vel, Vector2f& acc,
+             Color& c);
+    void add(const BulletProperties& p);
+    void remove(int index);
 
-        const int size() const;
+    const int size() const;
 };
 
 #endif

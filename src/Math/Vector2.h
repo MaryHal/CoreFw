@@ -1,6 +1,8 @@
 #ifndef _Vector2_h_
 #define _Vector2_h_
 
+#include <cmath>
+
 template <typename T>
 class Vector2
 {
@@ -31,6 +33,11 @@ class Vector2
         float magnitude()
         {
             return sqrt(x * x + y * y);
+        }
+
+        float direction()
+        {
+            return atan(y/x);
         }
 
         Vector2<T> normalize()

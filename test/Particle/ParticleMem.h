@@ -42,7 +42,7 @@ class ParticleMem
         const int getColorBufferSize() const;
 };
 
-// This will just use a simple vector to store the particles and just some fun little 
+// This will just use a simple vector to store the particles and just some fun little
 // swapping for speed.
 class VectorMem : public ParticleMem
 {
@@ -60,10 +60,10 @@ class VectorMem : public ParticleMem
         ~VectorMem();
 
         //void add(const Particle& p);
-        void add(const Vector2f& position, 
-                 const Vector2f& velocity, 
-                 const Vector2f acceleration, 
-                 const Color& color, 
+        void add(const Vector2f& position,
+                 const Vector2f& velocity,
+                 const Vector2f acceleration,
+                 const Color& color,
                  float life=2.0f);
         void add(const ParticleProperties& p);
         void remove(int index);

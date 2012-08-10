@@ -14,7 +14,7 @@ solution "CoreFW"
         targetdir "lib"
         targetname "CoreFW"
 
-        --------------------------------------- 
+        ---------------------------------------
         -- Link static libraries and config
         libdirs ("lib")
         links { "openal", "sndfile", "GLEW" }
@@ -31,19 +31,16 @@ solution "CoreFW"
         configuration "x32"
             targetsuffix "32"
 
-        --------------------------------------- 
+        ---------------------------------------
         -- Build rules
         configuration "Debug"
-            kind "StaticLib" 
+            kind "StaticLib"
             defines "DEBUG"
             flags { "Symbols", "ExtraWarnings" }
-            --postbuildcommands { "sh make_includes" } 
 
         configuration "Release"
             kind "StaticLib"
             flags { "Optimize", "ExtraWarnings" }
-            --postbuildcommands { "sh make_includes" } 
-
 
     project "test"
         language "C++"
@@ -56,7 +53,7 @@ solution "CoreFW"
         targetdir "bin"
         targetname "Test"
 
-        --------------------------------------- 
+        ---------------------------------------
         -- Link static libraries and config
         libdirs ("lib")
 
@@ -79,10 +76,10 @@ solution "CoreFW"
             links { "CoreFW" }
             targetsuffix "32"
 
-        --------------------------------------- 
+        ---------------------------------------
         -- Build rules
         configuration "Debug"
-            kind "ConsoleApp" 
+            kind "ConsoleApp"
             defines "DEBUG"
             flags { "Symbols", "ExtraWarnings" }
 

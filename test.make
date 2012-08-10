@@ -165,6 +165,7 @@ OBJECTS := \
 	$(OBJDIR)/BulletEmitter.o \
 	$(OBJDIR)/Bullet.o \
 	$(OBJDIR)/BulletMem.o \
+	$(OBJDIR)/BulletGroup.o \
 
 RESOURCES := \
 
@@ -262,6 +263,9 @@ $(OBJDIR)/Bullet.o: test/Bullet/Bullet.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BulletMem.o: test/Bullet/BulletMem.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BulletGroup.o: test/Bullet/BulletGroup.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

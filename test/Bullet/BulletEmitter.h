@@ -2,20 +2,24 @@
 #define _BulletEmitter_h_
 
 #include "BulletMem.h"
+
+#include <Math/Vector2.h>
 #include <Graphics/Drawable.h>
 
 class BulletEmitter : public Drawable
 {
     private:
-        BulletMem bulletMem;
+    Vector2f position;
+    BulletMem bulletMem;
 
     public:
-        BulletEmitter();
-        ~BulletEmitter();
+    BulletEmitter();
+    ~BulletEmitter();
 
-        void fire();
+    virtual void fire();
 
-        void draw(float x = 0.0f, float y = 0.0f) const;
+    void logic(float step);
+    void draw(float x = 0.0f, float y = 0.0f) const;
 };
 
 #endif

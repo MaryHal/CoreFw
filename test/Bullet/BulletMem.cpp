@@ -8,6 +8,7 @@ void BulletMem::swap(int index1, int index2)
 }
 
 BulletMem::BulletMem()
+    : deadIndex(0)
 {
     //mem = new Bullet[MAX_BULLETS];
 }
@@ -17,16 +18,26 @@ BulletMem::~BulletMem()
     //delete [] mem;
 }
 
-const Bullet& BulletMem::get(int index) const
+Bullet& BulletMem::get(int index)
 {
-    coreAssert(index < 0 || index >= MAX_BULLETS, "BulletMem::get index out of bounds.");
+    coreAssert(index > 0 || index < MAX_BULLETS, "BulletMem::get index out of bounds.");
     return mem[index];
 }
 
-void BulletMem::add()
+void BulletMem::add(Vector2f& pos, Vector2f& vel, Vector2f& acc,
+                    Color& c)
 {
     if (deadIndex > MAX_BULLETS)
         return;
+    mem[deadIndex].set(pos, vel, acc, c);
+    ++deadIndex;
+}
+
+void BulletMem::add(const BulletProperties& p)
+{
+    if (deadIndex > MAX_BULLETS)
+        return;
+    mem[deadIndex].set(p);
     ++deadIndex;
 }
 

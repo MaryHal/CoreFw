@@ -36,10 +36,13 @@ void PatternState::handleInput(Input& input, int value, int action)
 
 void PatternState::logic(float timeStep)
 {
+    emitter.fire();
+    emitter.logic(timeStep);
 }
 
 void PatternState::draw()
 {
-    background->draw(0.0f, 0.0f);
+    //background->draw(0.0f, 0.0f);
+    emitter.draw();
 }
 

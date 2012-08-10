@@ -9,18 +9,19 @@
 class PatternState : public CoreState
 {
     private:
-        TexturePtr background;
+    TexturePtr background;
+    BulletEmitter emitter;
 
     public:
-        PatternState();
-        ~PatternState();
+    PatternState();
+    ~PatternState();
 
-        void init(ResourceManager& resources);
-        void deinit();
+    void init(ResourceManager& resources);
+    void deinit();
 
-        void handleInput(Input& input, int value, int action);
-        void logic(float timeStep);
-        void draw();
+    void handleInput(Input& input, int value, int action);
+    void logic(float timeStep);
+    void draw();
 };
 
 #endif

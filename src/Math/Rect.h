@@ -29,18 +29,18 @@ template <typename T> class Rect
 
         bool collide(const Rect<T>& rect)
         {
-            if (bottom < rect.top) 
+            if (bottom < rect.top)
                 return true;
-            if (top > rect.bottom) 
+            if (top > rect.bottom)
                 return true;
-            if (right < rect.left) 
+            if (right < rect.left)
                 return true;
-            if (left > rect.right) 
+            if (left > rect.right)
                 return true;
 
             return false;
         }
-        
+
         bool collide(const Vector2<T>& point)
         {
             if (point.x > left && point.x < right)
