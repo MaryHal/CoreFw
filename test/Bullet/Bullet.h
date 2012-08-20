@@ -6,27 +6,6 @@
 
 #include <Graphics/Drawable.h>
 
-enum Action
-{
-    DirectionAbs,
-    DirectionRel,
-    VelocityAbs,
-    VelocityRel,
-    KillBullet
-};
-
-struct BulletAction
-{
-    BulletAction(Action a, float w, float c)
-        : action(a), wait(w), change(c)
-    {
-    }
-
-    Action action;
-    float wait;
-    float change;
-};
-
 struct BulletProperties
 {
     Vector2f position;

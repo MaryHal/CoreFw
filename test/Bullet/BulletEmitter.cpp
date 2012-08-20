@@ -1,4 +1,5 @@
 #include "BulletEmitter.h"
+#include "BulletGroup.h"
 
 #include <GL/glfw.h>
 #include <cmath>
@@ -33,8 +34,8 @@ void BulletEmitter::logic(float step)
         Bullet& b = bulletMem.get(i);
         b.logic(step);
 
-        //if (!p.isAlive())
-        //    bulletMem.remove(i);
+        if (!b.isAlive())
+            bulletMem.remove(i);
     }
 }
 

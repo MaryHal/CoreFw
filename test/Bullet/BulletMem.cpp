@@ -4,6 +4,7 @@
 
 void BulletMem::swap(int index1, int index2)
 {
+    // Not really swapping anything
     mem[index1] = mem[index2];
 }
 
