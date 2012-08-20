@@ -1,6 +1,8 @@
 #ifndef _Rect_h_
 #define _Rect_h_
 
+#include "Vector2.h"
+
 template <typename T> class Rect
 {
     public:

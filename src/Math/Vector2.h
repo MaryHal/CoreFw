@@ -37,7 +37,7 @@ class Vector2
 
         float direction()
         {
-            return atan(y/x);
+            return atan2(y, x);
         }
 
         Vector2<T> normalize()

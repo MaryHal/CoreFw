@@ -1,7 +1,7 @@
 #ifndef _BulletEmitter_h_
 #define _BulletEmitter_h_
 
-#include "BulletMem.h"
+#include "BulletGroup.h"
 
 #include <Math/Vector2.h>
 #include <Graphics/Drawable.h>
@@ -10,7 +10,11 @@ class BulletEmitter : public Drawable
 {
     private:
     Vector2f position;
-    BulletMem bulletMem;
+    BulletGroup bulletMem;
+
+    float dir;
+    int timeRef;
+    bool forward;
 
     public:
     BulletEmitter();

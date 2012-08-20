@@ -5,8 +5,12 @@
 #include <cmath>
 
 BulletEmitter::BulletEmitter()
-    : position(320.0f, 180.0f)
+    : position(320.0f, 180.0f),
+      bulletMem(2048),
+      dir(0.0f),
+      timeRef(0.0f)
 {
+    forward = false;
 }
 
 BulletEmitter::~BulletEmitter()
@@ -15,38 +19,54 @@ BulletEmitter::~BulletEmitter()
 
 void BulletEmitter::fire()
 {
-    BulletProperties p =
-    {
-        Vector2f(0.0f, 0.0f),
-        Vector2f(0.0f, 0.0f),
-        Vector2f(0.0f, 300.0f),
+    Vector2f position(320.0f, 240.0f);
+    float magnitude = 200;
+    Vector2f acceleration(0.0f, 0.0f);
+    Color color(1.0f, 0.0f, 1.0f, 0.8f);
 
-        Color(0.0f, 0.0f, 1.0f, 0.8f)
-    };
+    Bullet b;
+    b.queueAction(BulletAction(VelocityAbs,  18, 0.01f));
+    b.queueAction(BulletAction(DirectionRel, 60, 3.14f));
+    b.queueAction(BulletAction(VelocityAbs,  60, 200.0f));
 
-    bulletMem.add(p);
+    b.set(position, dir, magnitude, acceleration, color);
+    bulletMem.add(b);
+
+    b.set(position, 3.14 / 2 + dir, magnitude, acceleration, color);
+    bulletMem.add(b);
+
+    b.set(position, 3.14 + dir, magnitude, acceleration, color);
+    bulletMem.add(b);
+
+    b.set(position, 3 * 3.14 / 2 + dir, magnitude, acceleration, color);
+    bulletMem.add(b);
+
+    /*
+    b.set(position, dir + 3.14f, magnitude * 1.25, acceleration, color);
+    bulletMem.add(b);
+    */
+    if (dir > 20.0f)
+        forward = false;
+    else if (dir < 0.0f)
+        forward = true;
+
+    if (forward)
+        dir += 0.05f;
+    else
+        dir -= 0.05f;
 }
 
 void BulletEmitter::logic(float step)
 {
-    for (int i = 0; i < bulletMem.size(); ++i)
-    {
-        Bullet& b = bulletMem.get(i);
-        b.logic(step);
-
-        if (!b.isAlive())
-            bulletMem.remove(i);
-    }
+    bulletMem.logic(step);
 }
 
 void BulletEmitter::draw(float x, float y) const
 {
+    glPointSize(4.0f);
     glPushMatrix();
-    glTranslatef(position.x, position.y, 0.0f);
-    for (int i = 0; i < bulletMem.size(); ++i)
-    {
-        //bulletMem.drawBullet(i);
-    }
+    //glTranslatef(position.x, position.y, 0.0f);
+    bulletMem.draw();
     glPopMatrix();
 }
 

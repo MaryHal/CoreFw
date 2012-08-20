@@ -32,6 +32,10 @@ void PatternState::handleInput(Input& input, int value, int action)
     {
         Core::popState();
     }
+    if (value == 'Q' && action == GLFW_PRESS)
+    {
+        emitter.fire();
+    }
 }
 
 void PatternState::logic(float timeStep)
@@ -42,7 +46,7 @@ void PatternState::logic(float timeStep)
 
 void PatternState::draw()
 {
-    //background->draw(0.0f, 0.0f);
+    background->draw(0.0f, 0.0f);
     emitter.draw();
 }
 

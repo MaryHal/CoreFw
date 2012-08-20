@@ -3,22 +3,15 @@
 
 #include <GL/glfw.h>
 
-void BulletGroup::swap(int index1, int index2)
-{
-    mem[index1] = mem[index2];
-}
-
 BulletGroup::BulletGroup(int capacity)
     : mem(capacity),
-      time(0.0f),
-      deadIndex(0)
+      screen(-320.0f, -240.0f, 640.0f, 480.0f),
+      frameRef(0)
 {
-    actionMap[NoAction]     = &noAction;
-    actionMap[DirectionAbs] = &setDirectionAbsolute;
-    actionMap[DirectionRel] = &setDirectionRelative;
-    actionMap[VelocityAbs]  = &setSpeedAbsolute;
-    actionMap[VelocityRel]  = &setSpeedRelative;
-    actionMap[Kill]         = &killBullet;
+    for (int i = 0; i < capacity; ++i)
+    {
+        freeMem.push(&mem[i]);
+    }
 }
 
 BulletGroup::~BulletGroup()
@@ -27,117 +20,77 @@ BulletGroup::~BulletGroup()
 
 void BulletGroup::add(Bullet& b)
 {
-    if (deadIndex >= mem.size())
-        return;
-    mem[deadIndex] = b;
-    ++deadIndex;
+    Bullet* bulletRef = freeMem.top();
+    freeMem.pop();
+    *bulletRef = b;
 }
 
 void BulletGroup::add(const BulletProperties& p)
 {
-    if (deadIndex >= mem.size())
-        return;
-    mem[deadIndex].set(p);
-    ++deadIndex;
+    Bullet* bulletRef = freeMem.top();
+    freeMem.pop();
+    bulletRef->set(p);
 }
 
 void BulletGroup::add(Vector2f& pos, Vector2f& vel, Vector2f& acc,
                       Color& c)
 {
-    if (deadIndex >= mem.size())
-        return;
-    mem[deadIndex].set(pos, vel, acc, c);
-    ++deadIndex;
+    Bullet* bulletRef = freeMem.top();
+    freeMem.pop();
+    bulletRef->set(pos, vel, acc, c);
+}
+
+void BulletGroup::add(Vector2f& pos, float vel_direction, float vel_magnitude, Vector2f& acc,
+                      Color& c)
+{
+    Bullet* bulletRef = freeMem.top();
+    freeMem.pop();
+    bulletRef->set(pos, vel_direction, vel_magnitude, acc, c);
 }
 
 void BulletGroup::remove(unsigned int index)
 {
-    if (index >= mem.size())
-        return;
-    swap(index, deadIndex - 1);
-    --deadIndex;
-}
-
-void BulletGroup::queueAction(BulletAction action)
-{
-    actionQueue.push(action);
+    mem[index].remove();
+    freeMem.push(&mem[index]);
 }
 
 void BulletGroup::logic(float step)
 {
-    time += step;
+    frameRef += 1;
 
-    while (actionQueue.top().wait >= time)
+    for (unsigned int i = 0; i < mem.size(); ++i)
     {
-        BulletAction bulletAction = actionQueue.top();
-        actionQueue.pop();
-
-        /*
-        for (std::vector<Bullet>::iterator iter = mem.begin();
-             iter != mem.end();
-             ++iter)
+        if (mem[i].isAlive())
         {
-            actionMap[bulletAction.action](*iter, bulletAction.change);
-        }
-        */
-
-        for (unsigned int i = 0; i < mem.size(); ++i)
-        {
-            actionMap[bulletAction.action](mem[i], bulletAction.change);
+            mem[i].logic(step);
+            /*
+              if (!screen.collide(mem[i].getPosition()))
+              {
+              mem[i].kill();
+              remove(i);
+              }
+            */
+            Vector2f pos = mem[i].getPosition();
+            if (pos.x < 0.0f || pos.x > 640.0f)
+            {
+                mem[i].kill();
+                remove(i);
+            }
+            if (pos.y < 0.0f || pos.y > 480.0f)
+            {
+                mem[i].kill();
+                remove(i);
+            }
         }
     }
 }
 
 void BulletGroup::draw(float x, float y) const
 {
-    for (std::vector<Bullet>::const_iterator iter = mem.begin();
-         iter != mem.end();
-         ++iter)
-    {
-        iter->draw();
-    }
-
-    /*
     for (unsigned int i = 0; i < mem.size(); ++i)
     {
-        mem[i].draw();
+        if (mem[i].isAlive())
+            mem[i].draw();
     }
-    */
-}
-
-// Bullet Methods
-void noAction(Bullet& b, float change)
-{
-    return;
-}
-
-void setDirectionAbsolute(Bullet& b, float change)
-{
-    float magnitude = b.getVelocity().magnitude();
-    Vector2f newVelocity(magnitude * cos(change),
-                         magnitude * sin(change));
-    b.setVelocity(newVelocity);
-}
-
-void setDirectionRelative(Bullet& b, float change)
-{
-    float direction = b.getVelocity().direction();
-    direction += change;
-    setDirectionAbsolute(b, direction);
-}
-
-void setSpeedAbsolute(Bullet& b, float change)
-{
-    b.setVelocity(b.getVelocity().normalize() * change);
-}
-
-void setSpeedRelative(Bullet& b, float change)
-{
-    b.setVelocity(b.getVelocity() * change);
-}
-
-void killBullet(Bullet& b, float change)
-{
-    b.kill();
 }
 
