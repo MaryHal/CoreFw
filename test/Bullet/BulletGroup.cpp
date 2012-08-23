@@ -56,8 +56,6 @@ void BulletGroup::remove(unsigned int index)
 
 void BulletGroup::logic(float step)
 {
-    frameRef += 1;
-
     for (unsigned int i = 0; i < mem.size(); ++i)
     {
         if (mem[i].isAlive())
@@ -83,6 +81,8 @@ void BulletGroup::logic(float step)
             }
         }
     }
+
+    frameRef += 1;
 }
 
 void BulletGroup::draw(float x, float y) const

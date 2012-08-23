@@ -8,7 +8,7 @@
   )
 
 (setq compile-command (concat "(cd " rootDir " && make -k -j && cd -)"))
-(defun compile-quietly ()
+(defun recompile-quietly ()
   "Re-compile without changing the window configuration."
   (interactive)
   (save-window-excursion
@@ -22,8 +22,8 @@
   )
 
 (global-set-key (kbd "<f4>") 'premake)
-(global-set-key (kbd "<f5>") 'compile)
-;(global-set-key (kbd "<f5>") 'recompile-quietly)
+(global-set-key (kbd "C-<f5>") 'compile)
+(global-set-key (kbd "<f5>") 'recompile-quietly)
 (global-set-key (kbd "<f6>") 'runProgram)
 
 (setq ac-clang-flags

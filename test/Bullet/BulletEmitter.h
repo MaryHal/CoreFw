@@ -9,6 +9,7 @@
 class BulletEmitter : public Drawable
 {
     private:
+    static const int MAX_BULLETS = 1024 * 4;
     Vector2f position;
     BulletGroup bulletMem;
 
@@ -20,6 +21,8 @@ class BulletEmitter : public Drawable
     BulletEmitter();
     ~BulletEmitter();
 
+    void pattern1();
+
     virtual void fire();
 
     void logic(float step);
@@ -27,4 +30,5 @@ class BulletEmitter : public Drawable
 };
 
 #endif
+
 

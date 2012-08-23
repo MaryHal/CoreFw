@@ -24,6 +24,10 @@ enum ActionType
     DirectionRel,
     VelocityAbs,
     VelocityRel,
+    AccelDirAbs,
+    AccelDirRel,
+    AccelerationAbs,
+    AccelerationRel,
     Kill,
     ACTION_COUNT
 };
@@ -68,7 +72,7 @@ class Bullet
     Color color;
     Color colorDelta;
 
-    float time;
+    int time;
     bool alive;
 
     public:
@@ -111,6 +115,10 @@ class Bullet
     static void setDirectionRelative(Bullet& b, float change);
     static void setSpeedAbsolute(Bullet& b, float change);
     static void setSpeedRelative(Bullet& b, float change);
+    static void setAccelDirAbsolute(Bullet& b, float change);
+    static void setAccelDirRelative(Bullet& b, float change);
+    static void setAccelerationAbsolute(Bullet& b, float change);
+    static void setAccelerationRelative(Bullet& b, float change);
 
     static void killBullet(Bullet& b, float change);
 

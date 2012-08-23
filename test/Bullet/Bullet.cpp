@@ -10,6 +10,10 @@ Bullet::ActionFunction Bullet::actionMap[ACTION_COUNT] =
     &setDirectionRelative,
     &setSpeedAbsolute,
     &setSpeedRelative,
+    &setAccelDirAbsolute,
+    &setAccelDirRelative,
+    &setAccelerationAbsolute,
+    &setAccelerationRelative,
     &killBullet
 };
 
@@ -29,9 +33,10 @@ void Bullet::set(Vector2f& pos, Vector2f& vel, Vector2f& acc,
     acceleration = acc;
 
     color = c;
+    colorDelta = linearInterpolate(c, Color::WHITE , 1.5f * 60);
 
     alive = true;
-    time = 0.0f;
+    time = 0;
 }
 
 void Bullet::set(Vector2f& pos, float vel_direction, float vel_magnitude, Vector2f& acc,
@@ -43,9 +48,10 @@ void Bullet::set(Vector2f& pos, float vel_direction, float vel_magnitude, Vector
     acceleration = acc;
 
     color = c;
+    colorDelta = linearInterpolate(c, Color::WHITE , 1.5f * 60);
 
     alive = true;
-    time = 0.0f;
+    time = 0;
 }
 
 void Bullet::set(const BulletProperties& p)
@@ -55,6 +61,7 @@ void Bullet::set(const BulletProperties& p)
     acceleration = p.acceleration;
 
     color = p.color;
+    colorDelta = linearInterpolate(p.color, Color::WHITE , 1.5f);
 
     alive = true;
     time = 0.0f;
@@ -63,7 +70,7 @@ void Bullet::set(const BulletProperties& p)
 void Bullet::remove()
 {
     alive = false;
-    time = 0.0f;
+    time = 0;
     while (!actionQueue.empty())
         actionQueue.pop();
 }
@@ -75,7 +82,6 @@ void Bullet::queueAction(BulletAction action)
 
 void Bullet::logic(float step)
 {
-    time += 1;
     //logf("%d %f %f", actionQueue.size(), actionQueue.top().wait, time);
     while (!actionQueue.empty() && actionQueue.top().wait <= time)
     {
@@ -86,10 +92,12 @@ void Bullet::logic(float step)
         actionQueue.pop();
     }
 
-    velocity += acceleration * step;
-    position += velocity * step;
+    velocity += acceleration;
+    position += velocity;
 
-    color += colorDelta * step;
+    color += colorDelta;
+
+    time += 1;
 }
 
 void Bullet::draw(float x, float y) const
@@ -191,6 +199,29 @@ void Bullet::setSpeedAbsolute(Bullet& b, float change)
 void Bullet::setSpeedRelative(Bullet& b, float change)
 {
     b.setVelocity(b.getVelocity() * change);
+}
+
+void Bullet::setAccelDirAbsolute(Bullet& b, float change)
+{
+    float magnitude = b.getAcceleration().magnitude();
+    b.setAcceleration(change, magnitude);
+}
+
+void Bullet::setAccelDirRelative(Bullet& b, float change)
+{
+    float direction = b.getAcceleration().direction();
+    direction += change;
+    b.setAcceleration(direction, b.getAcceleration().magnitude());
+}
+
+void Bullet::setAccelerationAbsolute(Bullet& b, float change)
+{
+    b.setAcceleration(b.getAcceleration().direction(), change);
+}
+
+void Bullet::setAccelerationRelative(Bullet& b, float change)
+{
+    b.setAcceleration(b.getAcceleration() * change);
 }
 
 void Bullet::killBullet(Bullet& b, float change)
