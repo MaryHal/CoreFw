@@ -18,6 +18,11 @@ BulletGroup::~BulletGroup()
 {
 }
 
+Bullet& BulletGroup::get(int i)
+{
+    return mem[i];
+}
+
 void BulletGroup::add(Bullet& b)
 {
     Bullet* bulletRef = freeMem.top();
@@ -50,7 +55,7 @@ void BulletGroup::add(Vector2f& pos, float vel_direction, float vel_magnitude, V
 
 void BulletGroup::remove(unsigned int index)
 {
-    mem[index].remove();
+    mem[index].clear();
     freeMem.push(&mem[index]);
 }
 
@@ -71,12 +76,10 @@ void BulletGroup::logic(float step)
             Vector2f pos = mem[i].getPosition();
             if (pos.x < 0.0f || pos.x > 640.0f)
             {
-                mem[i].kill();
                 remove(i);
             }
             if (pos.y < 0.0f || pos.y > 480.0f)
             {
-                mem[i].kill();
                 remove(i);
             }
         }

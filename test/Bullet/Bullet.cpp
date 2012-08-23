@@ -67,7 +67,7 @@ void Bullet::set(const BulletProperties& p)
     time = 0.0f;
 }
 
-void Bullet::remove()
+void Bullet::clear()
 {
     alive = false;
     time = 0;
@@ -85,9 +85,10 @@ void Bullet::logic(float step)
     //logf("%d %f %f", actionQueue.size(), actionQueue.top().wait, time);
     while (!actionQueue.empty() && actionQueue.top().wait <= time)
     {
-        logf("%d", actionQueue.size());
         BulletAction bulletAction = actionQueue.top();
-        Bullet::actionMap[bulletAction.action](*this, bulletAction.change);
+        Bullet::actionMap[bulletAction.action](bulletAction.group,
+                                               *this,
+                                               bulletAction.change);
 
         actionQueue.pop();
     }
@@ -173,58 +174,58 @@ void Bullet::kill()
 
 
 // Bullet Methods
-void Bullet::noAction(Bullet& b, float change)
+void Bullet::noAction(BulletGroup* g, Bullet& b, float change)
 {
     return;
 }
 
-void Bullet::setDirectionAbsolute(Bullet& b, float change)
+void Bullet::setDirectionAbsolute(BulletGroup* g, Bullet& b, float change)
 {
     float magnitude = b.getVelocity().magnitude();
     b.setVelocity(change, magnitude);
 }
 
-void Bullet::setDirectionRelative(Bullet& b, float change)
+void Bullet::setDirectionRelative(BulletGroup* g, Bullet& b, float change)
 {
     float direction = b.getVelocity().direction();
     direction += change;
     b.setVelocity(direction, b.getVelocity().magnitude());
 }
 
-void Bullet::setSpeedAbsolute(Bullet& b, float change)
+void Bullet::setSpeedAbsolute(BulletGroup* g, Bullet& b, float change)
 {
     b.setVelocity(b.getVelocity().direction(), change);
 }
 
-void Bullet::setSpeedRelative(Bullet& b, float change)
+void Bullet::setSpeedRelative(BulletGroup* g, Bullet& b, float change)
 {
     b.setVelocity(b.getVelocity() * change);
 }
 
-void Bullet::setAccelDirAbsolute(Bullet& b, float change)
+void Bullet::setAccelDirAbsolute(BulletGroup* g, Bullet& b, float change)
 {
     float magnitude = b.getAcceleration().magnitude();
     b.setAcceleration(change, magnitude);
 }
 
-void Bullet::setAccelDirRelative(Bullet& b, float change)
+void Bullet::setAccelDirRelative(BulletGroup* g, Bullet& b, float change)
 {
     float direction = b.getAcceleration().direction();
     direction += change;
     b.setAcceleration(direction, b.getAcceleration().magnitude());
 }
 
-void Bullet::setAccelerationAbsolute(Bullet& b, float change)
+void Bullet::setAccelerationAbsolute(BulletGroup* g, Bullet& b, float change)
 {
     b.setAcceleration(b.getAcceleration().direction(), change);
 }
 
-void Bullet::setAccelerationRelative(Bullet& b, float change)
+void Bullet::setAccelerationRelative(BulletGroup* g, Bullet& b, float change)
 {
     b.setAcceleration(b.getAcceleration() * change);
 }
 
-void Bullet::killBullet(Bullet& b, float change)
+void Bullet::killBullet(BulletGroup* g, Bullet& b, float change)
 {
     b.kill();
 }

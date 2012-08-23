@@ -70,9 +70,10 @@ void GameState::logic(float timeStep)
         emitter->set();
     }
     emitter->logic(timeStep);
+    fps.calculate();
     text.setText(toString(emitter->getParticleCount()) + 
                  '\n' +
-                 toString(1.0f / timeStep) +
+                 toString(fps.getFps()) +
                  '\n' +
                  "Skittles: " +
                  toString(((Burst*)emitter)->getSkittles()));

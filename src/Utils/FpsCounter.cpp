@@ -17,7 +17,7 @@ void FpsCounter::calculate()
     currentTime = glfwGetTime();
     if (currentTime - startTime > 1 || frameCount == 0)
     {
-        fps = (float)frameCount / (currentTime - startTime); 
+        fps = (float)frameCount / (currentTime - startTime);
         startTime = currentTime;
         frameCount = 0;
     }

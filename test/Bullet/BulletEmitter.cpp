@@ -30,9 +30,9 @@ void BulletEmitter::pattern1()
     Color color(0.8f, 0.0f, 1.0f, 0.9f);
 
     Bullet b;
-    b.queueAction(BulletAction(VelocityAbs,  18, 0.01f));
-    b.queueAction(BulletAction(DirectionRel, 60, 3.14f));
-    b.queueAction(BulletAction(VelocityAbs,  60, 3.5f));
+    b.queueAction(BulletAction(&bulletMem, VelocityAbs,  18, 0.01f));
+    b.queueAction(BulletAction(&bulletMem, DirectionRel, 60, 3.14f));
+    b.queueAction(BulletAction(&bulletMem, VelocityAbs,  60, 3.5f));
 
     b.set(position, dir, magnitude, acceleration, color);
     bulletMem.add(b);

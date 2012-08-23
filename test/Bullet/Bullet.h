@@ -8,6 +8,8 @@
 
 #include <Graphics/Drawable.h>
 
+class BulletGroup;
+
 struct BulletProperties
 {
     Vector2f position;
@@ -34,11 +36,12 @@ enum ActionType
 
 struct BulletAction
 {
-    BulletAction(ActionType a, int w, float c)
-        : action(a), wait(w), change(c)
+    BulletAction(BulletGroup* g, ActionType a, int w, float c)
+        : group(g), action(a), wait(w), change(c)
     {
     }
 
+    BulletGroup* group;
     ActionType action;
     int wait;
     float change;
@@ -47,7 +50,7 @@ struct BulletAction
 class Bullet
 {
     private:
-    typedef void(*ActionFunction)(Bullet& b, float change);
+    typedef void(*ActionFunction)(BulletGroup* g, Bullet& b, float change);
     //typedef std::map<ActionType, ActionFunction> ActionMap;
     //ActionMap actionMap;
     static ActionFunction actionMap[ACTION_COUNT];
@@ -84,7 +87,7 @@ class Bullet
     void set(Vector2f& pos, float vel_direction, float vel_magnitude, Vector2f& acc,
              Color& c);
     void set(const BulletProperties& p);
-    void remove();
+    void clear();
 
     void queueAction(BulletAction action);
 
@@ -110,17 +113,17 @@ class Bullet
     void kill();
 
     // Bullet Methods
-    static void noAction(Bullet& b, float change);
-    static void setDirectionAbsolute(Bullet& b, float change);
-    static void setDirectionRelative(Bullet& b, float change);
-    static void setSpeedAbsolute(Bullet& b, float change);
-    static void setSpeedRelative(Bullet& b, float change);
-    static void setAccelDirAbsolute(Bullet& b, float change);
-    static void setAccelDirRelative(Bullet& b, float change);
-    static void setAccelerationAbsolute(Bullet& b, float change);
-    static void setAccelerationRelative(Bullet& b, float change);
+    static void noAction(BulletGroup* g, Bullet& b, float change);
+    static void setDirectionAbsolute(BulletGroup* g, Bullet& b, float change);
+    static void setDirectionRelative(BulletGroup* g, Bullet& b, float change);
+    static void setSpeedAbsolute(BulletGroup* g, Bullet& b, float change);
+    static void setSpeedRelative(BulletGroup* g, Bullet& b, float change);
+    static void setAccelDirAbsolute(BulletGroup* g, Bullet& b, float change);
+    static void setAccelDirRelative(BulletGroup* g, Bullet& b, float change);
+    static void setAccelerationAbsolute(BulletGroup* g, Bullet& b, float change);
+    static void setAccelerationRelative(BulletGroup* g, Bullet& b, float change);
 
-    static void killBullet(Bullet& b, float change);
+    static void killBullet(BulletGroup* g, Bullet& b, float change);
 
 };
 

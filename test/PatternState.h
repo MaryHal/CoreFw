@@ -3,6 +3,7 @@
 
 #include <Core/CoreState.h>
 #include <System/ResourcePtr.h>
+#include <Utils/FpsCounter.h>
 
 #include "Bullet/BulletEmitter.h"
 
@@ -11,6 +12,10 @@ class PatternState : public CoreState
     private:
     TexturePtr background;
     BulletEmitter emitter;
+
+    Text text;
+
+    FpsCounter fps;
 
     public:
     PatternState();

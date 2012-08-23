@@ -21,6 +21,8 @@ class BulletGroup : public Drawable
     BulletGroup(int capacity);
     ~BulletGroup();
 
+    Bullet& get(int i);
+
     void add(Bullet& b);
     void add(const BulletProperties& p);
     void add(Vector2f& pos, Vector2f& vel, Vector2f& acc,
