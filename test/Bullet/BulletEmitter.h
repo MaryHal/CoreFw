@@ -5,11 +5,14 @@
 
 #include <Math/Vector2.h>
 #include <Graphics/Drawable.h>
+#include <Math/Random.h>
 
 class BulletEmitter : public Drawable
 {
     private:
     static const int MAX_BULLETS = 1024 * 4;
+    Random rng;
+
     Vector2f position;
     BulletGroup bulletMem;
 
@@ -22,6 +25,8 @@ class BulletEmitter : public Drawable
     ~BulletEmitter();
 
     void pattern1();
+    void pattern2();
+    void pattern3();
 
     virtual void fire();
 

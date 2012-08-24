@@ -7,6 +7,8 @@
 
 #include "Bullet/BulletEmitter.h"
 
+#include <boost/function.hpp>
+
 class PatternState : public CoreState
 {
     private:
@@ -14,8 +16,9 @@ class PatternState : public CoreState
     BulletEmitter emitter;
 
     Text text;
-
     FpsCounter fps;
+
+    boost::function<void(BulletEmitter*)> patternFunction;
 
     public:
     PatternState();
