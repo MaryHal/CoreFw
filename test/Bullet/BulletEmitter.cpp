@@ -121,7 +121,7 @@ void BulletEmitter::pattern3()
     b.set(position, -dir + 3 * 3.14f / 2, magnitude, acceleration, color);
     bulletMem.add(b);
 
-    dir += 0.02f;
+    dir += 0.03f;
 }
 
 void BulletEmitter::logic(float step)

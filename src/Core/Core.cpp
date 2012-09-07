@@ -141,21 +141,21 @@ void Core::pushState(CoreState* s)
 {
     if (s == NULL)
     {
-        logf(" ## Trying to push NULL state: \"%s\"", 
+        logf(" ## Trying to push NULL state: \"%s\"",
              CoreRegistry::getStateName(s).c_str());
         return;
     }
 
     if (s->isInitialized())
     {
-        logf(" ## Trying to push already initialized state: \"%s\"", 
+        logf(" ## Trying to push already initialized state: \"%s\"",
              CoreRegistry::getStateName(s).c_str());
         return;
     }
 
     states.push(s);
     s->init(*resourceManager);
-    logf(" -- Initialized State(%d): \"%s\"", states.size(), CoreRegistry::getStateName(s).c_str());
+    logf(" -- (%d) Initializing \"%s\"", states.size(), CoreRegistry::getStateName(s).c_str());
 }
 
 void Core::popState()
@@ -164,11 +164,11 @@ void Core::popState()
     {
         // Get top member and remove it.
         CoreState* current = states.top();
-        logf(" -- Denitialized State(%d): \"%s\"", states.size(), CoreRegistry::getStateName(current).c_str());
+        logf(" -- (%d) Deinitializing \"%s\"", states.size(), CoreRegistry::getStateName(current).c_str());
         current->deinit();
 
         states.pop();
-        
+
         if (states.empty())
             running  = false;
     }
@@ -181,8 +181,8 @@ void Core::popAllStates()
         CoreState* current = states.top();
         if (current->isInitialized())
         {
+            logf(" -- (%d) Deinitializing \"%s\"", states.size(), CoreRegistry::getStateName(current).c_str());
             current->deinit();
-            logf(" -- Denitialized State(%d): \"%s\"", states.size(), CoreRegistry::getStateName(current).c_str());
         }
 
         states.pop();
@@ -218,4 +218,3 @@ void GLFWCALL Core::mouseInput(int button, int action)
 {
     states.top()->handleInput(*input, button, action);
 }
-

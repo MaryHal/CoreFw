@@ -18,6 +18,11 @@ BulletGroup::~BulletGroup()
 {
 }
 
+unsigned int BulletGroup::activeSize()
+{
+    return mem.capacity() - freeMem.size();
+}
+
 Bullet& BulletGroup::get(int i)
 {
     return mem[i];

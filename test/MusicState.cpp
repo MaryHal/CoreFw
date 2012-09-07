@@ -4,7 +4,10 @@
 #include <Core/CoreRegistry.h>
 
 #include "Menu.h"
+#include <Math/Math.h>
 #include <Utils/StringUtils.h>
+
+#include <GL/glfw.h>
 
 REGISTER_GAME("Music", MusicState);
 
@@ -66,7 +69,9 @@ void MusicState::logic(float timeStep)
     if (menu->checkChoice())
     {
         if (music)
+        {
             music->stop();
+        }
 
         std::string choice = menu->getChoice();
         if (choice == "PainAndPossibility")
@@ -98,7 +103,12 @@ void MusicState::logic(float timeStep)
         menu->resetChoice();
     }
     if (music)
-        text.setText(toString<float>(music->getTime()) + '/' + toString<float>(music->getDuration()));
+    {
+
+        //std::string currentTime  = toString<float>(music->getTime());
+        //std::string durationTime = toString<float>(music->getDuration());
+        text.setText(formatString("%.2f / %.2f", music->getTime(), music->getDuration()));
+    }
 }
 
 void MusicState::draw()
@@ -106,7 +116,14 @@ void MusicState::draw()
     background->draw(0.0f, 0.0f);
     menu->draw(440.0f, 240.0f);
     text.draw(13.0f, 13.0f);
+
+    if (music)
+    {
+        glLineWidth(3.0f);
+        glBegin(GL_LINES);
+        glVertex2f(12.0f, 32.0f);
+        glVertex2f(12 + (640.0f - 24.0f) * music->getTime() / music->getDuration(), 32.0f);
+        glEnd();
+    }
 }
-
-
 

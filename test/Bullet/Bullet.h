@@ -124,7 +124,6 @@ class Bullet
     static void setAccelerationRelative(BulletGroup* g, Bullet& b, float change);
 
     static void killBullet(BulletGroup* g, Bullet& b, float change);
-
 };
 
 #endif

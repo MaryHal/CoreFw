@@ -18,11 +18,11 @@ class Drawable
 
     public:
         Drawable();
-        virtual ~Drawable() {} 
+        virtual ~Drawable() {}
 
         virtual void draw(Vector2<float> v) const;
         virtual void draw(float x = 0.0f, float y = 0.0f) const = 0;
-};  
+};
 
 #endif
 

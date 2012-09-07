@@ -74,6 +74,11 @@ void Buffer::rewind()
     readLoc = data;
 }
 
+void Buffer::move(int offset)
+{
+    writeLoc = data + offset;
+}
+
 void Buffer::clear()
 {
     writeLoc = readLoc = data;

@@ -1,5 +1,7 @@
 #include "Math.h"
 
+#include <cmath>
+
 float Math::radToDeg(float radians)
 {
     return (radians * (180.0f / PI));
@@ -14,7 +16,7 @@ unsigned int Math::nextPow2(register unsigned int n)
 {
     // Flip final bit
     --n;
-    
+
     // Shift bits then OR data
     for (unsigned int i = 1; i < sizeof(unsigned int); i*=2)
         n |= (n >> i);

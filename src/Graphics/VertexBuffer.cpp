@@ -12,14 +12,14 @@
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-const int VertexBuffer::gl_BufferType[BufferType::MAX_BUFFER] = 
+const int VertexBuffer::gl_BufferType[BufferType::MAX_BUFFER] =
 {
     GL_STATIC_DRAW,
     GL_DYNAMIC_DRAW,
     GL_STREAM_DRAW
 };
 
-const int VertexBuffer::gl_PrimitiveType[PrimitiveType::MAX_PRIMITIVE] = 
+const int VertexBuffer::gl_PrimitiveType[PrimitiveType::MAX_PRIMITIVE] =
 {
     GL_POINTS,
     GL_LINE_STRIP,
@@ -33,7 +33,7 @@ const int VertexBuffer::gl_PrimitiveType[PrimitiveType::MAX_PRIMITIVE] =
     GL_POLYGON
 };
 
-const int VertexBuffer::bytesNeeded[BufferLayout::MAX_LAYOUT] = 
+const int VertexBuffer::bytesNeeded[BufferLayout::MAX_LAYOUT] =
 {
     0,                  // None
     2 * sizeof(float),  // Vertex
@@ -112,8 +112,8 @@ void VertexBuffer::updateBuffers()
                  gl_BufferType[bufferType]);
 
     /*
-    glBufferSubData(GL_ARRAY_BUFFER_ARB, 
-                    0, 
+    glBufferSubData(GL_ARRAY_BUFFER_ARB,
+                    0,
                     vertexBufferSize,
                     vertices);
                     */
@@ -174,7 +174,7 @@ void VertexBuffer::printDebug()
 }
 
 // Static methods
-void VertexBuffer::Line(VertexBuffer& b, 
+void VertexBuffer::Line(VertexBuffer& b,
                         float x1, float y1, float x2, float y2,
                         const Color& color)
 {
@@ -196,7 +196,7 @@ void VertexBuffer::Line(VertexBuffer& b,
     VertexBuffer::Line(b, v1.x, v1.y, v2.x, v2.y, color);
 }
 
-void VertexBuffer::Rectangle(VertexBuffer& b, 
+void VertexBuffer::Rectangle(VertexBuffer& b,
                              float x1, float y1, float x2, float y2,
                              const Color& color)
 {
@@ -215,14 +215,14 @@ void VertexBuffer::Rectangle(VertexBuffer& b,
     b.updateBuffers();
 }
 
-void VertexBuffer::Rectangle(VertexBuffer& b, 
+void VertexBuffer::Rectangle(VertexBuffer& b,
                              const Vector2f& v1, const Vector2f& v2,
                              const Color& color)
 {
     VertexBuffer::Rectangle(b, v1.x, v1.y, v2.x, v2.y, color);
 }
 
-void VertexBuffer::Circle(VertexBuffer& b, 
+void VertexBuffer::Circle(VertexBuffer& b,
                           float x, float y, float r,
                           const Color& color)
 {
@@ -242,10 +242,9 @@ void VertexBuffer::Circle(VertexBuffer& b,
     b.updateBuffers();
 }
 
-void VertexBuffer::Circle(VertexBuffer& b, 
+void VertexBuffer::Circle(VertexBuffer& b,
                           const Vector2f& v, float r,
                           const Color& color)
 {
     VertexBuffer::Circle(b, v.x, v.y, r, color);
 }
-

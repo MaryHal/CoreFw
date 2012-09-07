@@ -92,27 +92,26 @@ class VertexBuffer : public Buffer, public Drawable
         void printDebug();
 
         // Static methods
-        static void Line(VertexBuffer& b, 
+        static void Line(VertexBuffer& b,
                          float x1, float y1, float x2, float y2,
                          const Color& color);
         static void Line(VertexBuffer& b,
                          const Vector2f& v1, const Vector2f& v2,
                          const Color& color);
 
-        static void Rectangle(VertexBuffer& b, 
+        static void Rectangle(VertexBuffer& b,
                               float x1, float y1, float x2, float y2,
                               const Color& color);
-        static void Rectangle(VertexBuffer& b, 
+        static void Rectangle(VertexBuffer& b,
                               const Vector2f& v1, const Vector2f& v2,
                               const Color& color);
 
-        static void Circle(VertexBuffer& b, 
+        static void Circle(VertexBuffer& b,
                            float x, float y, float r,
                            const Color& color);
-        static void Circle(VertexBuffer& b, 
+        static void Circle(VertexBuffer& b,
                            const Vector2f& v, float r,
                            const Color& color);
 };
 
 #endif
-

@@ -49,9 +49,9 @@ class Core
 
         static void printStateStack();
 
-        static void keyInput(int key, int action); 
+        static void keyInput(int key, int action);
         static void mouseMoveInput(int x, int y);
-        static void mouseInput(int button, int action); 
+        static void mouseInput(int button, int action);
 };
 
 #endif

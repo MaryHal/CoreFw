@@ -21,6 +21,7 @@ class BulletGroup : public Drawable
     BulletGroup(int capacity);
     ~BulletGroup();
 
+    unsigned int activeSize();
     Bullet& get(int i);
 
     void add(Bullet& b);
