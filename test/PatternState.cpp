@@ -22,9 +22,7 @@ void PatternState::init(ResourceManager& resources)
     CoreState::init(resources);
     background = textures->add("patternBackground", "data/graphics/Frac4.png");
 
-    text = fonts->makeText("default");
-
-    patternFunction = &BulletEmitter::pattern1;
+    fpstext = fonts->makeText("default");
 }
 
 void PatternState::deinit()
@@ -40,32 +38,31 @@ void PatternState::handleInput(Input& input, int value, int action)
     }
     else if (value == 'Q' && action == GLFW_PRESS)
     {
-        patternFunction = &BulletEmitter::pattern1;
+        emitter.setPattern(0);
     }
     else if (value == 'W' && action == GLFW_PRESS)
     {
-        patternFunction = &BulletEmitter::pattern2;
+        emitter.setPattern(1);
     }
     else if (value == 'E' && action == GLFW_PRESS)
     {
-        patternFunction = &BulletEmitter::pattern3;
+        emitter.setPattern(2);
     }
 }
 
 void PatternState::logic(float timeStep)
 {
-    //emitter.fire();
-    patternFunction(&emitter);
+    emitter.fire();
     emitter.logic(timeStep);
 
     fps.calculate();
-    text.setText(toString(fps.getFps()));
+    fpstext.setText(toString(fps.getFps()));
 }
 
 void PatternState::draw()
 {
     background->draw(0.0f, 0.0f);
     emitter.draw();
-    text.draw(4.0f, 4.0f);
+    fpstext.draw(4.0f, 4.0f);
 }
 

@@ -15,10 +15,8 @@ class PatternState : public CoreState
     TexturePtr background;
     BulletEmitter emitter;
 
-    Text text;
+    Text fpstext;
     FpsCounter fps;
-
-    boost::function<void(BulletEmitter*)> patternFunction;
 
     public:
     PatternState();

@@ -20,16 +20,19 @@ class BulletEmitter : public Drawable
     int timeRef;
     bool forward;
 
+    int patternNum;
+
     public:
     BulletEmitter();
     ~BulletEmitter();
+
+    virtual void fire();
 
     void pattern1();
     void pattern2();
     void pattern3();
 
-    virtual void fire();
-
+    void setPattern(int i);
     void logic(float step);
     void draw(float x = 0.0f, float y = 0.0f) const;
 };

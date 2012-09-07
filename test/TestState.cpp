@@ -31,7 +31,7 @@ void TestState::init(ResourceManager& resources)
 
     sound = sounds->addSample("noise", "data/sound/sfx.wav");
 
-    text = fonts->makeText("default", "\"This above all: to thine own self be true\" ~ Hamlet Act 1, scene 3, 78 82\nasdf\nasd\nas\na\nDefinitely no kerning :(");
+    text = fonts->makeText("default", "\"This above all: to thine own self be true\" ~ Hamlet Act 1, scene 3, 78 82\nasdf\nasd\nas\na\nDefinitely no kerning :(\n\n\nIn the beginner's mind there are many possiblities, in the expert's mind there are few.");
     text2 = fonts->makeText("big", "AVAVAV");
 
     menu = new Menu("Main Menu", font);

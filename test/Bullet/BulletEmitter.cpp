@@ -8,7 +8,8 @@ BulletEmitter::BulletEmitter()
     : position(320.0f, 180.0f),
       bulletMem(MAX_BULLETS),
       dir(0.0f),
-      timeRef(0)
+      timeRef(0),
+      patternNum(0)
 {
     forward = false;
 }
@@ -19,7 +20,20 @@ BulletEmitter::~BulletEmitter()
 
 void BulletEmitter::fire()
 {
-    pattern1();
+    switch (patternNum)
+    {
+    case 0:
+        pattern1();
+        break;
+    case 1:
+        pattern2();
+        break;
+    case 2:
+        pattern3();
+        break;
+    default:
+        break;
+    }
 }
 
 void BulletEmitter::pattern1()
@@ -122,6 +136,11 @@ void BulletEmitter::pattern3()
     bulletMem.add(b);
 
     dir += 0.03f;
+}
+
+void BulletEmitter::setPattern(int i)
+{
+    patternNum = i;
 }
 
 void BulletEmitter::logic(float step)

@@ -10,6 +10,7 @@ BulletGroup::BulletGroup(int capacity)
 {
     for (int i = 0; i < capacity; ++i)
     {
+        mem[i].clear();
         freeMem.push(&mem[i]);
     }
 }
