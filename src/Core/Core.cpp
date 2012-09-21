@@ -216,5 +216,5 @@ void GLFWCALL Core::mouseMoveInput(int x, int y)
 
 void GLFWCALL Core::mouseInput(int button, int action)
 {
-    states.top()->handleInput(*input, button, action);
+    states.top()->handleMouseInput(*input, button, action);
 }

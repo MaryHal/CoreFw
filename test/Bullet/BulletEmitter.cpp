@@ -83,7 +83,7 @@ void BulletEmitter::pattern2()
         Vector2f acceleration(0.0f, 0.0f);
         Color color(0.8f, 0.0f, 1.0f, 0.9f);
 
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 1; ++i)
         {
             float initialDir = rng.genRand(0.0, 6.28);
             float fireDir = rng.genRand(3.14 / 3, 2 * 3.14 / 3);
@@ -103,7 +103,7 @@ void BulletEmitter::pattern2()
                 bulletMem.add(b);
             }
         }
-        timeRef = 60;
+        timeRef = 30;
     }
     else
         timeRef--;

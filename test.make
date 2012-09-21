@@ -155,6 +155,7 @@ OBJECTS := \
 	$(OBJDIR)/Menu.o \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/MusicState.o \
+	$(OBJDIR)/QuadState.o \
 	$(OBJDIR)/GameState.o \
 	$(OBJDIR)/PatternState.o \
 	$(OBJDIR)/main.o \
@@ -233,6 +234,9 @@ $(OBJDIR)/TestState.o: test/TestState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MusicState.o: test/MusicState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/QuadState.o: test/QuadState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/GameState.o: test/GameState.cpp

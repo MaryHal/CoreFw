@@ -60,7 +60,7 @@ void TestState::init(ResourceManager& resources)
 
     vb->updateBuffers();
     //vb->printDebug();
-    
+
     line = new VertexBuffer(2, PrimitiveType::Lines, BufferLayout::VC, BufferType::StaticBuffer);
     line->writeVector(0.0f, 0.0f);
     line->writeColor(1.0f, 1.0f, 1.0f, 0.5f);
@@ -103,6 +103,10 @@ void TestState::logic(float timeStep)
         else if (choice == "Howdy")
         {
             Core::pushState(CoreRegistry::getState("Music"));
+        }
+        else if (choice == "Hey")
+        {
+            Core::pushState(CoreRegistry::getState("Quad"));
         }
 
         menu->resetChoice();

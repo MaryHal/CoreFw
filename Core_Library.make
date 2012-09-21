@@ -157,6 +157,7 @@ OBJECTS := \
 	$(OBJDIR)/CoreState.o \
 	$(OBJDIR)/Timer.o \
 	$(OBJDIR)/BinaryHeap.o \
+	$(OBJDIR)/QuadTree.o \
 	$(OBJDIR)/FpsCounter.o \
 	$(OBJDIR)/FileLoader.o \
 	$(OBJDIR)/Ini.o \
@@ -260,6 +261,9 @@ $(OBJDIR)/Timer.o: src/Utils/Timer.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BinaryHeap.o: src/Utils/BinaryHeap.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/QuadTree.o: src/Utils/QuadTree.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/FpsCounter.o: src/Utils/FpsCounter.cpp
