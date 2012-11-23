@@ -26,22 +26,14 @@ void MusicState::init(ResourceManager& resources)
     fonts->add("default", "data/fonts/DroidSans.ttf", 16);
     text = fonts->makeText("default", "");
 
-    sounds->addMusic("song1", "data/music/song1.flac");
-    sounds->addMusic("song2", "data/music/song2.ogg");
-    sounds->addMusic("song3", "data/music/song3.ogg");
-    sounds->addMusic("song4", "data/music/song4.ogg");
-    sounds->addMusic("song5", "data/music/song5.ogg");
-    sounds->addMusic("song6", "data/music/song6.wav");
+    sounds->addMusic("PainAndPossibility", "data/music/song1.flac");
+    sounds->addMusic("Nevergreen", "data/music/song2.wav");
 
     background = textures->add("musicBackground", "data/graphics/Frac2.png");
 
     menu = new Menu("Songs", fonts->get("default"));
     menu->setMetrics(6, 20);
     menu->addItem("PainAndPossibility");
-    menu->addItem("NocturneOfLove");
-    menu->addItem("LostMemories");
-    menu->addItem("KindredSpirit");
-    menu->addItem("WithRainyEyes");
     menu->addItem("Nevergreen");
     menu->sortItems();
     menu->make();
@@ -74,30 +66,8 @@ void MusicState::logic(float timeStep)
         }
 
         std::string choice = menu->getChoice();
-        if (choice == "PainAndPossibility")
-        {
-            music = sounds->get("song1");
-        }
-        else if (choice == "NocturneOfLove")
-        {
-            music = sounds->get("song2");
-        }
-        else if (choice == "LostMemories")
-        {
-            music = sounds->get("song3");
-        }
-        else if (choice == "KindredSpirit")
-        {
-            music = sounds->get("song4");
-        }
-        else if (choice == "WithRainyEyes")
-        {
-            music = sounds->get("song5");
-        }
-        else if (choice == "Nevergreen")
-        {
-            music = sounds->get("song6");
-        }
+
+        music = sounds->get(choice);
         music->play();
 
         menu->resetChoice();

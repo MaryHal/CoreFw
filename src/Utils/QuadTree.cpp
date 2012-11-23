@@ -117,12 +117,12 @@ int QuadTree::Parent(int x)
     return x / 4;
 }
 
-std::vector<Vector2f> QuadTree::getPoints() const
+std::vector<Vector2f>& QuadTree::getPoints()
 {
     return allPoints;
 }
 
-std::vector<Node> QuadTree::getNodes() const
+std::vector<Node>& QuadTree::getNodes()
 {
     return nodes;
 }

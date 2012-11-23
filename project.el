@@ -16,7 +16,8 @@
   )
 
 (global-set-key (kbd "<f4>") 'premake)
-(global-set-key (kbd "<f5>") 'compile)
+(global-set-key (kbd "C-<f5>") 'compile)
+(global-set-key (kbd "<f5>") 'recompile)
 (global-set-key (kbd "<f6>") 'runProgram)
 
 (setq ac-clang-flags

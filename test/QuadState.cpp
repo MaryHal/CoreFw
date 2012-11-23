@@ -36,6 +36,10 @@ void QuadState::handleInput(Input& input, int value, int action)
     {
         tree.clear();
     }
+    if (value == GLFW_KEY_BACKSPACE && action == GLFW_PRESS)
+    {
+        Core::popState();
+    }
 }
 
 void QuadState::handleMouseInput(Input& input, int value, int action)

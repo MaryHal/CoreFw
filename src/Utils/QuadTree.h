@@ -65,8 +65,8 @@ class QuadTree
 
     inline int Parent(int x);
 
-    std::vector<Vector2f> getPoints() const;
-    std::vector<Node> getNodes() const;
+    std::vector<Vector2f>& getPoints();
+    std::vector<Node>& getNodes();
 };
 
 #endif /* _QUADTREE_H_ */
