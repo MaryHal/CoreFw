@@ -111,31 +111,37 @@ void BulletEmitter::pattern2()
 
 void BulletEmitter::pattern3()
 {
-    Vector2f position(320.0f, 240.0f);
-    Vector2f acceleration(0.0f, 0.0f);
-    Color color(0.8f, 0.0f, 1.0f, 0.9f);
-    float magnitude = 4.0f;
+    if (timeRef > 0)
+    {
+        Vector2f position(320.0f, 240.0f);
+        Vector2f acceleration(0.0f, 0.0f);
+        Color color(0.8f, 0.0f, 1.0f, 0.9f);
+        float magnitude = 4.0f;
 
-    Bullet b;
-    b.set(position, dir, magnitude, acceleration, color);
-    bulletMem.add(b);
-    b.set(position, dir + 3.14f, magnitude, acceleration, color);
-    bulletMem.add(b);
-    b.set(position, dir + 3.14f / 2, magnitude, acceleration, color);
-    bulletMem.add(b);
-    b.set(position, dir + 3 * 3.14f / 2, magnitude, acceleration, color);
-    bulletMem.add(b);
+        Bullet b;
+        b.set(position, dir, magnitude, acceleration, color);
+        bulletMem.add(b);
+        b.set(position, dir + 3.14f, magnitude, acceleration, color);
+        bulletMem.add(b);
+        b.set(position, dir + 3.14f / 2, magnitude, acceleration, color);
+        bulletMem.add(b);
+        b.set(position, dir + 3 * 3.14f / 2, magnitude, acceleration, color);
+        bulletMem.add(b);
 
-    b.set(position, -dir, magnitude, acceleration, color);
-    bulletMem.add(b);
-    b.set(position, -dir + 3.14f, magnitude, acceleration, color);
-    bulletMem.add(b);
-    b.set(position, -dir + 3.14f / 2, magnitude, acceleration, color);
-    bulletMem.add(b);
-    b.set(position, -dir + 3 * 3.14f / 2, magnitude, acceleration, color);
-    bulletMem.add(b);
+        b.set(position, -dir, magnitude, acceleration, color);
+        bulletMem.add(b);
+        b.set(position, -dir + 3.14f, magnitude, acceleration, color);
+        bulletMem.add(b);
+        b.set(position, -dir + 3.14f / 2, magnitude, acceleration, color);
+        bulletMem.add(b);
+        b.set(position, -dir + 3 * 3.14f / 2, magnitude, acceleration, color);
+        bulletMem.add(b);
 
-    dir += 0.03f;
+        dir += 0.03f;
+    }
+    --timeRef;
+    if (timeRef < -10)
+        timeRef = 30;
 }
 
 void BulletEmitter::setPattern(int i)

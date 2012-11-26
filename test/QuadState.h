@@ -11,6 +11,7 @@ class QuadState : public CoreState
     private:
     TexturePtr background;
     QuadTree tree;
+    Text info;
 
     public:
     QuadState();

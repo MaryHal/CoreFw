@@ -1,4 +1,5 @@
 #include "QuadTree.h"
+#include <cstdio>
 
 // For convenience, my node list is going to be 1-indexed.
 QuadTree::QuadTree(float x, float y, float width, float height)
@@ -34,9 +35,9 @@ void QuadTree::add(Vector2f v)
     int i = 1;
     nodes[i].points.push_back(&v);
 
-    while (nodes[i].points.size() > SPLIT_CAPACITY)
+    while (SE(i) < ARBITRARY_DEFAULT_CAPACITY && nodes[i].points.size() > SPLIT_CAPACITY)
     {
-        if (!nodes[NW(i)].active)
+        if (!nodes[SE(i)].active)
         {
             splitNode(i);
         }
@@ -56,9 +57,7 @@ void QuadTree::add(Vector2f v)
 void QuadTree::splitNode(int i)
 {
     if (!nodes[i].active)
-    {
         return;
-    }
 
     Node& currentNode = nodes[i];
     float x = currentNode.x;
@@ -115,6 +114,18 @@ int QuadTree::SE(int x)
 int QuadTree::Parent(int x)
 {
     return x / 4;
+}
+
+// Debugging
+unsigned int QuadTree::__debugUsedNodes()
+{
+    unsigned int s = 0;
+    for (unsigned int i = 0; i < nodes.size(); ++i)
+    {
+        if (nodes[i].active == true)
+            s += 1;
+    }
+    return s;
 }
 
 std::vector<Vector2f>& QuadTree::getPoints()

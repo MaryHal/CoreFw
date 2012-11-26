@@ -54,6 +54,11 @@ void MusicState::handleInput(Input& input, int value, int action)
     {
         Core::popState();
     }
+    if (value == 'Q' && action == GLFW_PRESS)
+    {
+        if (music)
+            music->stop();
+    }
 }
 
 void MusicState::logic(float timeStep)

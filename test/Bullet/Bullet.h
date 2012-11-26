@@ -60,9 +60,7 @@ class Bullet
         public:
         bool operator()(BulletAction& a, BulletAction& b)
         {
-            if (a.wait > b.wait)
-                return true;
-            return false;
+            return a.wait > b.wait;
         }
     };
 

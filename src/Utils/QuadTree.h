@@ -65,6 +65,9 @@ class QuadTree
 
     inline int Parent(int x);
 
+    // Debugging
+    unsigned int __debugUsedNodes();
+
     std::vector<Vector2f>& getPoints();
     std::vector<Node>& getNodes();
 };

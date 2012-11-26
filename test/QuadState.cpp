@@ -5,6 +5,8 @@
 #include <Core/CoreRegistry.h>
 
 #include <System/Log.h>
+#include <Math/Random.h>
+#include <Utils/StringUtils.h>
 
 #include <GL/glfw.h>
 
@@ -23,6 +25,7 @@ void QuadState::init(ResourceManager& resources)
 {
     CoreState::init(resources);
     background = textures->add("patternBackground", "data/graphics/Frac4.png");
+    info = fonts->makeText("default");
 }
 
 void QuadState::deinit()
@@ -35,6 +38,20 @@ void QuadState::handleInput(Input& input, int value, int action)
     if (value == 'Q' && action == GLFW_PRESS)
     {
         tree.clear();
+    }
+    if (value == 'W' && action == GLFW_PRESS)
+    {
+        tree.add(Vector2f(rng.genRand(0.0f, 480.0f), rng.genRand(0.0f, 480.0f)));
+    }
+    if (value == 'E' && action == GLFW_PRESS)
+    {
+        for (int i = 0; i < 16; i++)
+            tree.add(Vector2f(rng.genRand(0.0f, 480.0f), rng.genRand(0.0f, 480.0f)));
+    }
+    if (value == 'R' && action == GLFW_PRESS)
+    {
+        for (int i = 0; i < 64; i++)
+            tree.add(Vector2f(rng.genRand(0.0f, 480.0f), rng.genRand(0.0f, 480.0f)));
     }
     if (value == GLFW_KEY_BACKSPACE && action == GLFW_PRESS)
     {
@@ -57,11 +74,22 @@ void QuadState::handleMouseInput(Input& input, int value, int action)
 
 void QuadState::logic(float timeStep)
 {
+    info.setText("Nodes: " +
+                 toString(tree.getNodes().size()) + '\n'
+                 + "Used: " +
+                 toString(tree.__debugUsedNodes()) + '\n'
+                 + "Points: " +
+                 toString(tree.getPoints().size()));
 }
 
 void QuadState::draw()
 {
     //background->draw();
+    glPushMatrix();
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+    info.draw(4.0f, 4.0f);
+
+    glTranslatef(160.0f, 0, 0);
 
     // Draw rectangles
     glLineWidth(2.0f);
@@ -94,5 +122,6 @@ void QuadState::draw()
         glVertex2f(iter->x, iter->y);
         glEnd();
     }
+    glPopMatrix();
 }
 
