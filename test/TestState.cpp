@@ -108,6 +108,10 @@ void TestState::logic(float timeStep)
         {
             Core::pushState(CoreRegistry::getState("Quad"));
         }
+        else if (choice == "WA")
+        {
+            Core::pushState(CoreRegistry::getState("Jump"));
+        }
 
         menu->resetChoice();
     }

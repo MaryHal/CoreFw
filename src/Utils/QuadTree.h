@@ -45,7 +45,7 @@ class QuadTree
 {
     private:
     static const int ARBITRARY_DEFAULT_CAPACITY = 1024;
-    static const unsigned int SPLIT_CAPACITY = 2;
+    static const unsigned int SPLIT_CAPACITY = 4;
     std::vector<Node> nodes;
     std::vector<Vector2f> allPoints;
 

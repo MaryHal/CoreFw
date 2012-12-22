@@ -1,27 +1,29 @@
 #include "QuadTree.h"
-#include <cstdio>
 
-// For convenience, my node list is going to be 1-indexed.
+// THIS IS SO MEMORY INEFFICIENT!!!
+
+// To be slightly-more convenient, my node list is going to be 1-indexed.
+// Let's change that! (Did it!)
 QuadTree::QuadTree(float x, float y, float width, float height)
-    : nodes(ARBITRARY_DEFAULT_CAPACITY + 1)
+    : nodes(ARBITRARY_DEFAULT_CAPACITY)
 {
     clear();
-    nodes[1].active = true;
-    nodes[1].x = x;
-    nodes[1].y = y;
-    nodes[1].width  = width;
-    nodes[1].height = height;
+    nodes[0].active = true;
+    nodes[0].x = x;
+    nodes[0].y = y;
+    nodes[0].width  = width;
+    nodes[0].height = height;
 }
 
 QuadTree::QuadTree(float x, float y, float width, float height, int capacity)
-    : nodes(capacity + 1)
+    : nodes(capacity + 0)
 {
     clear();
-    nodes[1].active = true;
-    nodes[1].x = x;
-    nodes[1].y = y;
-    nodes[1].width  = width;
-    nodes[1].height = height;
+    nodes[0].active = true;
+    nodes[0].x = x;
+    nodes[0].y = y;
+    nodes[0].width  = width;
+    nodes[0].height = height;
 }
 
 QuadTree::~QuadTree()
@@ -32,12 +34,13 @@ void QuadTree::add(Vector2f v)
 {
     allPoints.push_back(v);
 
-    int i = 1;
+    int i = 0;
     nodes[i].points.push_back(&v);
 
-    while (SE(i) < ARBITRARY_DEFAULT_CAPACITY && nodes[i].points.size() > SPLIT_CAPACITY)
+    while (SE(i) < ARBITRARY_DEFAULT_CAPACITY)
+        // && nodes[i].points.size() > SPLIT_CAPACITY)
     {
-        if (!nodes[SE(i)].active)
+        if (nodes[i].points.size() > SPLIT_CAPACITY && !nodes[NW(i)].active)
         {
             splitNode(i);
         }
@@ -88,32 +91,32 @@ void QuadTree::clear()
         iter->points.clear();
     }
     allPoints.clear();
-    nodes[1].active = true;
+    nodes[0].active = true;
 }
 
 int QuadTree::NE(int x)
 {
-    return (x * 4) + 1;
+    return ((x + 1) * 4);
 }
 
 int QuadTree::NW(int x)
 {
-    return (x * 4) + 2;
+    return ((x + 1) * 4) + 1;
 }
 
 int QuadTree::SW(int x)
 {
-    return (x * 4) + 3;
+    return ((x + 1) * 4) + 2;
 }
 
 int QuadTree::SE(int x)
 {
-    return (x * 4) + 4;
+    return ((x + 1) * 4) + 3;
 }
 
 int QuadTree::Parent(int x)
 {
-    return x / 4;
+    return (x / 4) - 1;
 }
 
 // Debugging

@@ -28,3 +28,4 @@ class QuadState : public CoreState
 
 
 #endif /* _QUADSTATE_H_ */
+

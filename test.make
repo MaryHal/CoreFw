@@ -155,6 +155,7 @@ OBJECTS := \
 	$(OBJDIR)/Menu.o \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/MusicState.o \
+	$(OBJDIR)/JumpState.o \
 	$(OBJDIR)/QuadState.o \
 	$(OBJDIR)/GameState.o \
 	$(OBJDIR)/PatternState.o \
@@ -163,6 +164,7 @@ OBJECTS := \
 	$(OBJDIR)/Particle.o \
 	$(OBJDIR)/ParticleMem.o \
 	$(OBJDIR)/ParticleEmitter.o \
+	$(OBJDIR)/Player.o \
 	$(OBJDIR)/BulletEmitter.o \
 	$(OBJDIR)/Bullet.o \
 	$(OBJDIR)/BulletMem.o \
@@ -237,6 +239,9 @@ $(OBJDIR)/TestState.o: test/TestState.cpp
 $(OBJDIR)/MusicState.o: test/MusicState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/JumpState.o: test/JumpState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/QuadState.o: test/QuadState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -259,6 +264,9 @@ $(OBJDIR)/ParticleMem.o: test/Particle/ParticleMem.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/ParticleEmitter.o: test/Particle/ParticleEmitter.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Player.o: test/Platform/Player.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BulletEmitter.o: test/Bullet/BulletEmitter.cpp

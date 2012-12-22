@@ -67,7 +67,7 @@ void QuadState::handleMouseInput(Input& input, int value, int action)
         int x;
         int y;
         glfwGetMousePos(&x, &y);
-        tree.add(Vector2f(x, y));
+        tree.add(Vector2f(x - 160.0f, y));
         logf("%d %d", x, y);
     }
 }
