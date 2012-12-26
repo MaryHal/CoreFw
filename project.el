@@ -1,5 +1,6 @@
-(defvar rootDirShort "~/code/current/CoreFW/")
-(defvar rootDir (expand-file-name rootDirShort))
+;(defvar rootDirShort "~/code/current/turtle/")
+;(defvar rootDir (expand-file-name rootDirShort))
+(defvar rootDir (file-name-directory (or load-file-name buffer-file-name)))
 
 (defun premake ()
   (interactive)
